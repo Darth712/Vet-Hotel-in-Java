@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/007.iml" filepath="$PROJECT_DIR$/.idea/007.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hva-app/hva-app.iml" filepath="$PROJECT_DIR$/hva-app/hva-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hva-core/hva-core.iml" filepath="$PROJECT_DIR$/hva-core/hva-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/po-uilib-202408310000/po-uilib-202408310000.iml" filepath="$PROJECT_DIR$/po-uilib-202408310000/po-uilib-202408310000.iml" />
+    </modules>
+  </component>
+</project>

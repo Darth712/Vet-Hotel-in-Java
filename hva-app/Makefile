@@ -1,5 +1,5 @@
-PO_UILIB_DIR=/usr/share/java
-#PO_UILIB_DIR=../../po-uilib
+#PO_UILIB_DIR=/usr/share/java
+PO_UILIB_DIR=../../../po-uilib
 JARNAME=hva-app
 
 all:

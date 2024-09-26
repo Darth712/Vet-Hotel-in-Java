@@ -56,5 +56,5 @@ public class HotelManager {
     public void importFile(String filename) throws ImportFileException {
         _hotel.importFile(filename);
     }
-
+    public Hotel getHotel() {return _hotel;}
 }
