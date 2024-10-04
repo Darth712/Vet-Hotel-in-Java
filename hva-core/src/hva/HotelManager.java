@@ -12,6 +12,7 @@ public class HotelManager {
 
     /** This is the current hotel. */
     private Hotel _hotel = new Hotel();
+    private File _assosciatedFile = null;
 
     // FIXME maybe add more fields if needed
 
@@ -23,7 +24,16 @@ public class HotelManager {
      * @throws IOException if there is some error while serializing the state of the network to disk.
      */
     public void save() throws FileNotFoundException, MissingFileAssociationException, IOException {
-        // FIXME implement serialization method
+        if (_assosciatedFile == null){
+            throw new MissingFileAssociationException("No associated file to save");
+        }
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(_assosciatedFile)));
+            oos.writeObject(_hotel);
+            oos.close();
+        } 
+        catch (FileNotFoundException e) {e.printStackTrace();}
+        catch (IOException e) {e.printStackTrace();}
     }
 
     /**
@@ -34,7 +44,8 @@ public class HotelManager {
      * @throws IOException if there is some error while serializing the state of the network to disk.
      */
     public void saveAs(String filename) throws FileNotFoundException, MissingFileAssociationException, IOException {
-        // FIXME implement serialization method
+        _assosciatedFile = new File(filename);
+        save();
     }
 
     /**
@@ -44,9 +55,14 @@ public class HotelManager {
      *         an error while processing this file.
      */
     public void load(String filename) throws UnavailableFileException {
-        // FIXME implement serialization method
+        try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filename)))) {
+            _hotel = (Hotel) ois.readObject();  // Deserialize the hotel object
+        } catch (FileNotFoundException e) {
+            throw new UnavailableFileException("The file " + filename + " was not found.");
+        } catch (IOException | ClassNotFoundException e) {
+            throw new UnavailableFileException("Error processing the file " + filename + ": " + e.getMessage());
+        }
     }
-
     /**
      * Read text input file.
      *
