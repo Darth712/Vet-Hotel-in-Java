@@ -5,15 +5,32 @@ import java.util.Map;
 import java.util.TreeMap;
 import hva.habitat.Habitat;
 
-public class Handler extends Employee implements Serializable{
+import java.util.List;
 
 
-    private Map<String, Habitat> _responsability;
+
+public class Handler extends Employee{
+
+  
+    private List<String> _responsability;
 
     public Handler (String id, String name) {
         super(id, name);
-        _responsability = new TreeMap<String, Habitat>();
+        _responsability = new List<Habitat>();
     }
+
+    @Override
+    public void addNewResponsability(String id) {
+        _responsability.add(id);
+    }
+    
+    @Override
+    public String getType() {
+        return "TRT";
+    }
+
+
+
     
     
 }

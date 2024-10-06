@@ -4,22 +4,16 @@ import java.io.Serializable;
 
 import java.util.EnumMap;
 
-public class Tree implements Serializable {
+public class Tree implements Serializable{
+
     private String _id;
     private String _name;
-    private int _age;
-    private LeafType _leafType;
-    private int _baseCleaningDifficulty;
+    private int _age = 0;
+    // LEAFTYPE : ENUM
+    private int _baseCleaningDiff;
     private Season _currentSeason;
 
-    public Tree(String id, String name, int age, LeafType leafType, int baseCleaningDifficulty, Season currentSeason) {
-        _id = id;
-        _name = name;
-        _age = age;
-        _leafType = leafType;
-        _baseCleaningDifficulty = baseCleaningDifficulty;
-        _currentSeason = currentSeason;
-    }
+    // CONSTRUCTOR FOR TREE
 
     public String getId() {
         return _id;
@@ -38,7 +32,7 @@ public class Tree implements Serializable {
     }
 
     public int getBaseCleaningDifficulty() {
-        return _baseCleaningDifficulty;
+        return _baseCleaningDiff;
     }
 
     public Season getCurrentSeason() {
@@ -52,4 +46,18 @@ public class Tree implements Serializable {
 
 enum LeafType {
     CADUCA, PERENE;
+
+    public int age() {
+        return _age;
+    }
+    
+    public void addAge() {
+        _age++;
+    }
+
+    
+
+
+
+    
 }

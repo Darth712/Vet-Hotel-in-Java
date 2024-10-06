@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import hva.animal.Animal;
 
-public class Species implements Serializable{
+public class Species implements Serializable {
     private String _id;
     private String _name;
     private int _population;

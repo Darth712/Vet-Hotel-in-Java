@@ -7,7 +7,7 @@ public abstract class Employee implements Serializable{
     private String _id;
     private String _name;
 
-    public Employee(String id, String name){
+    public Employee(String id, String name) {
         _id = id;
         _name = name;
     }
@@ -19,5 +19,9 @@ public abstract class Employee implements Serializable{
     public String getName() {
         return _name;
     }
+
+    public abstract String getType();
+
+    public abstract void addNewResponsability(String id);
     
 }

@@ -10,9 +10,10 @@ public class Vaccine implements Serializable{
     private int _timesUsed;
     private List<Species> _applicableSpecies;
 
-    public Vaccine (String id, String name, int timesUsed){
+    public Vaccine (String id, String name, int timesUsed) {
         _id = id;
         _name = name;
         _timesUsed = timesUsed;
-    }
+        _applicableSpecies = new List<Species>();
+    }  
 }
