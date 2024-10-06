@@ -187,7 +187,6 @@ public class Hotel implements Serializable {
               vaccine.addSpecies(species);
           }
       }
-  
       _vaccines.put(id, vaccine);
     }
 }
