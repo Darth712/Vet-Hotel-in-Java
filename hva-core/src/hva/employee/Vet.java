@@ -1,13 +1,25 @@
 package hva.employee;
 
-import java.io.Serializable;
-import java.util.Map;
-import java.util.TreeMap;
-import hva.employee.Employee;
-import hva.Species;
 
-public class Vet extends Employee implements Serializable{
+import java.util.List;
 
-    private Map<String, Species> _responsability;
+
+public class Vet extends Employee{
+
+    private List<String> _responsability;
+
+    public Vet(String id, String name) {
+        super(id,name);
+    }
+
+    @Override
+    public void addNewResponsability(String id) {
+        _responsability.add(id);
+    }
+
+    @Override
+    public String getType() {
+        return "VET";
+    }
     
 }
