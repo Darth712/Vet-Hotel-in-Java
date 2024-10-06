@@ -1,4 +1,4 @@
-package hva.employee.handler;
+package hva.employee;
 
 import java.io.Serializable;
 import java.util.Map;

@@ -1,7 +1,7 @@
 package hva.app;
 
 import hva.exceptions.ImportFileException;
-import pt.tecnico.uilib.Dialog;
+import pt.tecnico.uilib.*;
 
 public class App {
 
