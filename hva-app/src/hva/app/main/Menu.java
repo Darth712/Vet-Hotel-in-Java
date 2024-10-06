@@ -16,19 +16,4 @@ public class Menu extends pt.tecnico.uilib.menus.Menu implements Label{
                 new DoOpenLookupsMenu(receiver)
         );
     }
-    public void open(){
-        System.out.println(
-        TITLE + "\n1 - " + 
-        NEW_FILE + "\n2 - " + 
-        OPEN_FILE + "\n3 - " + 
-        SAVE_FILE +"\n4 - " +
-        ADVANCE_SEASON + "\n5 - " +
-        SHOW_GLOBAL_SATISFACTION +"\n6 - " +
-        MENU_ANIMALS + "\n7 - " +
-        MENU_EMPLOYEES+"\n8 - " +
-        MENU_HABITATS +"\n9 - " +
-        MENU_VACCINES +"\n10 - " +
-        MENU_LOOKUPS +"\n0 - Sair\nEscolha uma opção:");
-    }
-
 }
