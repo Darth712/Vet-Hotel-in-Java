@@ -1,12 +1,8 @@
 package hva.employee;
 
 import java.io.Serializable;
-import java.util.Map;
-import java.util.TreeMap;
-import hva.habitat.Habitat;
-
 import java.util.List;
-
+import java.util.ArrayList;
 
 
 public class Handler extends Employee{
@@ -16,7 +12,7 @@ public class Handler extends Employee{
 
     public Handler (String id, String name) {
         super(id, name);
-        _responsability = new List<Habitat>();
+        _responsability = new ArrayList<String>();
     }
 
     @Override
@@ -28,6 +24,7 @@ public class Handler extends Employee{
     public String getType() {
         return "TRT";
     }
+
 
 
 

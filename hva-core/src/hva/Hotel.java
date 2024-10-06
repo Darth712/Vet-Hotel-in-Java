@@ -110,14 +110,14 @@ public class Hotel implements Serializable {
       for (String treeId : treeIds) {
           Tree tree = _trees.get(treeId);
           if (tree != null) {
-              habitat.addTree(tree);
+              habitat.addTree(treeId,tree);
           }
       }
   
       _habitats.put(id, habitat);
     }
 
-    private void parseAnimal(String[] parts) {
+    private void parseAnimal(String[] parts) throws UnrecognizedEntryException{
       String id = parts[1];
       String name = parts[2];
       Species species = _species.get(parts[3]);
@@ -133,7 +133,7 @@ public class Hotel implements Serializable {
       species.addAnimal(animal);
   
       // Assuming animals are stored in a map
-      _animals.put(id, animal);
+      habitat.getAnimals().put(id, animal);
     }
 
     private void parseHandler(String[] parts) {
@@ -148,7 +148,7 @@ public class Hotel implements Serializable {
       for (String habitatId : habitatIds) {
           Habitat habitat = _habitats.get(habitatId);
           if (habitat != null) {
-              handler.addHabitat(habitat);
+              handler.addNewResponsability(habitatId);
           }
       }
   
@@ -166,7 +166,7 @@ public class Hotel implements Serializable {
       for (String speciesId : speciesIds) {
           Species species = _species.get(speciesId);
           if (species != null) {
-              vet.addSpecies(species);
+              vet.addNewResponsability(speciesId);
           }
       }
   
@@ -190,11 +190,4 @@ public class Hotel implements Serializable {
   
       _vaccines.put(id, vaccine);
     }
-  
-  
-  
-  
-  
-  
-  
 }

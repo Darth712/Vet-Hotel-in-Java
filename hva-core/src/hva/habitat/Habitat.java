@@ -13,21 +13,18 @@ public class Habitat implements Serializable{
     private String _id;
     private String _name;
     private int _area;
-    private Map<String,Tree> _trees;
-    private Map<String,Animal> _animals;
-    // influencia das especies
+    private HashMap<String,Tree> _trees;
+    private HashMap<String,Animal> _animals;
+    private HashMap<String,Species> _influence;
 
 
     public Habitat(String id, String name, int area) {
         _id = id;
         _name = name;
         _area = area;
-        _trees = new HashMap<>();
-        _animals = new HashMap<>();
-        _influence = new HashMap<>();
         _trees = new HashMap<String,Tree>();
         _animals = new HashMap<String,Animal>();
-
+        _influence = new HashMap<String,Species>();
     }
 
     public String getId() {
@@ -50,7 +47,7 @@ public class Habitat implements Serializable{
         return _animals;
     }
 
-    public HashMap<Species, String> getInfluence() {
+    public HashMap<String, Species> getInfluence() {
         return _influence;
     }
 
@@ -58,12 +55,12 @@ public class Habitat implements Serializable{
         _trees.put(treeId, tree);
     }
 
-    public void addAnimal(String animalId, Animal animal) {
-        _animals.put(animalId, animal);
+    public void addAnimal(Animal animal) {
+        _animals.put(animal.getId(), animal);
     }
 
     public void addInfluence(Species species, String description) {
-        _influence.put(species, description);
+        _influence.put(description, species);
     }
     public void setArea(int area) {
         _area = area;

@@ -3,15 +3,16 @@ package hva.employee;
 import java.io.Serializable;
 import hva.Species;
 import java.util.List;
+import java.util.ArrayList;
 
 
 public class Vet extends Employee{
 
-    private Map<String, Species> _responsability;
+    private List<String> _responsability;
 
     public Vet(String id, String name) {
         super(id,name);
-        _responsability = new List<Species>();
+        _responsability = new ArrayList<String>();
     }
 
     public String getName() {

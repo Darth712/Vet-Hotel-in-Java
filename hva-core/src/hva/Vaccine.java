@@ -3,6 +3,7 @@ package hva;
 import java.io.Serializable;
 import hva.Species;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Vaccine implements Serializable{
     private String _id;
@@ -10,10 +11,14 @@ public class Vaccine implements Serializable{
     private int _timesUsed;
     private List<Species> _applicableSpecies;
 
-    public Vaccine (String id, String name, int timesUsed) {
+    public Vaccine (String id, String name) {
         _id = id;
         _name = name;
-        _timesUsed = timesUsed;
-        _applicableSpecies = new List<Species>();
+        _timesUsed = 0;
+        _applicableSpecies = new ArrayList<Species>();
     }  
+
+    public void addSpecies(Species applicabSpecies){
+        _applicableSpecies.add(applicabSpecies);
+    }
 }

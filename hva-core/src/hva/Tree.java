@@ -8,12 +8,19 @@ public class Tree implements Serializable{
 
     private String _id;
     private String _name;
-    private int _age = 0;
-    // LEAFTYPE : ENUM
+    private int _age ;
+    private LeafType _leafType;
     private int _baseCleaningDiff;
     private Season _currentSeason;
 
-    // CONSTRUCTOR FOR TREE
+    public Tree(String id, String name, int age, LeafType leafType, int baseCleaningDiff, Season currentSeason) {
+        _id = id;
+        _name = name;
+        _age = age;
+        _leafType = leafType;
+        _baseCleaningDiff = baseCleaningDiff;
+        _currentSeason = currentSeason;
+    }
 
     public String getId() {
         return _id;
@@ -46,18 +53,4 @@ public class Tree implements Serializable{
 
 enum LeafType {
     CADUCA, PERENE;
-
-    public int age() {
-        return _age;
-    }
-    
-    public void addAge() {
-        _age++;
-    }
-
-    
-
-
-
-    
 }
