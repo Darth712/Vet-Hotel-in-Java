@@ -205,12 +205,14 @@ public class Hotel implements Serializable {
       Vaccine vaccine = new Vaccine(id, name);
   
       // Parse species the vaccine applies to
-      String[] speciesIds = parts[3].split(",");
-      for (String speciesId : speciesIds) {
-          Species species = _species.get(speciesId);
-          if (species != null) {
-              vaccine.addSpecies(species);
-          }
+      if (parts.length > 3) {
+        String[] speciesIds = parts[3].split(",");
+        for (String speciesId : speciesIds) {
+            Species species = _species.get(speciesId);
+            if (species != null) {
+                vaccine.addSpecies(species);
+            }
+        }
       }
       _vaccines.put(id, vaccine);
     }
