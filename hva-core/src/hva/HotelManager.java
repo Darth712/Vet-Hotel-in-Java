@@ -27,7 +27,8 @@ public class HotelManager {
      */
     public void save() throws FileNotFoundException, MissingFileAssociationException, IOException {
         if (_assosciatedFile == null){
-            throw new MissingFileAssociationException("No associated file to save");
+            String message = "No associated file to save";
+            throw new MissingFileAssociationException(message);
         }
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(_assosciatedFile)));

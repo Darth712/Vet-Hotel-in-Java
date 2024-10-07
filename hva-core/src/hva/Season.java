@@ -1,5 +1,5 @@
 package hva;
 
-public interface Season {
+public abstract class Season {
     
 }

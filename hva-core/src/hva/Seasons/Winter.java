@@ -1,5 +1,7 @@
 package hva.Seasons;
 
-public class Winter {
+import hva.Season;
+
+public class Winter extends Season{
     
 }

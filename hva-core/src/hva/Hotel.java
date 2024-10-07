@@ -140,7 +140,6 @@ public class Hotel implements Serializable {
       String id = parts[1];
       String name = parts[2];
 
-  
       Handler handler = new Handler(id, name);
   
       // Parse habitats the handler manages
@@ -169,7 +168,6 @@ public class Hotel implements Serializable {
               vet.addNewResponsability(speciesId);
           }
       }
-  
       _vets.put(id, vet);
     }
 
