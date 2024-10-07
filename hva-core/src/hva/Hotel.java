@@ -12,6 +12,15 @@ import hva.animal.*;
 import hva.employee.*;
 import hva.habitat.*;
 import java.util.Map;
+
+import bank.account.SavingsAccount;
+
+import java.util.HashMap;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.ArrayList;
+
+
 import java.util.List;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -27,13 +36,21 @@ public class Hotel implements Serializable {
     private static final long serialVersionUID = 202407081733L;
 
     private Season _currentSeason;
-    private Map<String,Habitat> _habitats;
-    private Map<String,Species> _species;
-    private Map<String,Handler> _handlers;
-    private Map<String,Vet> _vets;
-    private Map<String,Vaccine> _vaccines;
-    private Map<String,Tree> _trees;
-    private List<Vaccination> _vaccinations;
+    private Map<String,Habitat> _habitats = new HashMap<String,Habitat>();
+    private Map<String,Species> _species = new HashMap<String,Species>();
+    private Map<String,Handler> _handlers = new HashMap<String,Handler>();
+    private Map<String,Vet> _vets = new HashMap<String,Vet>();
+    private Map<String,Vaccine> _vaccines = new HashMap<String,Vaccine>();
+    private Map<String,Tree> _trees = new HashMap<String,Tree>();
+    private List<Vaccination> _vaccinations = new ArrayList<Vaccination>();
+
+
+    public Map<String,Habitat> getHabitats() {
+      return _habitats;
+    }
+
+
+
     /**
      * Read text input file and create domain entities.
      *
@@ -190,4 +207,27 @@ public class Hotel implements Serializable {
   
       _vaccines.put(id, vaccine);
     }
+
+ 
+
+  public Collection<Habitat> ShowAllHabitats() {
+  
+    return Collections.unmodifiableCollection((_habitats.values()));
+
+  }
+
+  public void registerHabitat(String id, String name, int area) {
+    _habitats.put(id, new Habitat(id, name, area));
+
+  }
+
+  
+
+
+
+
+
+  
+
+
 }

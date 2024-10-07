@@ -74,6 +74,10 @@ public class Habitat implements Serializable{
         _animals.put(animal.getId(), animal);
     }
 
+    @Override
+    public String toString() {
+        return "HABITAT|" + _id + "|" + _name +"|" +_area;
+    }
 
 
     

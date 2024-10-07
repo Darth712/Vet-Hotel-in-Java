@@ -9,12 +9,14 @@ class DoRegisterHabitat extends Command<Hotel> {
 
     DoRegisterHabitat(Hotel receiver) {
         super(Label.REGISTER_HABITAT, receiver);
-        //FIXME add command fields if needed
+        addStringField("id", Prompt.habitatKey());
+        addStringField("name", Prompt.habitatName());
+        addIntegerField("area", Prompt.habitatArea());
     }
 
     @Override
-    protected void execute() throws CommandException {
-        //FIXME implement command
+    protected final void execute() throws CommandException { 
+        _receiver.registerHabitat(stringField("id"), stringField("name"), integerField("area"));
     }
-
 }
+    

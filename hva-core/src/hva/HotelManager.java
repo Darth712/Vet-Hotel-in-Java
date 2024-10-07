@@ -12,13 +12,11 @@ import hva.exceptions.*;
 public class HotelManager {
 
     /** This is the current hotel. */
-    private HotelManager _manager;
+   
     private Hotel _hotel = new Hotel();
     private File _assosciatedFile = null;
 
-    public HotelManager() {
-        _manager = new HotelManager();
-    }
+
 
     // FIXME maybe add more fields if needed
 
