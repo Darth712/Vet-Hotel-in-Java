@@ -44,11 +44,11 @@ public class Vaccine implements Serializable{
         }
     
         // Initialize ans with the first element
-        String ans = "|" + _applicableSpecies.get(0);
+        String ans = "|" + _applicableSpecies.get(0).getId();
     
         // Loop through the rest of the list starting from index 1
         for (int i = 1; i < _applicableSpecies.size(); i++) {
-            ans += "," + _applicableSpecies.get(i);
+            ans += "," + _applicableSpecies.get(i).getId();
         }
     
         return ans;
