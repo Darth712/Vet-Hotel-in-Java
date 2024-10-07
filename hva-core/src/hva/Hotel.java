@@ -13,7 +13,6 @@ import hva.employee.*;
 import hva.habitat.*;
 import java.util.Map;
 
-import bank.account.SavingsAccount;
 
 import java.util.HashMap;
 import java.util.Collection;
@@ -43,13 +42,16 @@ public class Hotel implements Serializable {
     private Map<String,Vaccine> _vaccines = new HashMap<String,Vaccine>();
     private Map<String,Tree> _trees = new HashMap<String,Tree>();
     private List<Vaccination> _vaccinations = new ArrayList<Vaccination>();
+    private boolean _changed;
 
 
     public Map<String,Habitat> getHabitats() {
       return _habitats;
     }
 
-
+    public void setChanged(boolean bool){ _changed = bool;}
+    public void changed() { _changed = true;}
+    public boolean hasChanged() { return _changed;}
 
     /**
      * Read text input file and create domain entities.
@@ -218,6 +220,7 @@ public class Hotel implements Serializable {
 
   public void registerHabitat(String id, String name, int area) {
     _habitats.put(id, new Habitat(id, name, area));
+    changed();
 
   }
 

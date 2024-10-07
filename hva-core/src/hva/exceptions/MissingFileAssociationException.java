@@ -7,7 +7,5 @@ public class MissingFileAssociationException extends Exception {
 
 	@Serial
 	private static final long serialVersionUID = 202407081733L;
-	public MissingFileAssociationException(String message){
-		super(message);
-	}
+	
 }

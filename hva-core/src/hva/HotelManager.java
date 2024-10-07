@@ -14,7 +14,7 @@ public class HotelManager {
     /** This is the current hotel. */
    
     private Hotel _hotel = new Hotel();
-    private File _assosciatedFile = null;
+    private String _associatedFile = "";
 
 
 
@@ -28,14 +28,13 @@ public class HotelManager {
      * @throws IOException if there is some error while serializing the state of the network to disk.
      */
     public void save() throws FileNotFoundException, MissingFileAssociationException, IOException {
-        if (_assosciatedFile == null){
-            String message = "No associated file to save";
-            throw new MissingFileAssociationException(message);
-        }
+        if (_associatedFile.isBlank()) throw new MissingFileAssociationException();
+        
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(_assosciatedFile)));
+            ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(_associatedFile)));
             oos.writeObject(_hotel);
             oos.close();
+            _hotel.setChanged(false);
         } 
         catch (FileNotFoundException e) {e.printStackTrace();}
         catch (IOException e) {e.printStackTrace();}
@@ -49,7 +48,7 @@ public class HotelManager {
      * @throws IOException if there is some error while serializing the state of the network to disk.
      */
     public void saveAs(String filename) throws FileNotFoundException, MissingFileAssociationException, IOException {
-        _assosciatedFile = new File(filename);
+        _associatedFile = filename;
         save();
     }
 
@@ -60,8 +59,12 @@ public class HotelManager {
      *         an error while processing this file.
      */
     public void load(String filename) throws UnavailableFileException {
+        _associatedFile = filename;
+        if (filename == null || filename.equals("")) throw new UnavailableFileException(filename);
+
         try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filename)))) {
-            _hotel = (Hotel) ois.readObject();  // Deserialize the hotel object
+            _hotel = (Hotel) ois.readObject();
+            _hotel.setChanged(false); // Deserialize the hotel object
         } catch (FileNotFoundException e) {
             throw new UnavailableFileException("The file " + filename + " was not found.");
         } catch (IOException | ClassNotFoundException e) {
@@ -77,5 +80,14 @@ public class HotelManager {
     public void importFile(String filename) throws ImportFileException {
         _hotel.importFile(filename);
     }
+
+    public String getFilename() { return _associatedFile;}
+    public void setFilename(String filename) { _associatedFile = filename;}
     public Hotel getHotel() {return _hotel;}
+    public boolean changed() {return _hotel.hasChanged();}
+
+    public void reset() {
+        _hotel = new Hotel();
+        _associatedFile = null;
+    }
 }
