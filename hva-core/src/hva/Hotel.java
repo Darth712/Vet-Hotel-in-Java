@@ -37,9 +37,9 @@ public class Hotel implements Serializable {
 
     private Season _currentSeason;
     private Map<String,Habitat> _habitats = new HashMap<String,Habitat>();
+    private Map<String,Animal> _animals = new HashMap<String,Animal>();
     private Map<String,Species> _species = new HashMap<String,Species>();
-    private Map<String,Handler> _handlers = new HashMap<String,Handler>();
-    private Map<String,Vet> _vets = new HashMap<String,Vet>();
+    private Map<String,Employee> _employees = new HashMap<String,Employee>();
     private Map<String,Vaccine> _vaccines = new HashMap<String,Vaccine>();
     private Map<String,Tree> _trees = new HashMap<String,Tree>();
     private List<Vaccination> _vaccinations = new ArrayList<Vaccination>();
@@ -138,19 +138,20 @@ public class Hotel implements Serializable {
       String id = parts[1];
       String name = parts[2];
       Species species = _species.get(parts[3]);
-      String healthStatus = parts[4];
+      
       Habitat habitat = _habitats.get(parts[5]);
   
       if (species == null || habitat == null) {
           throw new UnrecognizedEntryException("Species or Habitat not found for Animal: " + id);
       }
   
-      Animal animal = new Animal(id, name, species, healthStatus, habitat);
+      Animal animal = new Animal(id, name, species, habitat);
       habitat.addAnimal(animal);
       species.addAnimal(animal);
   
       // Assuming animals are stored in a map
       habitat.getAnimals().put(id, animal);
+      _animals.put(id,animal);
     }
 
     private void parseHandler(String[] parts) {
@@ -169,7 +170,7 @@ public class Hotel implements Serializable {
           }
       }
   
-      _handlers.put(id, handler);
+      _employees.put(id, handler);
     }
 
     private void parseVet(String[] parts) {
@@ -186,7 +187,7 @@ public class Hotel implements Serializable {
               vet.addNewResponsability(speciesId);
           }
       }
-      _vets.put(id, vet);
+      _employees.put(id, vet);
     }
 
     private void parseVaccine(String[] parts) {
@@ -214,10 +215,23 @@ public class Hotel implements Serializable {
 
   }
 
+
   public void registerHabitat(String id, String name, int area) {
     _habitats.put(id, new Habitat(id, name, area));
 
   }
+
+  public Collection<Animal> ShowAllAnimals() {
+    return Collections.unmodifiableCollection((_animals.values()));
+
+  }
+
+  public Collection<Employee> ShowAllEmployees() {
+    return Collections.unmodifiableCollection((_employees.values()));
+
+  }
+
+
 
   
 

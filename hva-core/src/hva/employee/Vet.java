@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class Vet extends Employee{
 
-    private List<String> _responsability;
 
     public Vet(String id, String name) {
         super(id,name);
@@ -32,6 +31,10 @@ public class Vet extends Employee{
     public String getType() {
         return "VET";
     }
-    
+
+    @Override
+    public String toString() {
+        return this.getType() + super.toString() + this.responsabilityString();
+    }
 }
 

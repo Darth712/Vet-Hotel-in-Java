@@ -74,9 +74,13 @@ public class Habitat implements Serializable{
         _animals.put(animal.getId(), animal);
     }
 
+    public int numOfTrees() {
+        return _trees.size();
+    }
+
     @Override
     public String toString() {
-        return "HABITAT|" + _id + "|" + _name +"|" +_area;
+        return "HABITAT|" + _id + "|" + _name +"|" +_area+"|"+this.numOfTrees();
     }
 
 

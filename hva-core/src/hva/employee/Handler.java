@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class Handler extends Employee{
 
   
-    private List<String> _responsability;
+    
 
-    public Handler (String id, String name) {
+    public Handler(String id, String name) {
         super(id, name);
         _responsability = new ArrayList<String>();
     }
@@ -23,6 +23,12 @@ public class Handler extends Employee{
     @Override
     public String getType() {
         return "TRT";
+    }
+
+    
+    @Override
+    public String toString() {
+        return this.getType() + super.toString() + this.responsabilityString();
     }
 
 

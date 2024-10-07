@@ -16,23 +16,21 @@ public class Animal implements Serializable{
     private Species _species;
     private String _healthStatus;
     private Habitat _habitat;
-    private List<String> _healthHistory;
-    private List<Vaccination> _vaccinations;
+    private String _healthHistory;
+    private List<Vaccination> _vaccinations = new ArrayList<>();
     private boolean _hasVaccinated = false;
     // vaccinations
 
 
-    public Animal(String id, String name, Species species, String healthStatus, Habitat habitat) {
+    public Animal(String id, String name, Species species, Habitat habitat) {
         _id = id;
         _name = name;
         _species = species;
-        _healthStatus = healthStatus;
         _habitat = habitat;
-        _healthHistory = new ArrayList<>();
-        _vaccinations = new ArrayList<>();
+        
     }
 
-    public List<String> getHealthHistory() {
+    public String getHealthHistory() {
         return _healthHistory;
     }
 
@@ -41,7 +39,13 @@ public class Animal implements Serializable{
     }
 
     public void addHealthHistory(String entry) {
-        _healthHistory.add(entry);
+        if (_healthHistory == null) {
+            _healthHistory = entry;
+        }
+        else {
+            _healthHistory += "," + entry;
+        }
+
     }
 
     public void addVaccination(Vaccination vaccination) {
@@ -77,9 +81,14 @@ public class Animal implements Serializable{
         _habitat = habitat;
     }
 
-    public void updateHealthHistory(String status) {
-        _healthHistory.add(status);
-    }
+
+    @Override
+    public String toString() {
+        if (_hasVaccinated)
+            return "ANIMAL|" + _id + "|" + _name +"|" +_species.getId()+"|"+_healthHistory+"|"+_habitat.getId();
+
+        return "ANIMAL|" + _id + "|" + _name +"|" +_species.getId()+"|VOID|"+_habitat.getId();
+    } 
 
     // public void _hasVaccinated  , -> true if vaccinated
 

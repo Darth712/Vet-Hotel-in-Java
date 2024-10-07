@@ -1,33 +1,44 @@
 package hva;
 
 import java.io.Serializable;
-import hva.employee.Vet;
-import java.util.List;
+
+import hva.animal.Animal;
+
+
+
 
 public class Vaccination implements Serializable{
-    private String _id;
-    private String _date;
-    private Vet _vet;
+
     private String _vaccineId;
     private String _vetId;
-    private String _animalId;
+    private Animal _animal;
 
-    public Vaccination(String id, String date, Vet vet) {
-        _id = id;
-        _date = date;
-        _vet = vet;
+    public Vaccination(Vaccine vaccine, String vetId, Animal animal) {
+        vaccine.use();
+        _vaccineId = vaccine.getId();
+        _vetId = vetId;
+        _animal = animal;
+
+
     }
 
     public String getId() {
-        return _id;
+        return _vaccineId;
     }
 
-    public String getDate() {
-        return _date;
+    public String getVet() {
+        return _vetId;
     }
 
-    public Vet getVet() {
-        return _vet;
+    public String getAnimal() {
+        return _animal.getId();
+    }
+
+
+    @Override
+    public String toString() {
+        return "REGISTO_VACINA|" + _vaccineId +"|" + _vetId +"|" + _animal.getSpecies().getId();
+        
     }
 }
     
