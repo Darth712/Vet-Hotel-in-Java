@@ -1,3 +1,12 @@
 {
-    "makefile.configureOnOpen": false
+    "java.project.sourcePaths": [
+        "po-uilib/src",
+        "hva-core/src",
+        "hva-app/src"
+    ],
+    "java.project.referencedLibraries": [
+        "po-uilib/src",
+        "hva-core/src",
+        "hva-app/src"
+    ]
 }
