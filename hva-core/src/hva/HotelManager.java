@@ -33,8 +33,8 @@ public class HotelManager {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(_associatedFile)));
             oos.writeObject(_hotel);
-            oos.close();
             _hotel.setChanged(false);
+            oos.close();
         } 
         catch (FileNotFoundException e) {e.printStackTrace();}
         catch (IOException e) {e.printStackTrace();}

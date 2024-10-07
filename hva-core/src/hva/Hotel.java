@@ -125,12 +125,14 @@ public class Hotel implements Serializable {
       Habitat habitat = new Habitat(id, name, area);
   
       // Parse trees in habitat
-      String[] treeIds = parts[4].split(",");
-      for (String treeId : treeIds) {
-          Tree tree = _trees.get(treeId);
-          if (tree != null) {
-              habitat.addTree(treeId,tree);
-          }
+      if (parts.length > 4) {
+        String[] treeIds = parts[4].split(",");
+        for (String treeId : treeIds) {
+            Tree tree = _trees.get(treeId);
+            if (tree != null) {
+                habitat.addTree(treeId,tree);
+            }
+        }
       }
   
       _habitats.put(id, habitat);
@@ -141,7 +143,7 @@ public class Hotel implements Serializable {
       String name = parts[2];
       Species species = _species.get(parts[3]);
       
-      Habitat habitat = _habitats.get(parts[5]);
+      Habitat habitat = _habitats.get(parts[4]);
   
       if (species == null || habitat == null) {
           throw new UnrecognizedEntryException("Species or Habitat not found for Animal: " + id);
@@ -164,12 +166,14 @@ public class Hotel implements Serializable {
       Handler handler = new Handler(id, name);
   
       // Parse habitats the handler manages
-      String[] habitatIds = parts[3].split(",");
-      for (String habitatId : habitatIds) {
-          Habitat habitat = _habitats.get(habitatId);
-          if (habitat != null) {
-              handler.addNewResponsability(habitatId);
-          }
+      if (parts.length > 3) {
+        String[] habitatIds = parts[3].split(",");
+        for (String habitatId : habitatIds) {
+            Habitat habitat = _habitats.get(habitatId);
+            if (habitat != null) {
+                handler.addNewResponsability(habitatId);
+            }
+        }
       }
   
       _employees.put(id, handler);
@@ -182,12 +186,14 @@ public class Hotel implements Serializable {
       Vet vet = new Vet(id, name);
   
       // Parse species the vet is responsible for
-      String[] speciesIds = parts[3].split(",");
-      for (String speciesId : speciesIds) {
-          Species species = _species.get(speciesId);
-          if (species != null) {
-              vet.addNewResponsability(speciesId);
-          }
+      if (parts.length >3) {
+        String[] speciesIds = parts[3].split(",");
+        for (String speciesId : speciesIds) {
+            Species species = _species.get(speciesId);
+            if (species != null) {
+                vet.addNewResponsability(speciesId);
+            }
+        }
       }
       _employees.put(id, vet);
     }
