@@ -231,6 +231,11 @@ public class Hotel implements Serializable {
 
   }
 
+  public Collection<Vaccine> ShowAllVaccines() {
+    return Collections.unmodifiableCollection((_vaccines.values()));
+
+  }
+
 
 
   
