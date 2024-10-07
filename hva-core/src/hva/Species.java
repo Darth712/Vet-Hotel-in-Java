@@ -8,13 +8,13 @@ import hva.animal.Animal;
 public class Species implements Serializable {
     private String _id;
     private String _name;
-    private int _population;
+    private static int _population;
     private Map<String, Animal> _animals;
 
-    public Species(String id, String name, int population) {
+    public Species(String id, String name) {
         _id = id;
         _name = name;
-        _population = population;
+        _population++;
         _animals = new HashMap<>();
     }
 

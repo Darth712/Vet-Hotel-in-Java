@@ -13,7 +13,7 @@ import hva.employee.*;
 import hva.habitat.*;
 import java.util.Map;
 
-
+import java.util.TreeMap;
 import java.util.HashMap;
 import java.util.Collection;
 import java.util.Collections;
@@ -35,12 +35,12 @@ public class Hotel implements Serializable {
     private static final long serialVersionUID = 202407081733L;
 
     private Season _currentSeason;
-    private Map<String,Habitat> _habitats = new HashMap<String,Habitat>();
-    private Map<String,Animal> _animals = new HashMap<String,Animal>();
-    private Map<String,Species> _species = new HashMap<String,Species>();
-    private Map<String,Employee> _employees = new HashMap<String,Employee>();
-    private Map<String,Vaccine> _vaccines = new HashMap<String,Vaccine>();
-    private Map<String,Tree> _trees = new HashMap<String,Tree>();
+    private Map<String,Habitat> _habitats = new TreeMap<String,Habitat>();
+    private Map<String,Animal> _animals = new TreeMap<String,Animal>();
+    private Map<String,Species> _species = new TreeMap<String,Species>();
+    private Map<String,Employee> _employees = new TreeMap<String,Employee>();
+    private Map<String,Vaccine> _vaccines = new TreeMap<String,Vaccine>();
+    private Map<String,Tree> _trees = new TreeMap<String,Tree>();
     private List<Vaccination> _vaccinations = new ArrayList<Vaccination>();
     private boolean _changed;
 
@@ -99,9 +99,9 @@ public class Hotel implements Serializable {
     private void parseSpecies(String[] parts) {
       String id = parts[1];
       String name = parts[2];
-      int population = Integer.parseInt(parts[3]);
       
-      Species species = new Species(id, name, population);
+      
+      Species species = new Species(id, name);
       _species.put(id, species);
     }
 
