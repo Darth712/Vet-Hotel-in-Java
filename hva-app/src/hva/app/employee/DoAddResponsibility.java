@@ -9,7 +9,7 @@ class DoAddResponsibility extends Command<Hotel> {
 
     DoAddResponsibility(Hotel receiver) {
         super(Label.ADD_RESPONSABILITY, receiver);
-        //FIXME add command fields if needed
+        addStringField("employeeId", Prompt.employeeKey());
     }
 
     @Override

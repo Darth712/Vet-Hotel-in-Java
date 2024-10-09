@@ -1,8 +1,6 @@
 package hva.employee;
 
-import java.io.Serializable;
-import hva.Species;
-import java.util.List;
+
 import java.util.ArrayList;
 
 
@@ -11,7 +9,7 @@ public class Vet extends Employee{
 
     public Vet(String id, String name) {
         super(id,name);
-        _responsability = new ArrayList<String>();
+        _responsability = new ArrayList<String>(); // com o id das especies
     }
 
     public String getName() {

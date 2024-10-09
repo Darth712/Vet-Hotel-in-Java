@@ -9,7 +9,8 @@ class DoRemoveResponsibility extends Command<Hotel> {
 
     DoRemoveResponsibility(Hotel receiver) {
         super(Label.REMOVE_RESPONSABILITY, receiver);
-        //FIXME add command fields if needed
+        addStringField("employeeId", Prompt.employeeKey());
+        
     }
 
     @Override

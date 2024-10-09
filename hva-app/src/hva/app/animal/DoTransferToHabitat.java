@@ -9,7 +9,8 @@ class DoTransferToHabitat extends Command<Hotel> {
 
     DoTransferToHabitat(Hotel hotel) {
         super(Label.TRANSFER_ANIMAL_TO_HABITAT, hotel);
-        //FIXME add command fields if needed
+        addStringField("animalId",Prompt.animalKey());
+        addStringField("habitatId",hva.app.habitat.Prompt.habitatKey());
     }
 
     @Override
