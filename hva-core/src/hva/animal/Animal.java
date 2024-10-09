@@ -8,7 +8,7 @@ import hva.habitat.Habitat;
 import hva.Vaccination;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class Animal implements Serializable{
     private String _id;
@@ -16,7 +16,7 @@ public class Animal implements Serializable{
     private Species _species;
     private String _healthStatus;
     private Habitat _habitat;
-    private String _healthHistory;
+    private String _healthHistory;   // concatenar novas healhStatus para healthHistory
     private List<Vaccination> _vaccinations = new ArrayList<>();
     private boolean _hasVaccinated = false;
     // vaccinations
@@ -80,6 +80,8 @@ public class Animal implements Serializable{
     public void setHabitat(Habitat habitat) {
         _habitat = habitat;
     }
+
+    public void vaccinated() {_hasVaccinated = true;}
 
 
     @Override

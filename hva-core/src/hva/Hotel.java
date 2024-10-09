@@ -11,6 +11,10 @@ import hva.Seasons.*;
 import hva.animal.*;
 import hva.employee.*;
 import hva.habitat.*;
+import hva.tree.Deciduous;
+import hva.tree.Evergreen;
+import hva.tree.Tree;
+
 import java.util.Map;
 
 import java.util.TreeMap;
@@ -110,11 +114,17 @@ public class Hotel implements Serializable {
       String name = parts[2];
       int age = Integer.parseInt(parts[3]);
       int difficulty = Integer.parseInt(parts[4]);
-      LeafType leafType = LeafType.valueOf(parts[5].toUpperCase());
-  
-      Tree tree = new Tree(id, name, age, leafType, difficulty, _currentSeason);
-      // Assuming trees are stored in a separate map or list
-      _trees.put(id, tree);
+      String type = parts[5].toUpperCase();
+      
+      if (type == "PERENE") {
+        Evergreen tree = new Evergreen(id, name, age, difficulty, _currentSeason, type);
+       _trees.put(id, tree);
+      }
+      if (type == "CADUCA") {
+        Deciduous tree = new Deciduous(id, name, age, difficulty, _currentSeason, type);
+       _trees.put(id, tree);
+      }
+
     }
 
     private void parseHabitat(String[] parts) {
@@ -153,7 +163,7 @@ public class Hotel implements Serializable {
       habitat.addAnimal(animal);
       species.addAnimal(animal);
   
-      // Assuming animals are stored in a map
+    
       habitat.getAnimals().put(id, animal);
       _animals.put(id,animal);
     }

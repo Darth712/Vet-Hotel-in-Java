@@ -15,6 +15,7 @@ public class Vaccination implements Serializable{
 
     public Vaccination(Vaccine vaccine, String vetId, Animal animal) {
         vaccine.use();
+        animal.vaccinated();
         _vaccineId = vaccine.getId();
         _vetId = vetId;
         _animal = animal;

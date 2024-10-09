@@ -1,23 +1,23 @@
-package hva;
+package hva.tree;
 
 import java.io.Serializable;
 
-import java.util.EnumMap;
+import hva.Seasons.Season;
 
-public class Tree implements Serializable{
+
+public abstract class Tree implements Serializable{
 
     private String _id;
     private String _name;
     private int _age ;
-    private LeafType _leafType;
+    protected String _leafType;
     private int _baseCleaningDiff;
-    private Season _currentSeason;
+    protected Season _currentSeason;
 
-    public Tree(String id, String name, int age, LeafType leafType, int baseCleaningDiff, Season currentSeason) {
+    public Tree(String id, String name, int age, int baseCleaningDiff, Season currentSeason) {
         _id = id;
         _name = name;
         _age = age;
-        _leafType = leafType;
         _baseCleaningDiff = baseCleaningDiff;
         _currentSeason = currentSeason;
     }
@@ -34,7 +34,7 @@ public class Tree implements Serializable{
         return _age;
     }
 
-    public LeafType getLeafType() {
+    public String getLeafType() {
         return _leafType;
     }
 
@@ -49,8 +49,13 @@ public class Tree implements Serializable{
     public void setCurrentSeason(Season currentSeason) {
         _currentSeason = currentSeason;
     }
+
+    @Override
+    public String toString() {
+        return "ÁRVORE|" + _id +"|"+_name+"|"+_age+"|"+_baseCleaningDiff;
+    }
+
+
+
 }
 
-enum LeafType {
-    CADUCA, PERENE;
-}
