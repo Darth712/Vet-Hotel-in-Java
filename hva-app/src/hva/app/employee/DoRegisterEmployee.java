@@ -12,10 +12,7 @@ class DoRegisterEmployee extends Command<Hotel> {
         super(Label.REGISTER_EMPLOYEE, receiver);
         addStringField("id",Prompt.employeeKey());
         addStringField("name",Prompt.employeeName());
-        String type;
-        do {
-          type = Form.requestString(Prompt.employeeType());
-        } while (!type.equals("TRT") && !type.equals("VET"));
+      
         
 
     }
