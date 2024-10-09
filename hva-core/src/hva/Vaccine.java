@@ -38,6 +38,10 @@ public class Vaccine implements Serializable{
         return _timesUsed;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String speciesString() {
         if (_applicableSpecies == null || _applicableSpecies.isEmpty()) {
             return ""; // Return empty string if the list is empty or null
