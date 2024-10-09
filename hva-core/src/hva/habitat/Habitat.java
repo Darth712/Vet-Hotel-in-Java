@@ -83,7 +83,7 @@ public class Habitat implements Serializable{
     public String toString() {
         StringBuilder habitatInfo = new StringBuilder("HABITAT|" + _id + "|" + _name + "|" + _area + "|" + this.numOfTrees());
         
-        if (_trees != null) {
+        if (!_trees.isEmpty()) {
             habitatInfo.append("\n");    
             for (Map.Entry<String, Tree> tree : _trees.entrySet()) {
                 habitatInfo.append(tree.toString()).append("\n"); 
