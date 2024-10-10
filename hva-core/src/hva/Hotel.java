@@ -297,11 +297,26 @@ public class Hotel implements Serializable {
         changed();  
     }
 
+    /**
+     * Registers a new species and adds it to the species map.
+     * 
+     * @param id    The unique identifier for the species.
+     * @param name  The name of the species.
+     */
     public void registerSpecies(String id, String name) { 
         _species.put(id, new Species(id, name));  
         changed();  
     }    
 
+    /**
+     * Registers a new animal and adds it to the animals map.
+     * Also associates the animal with its habitat and species.
+     * 
+     * @param id      The animal's ID
+     * @param name    The animal'sname
+     * @param species The species the animal belongs to.
+     * @param habitat The habitat where the animal resides.
+     */
     public void registerAnimal(String id, String name, Species species, Habitat habitat) { 
         Animal animal = new Animal(id, name, species, habitat);
         _animals.put(id, animal);
@@ -310,16 +325,38 @@ public class Hotel implements Serializable {
         changed();  
     }    
 
+    /**
+     * Registers a new handler and adds them to the employees map.
+     * 
+     * @param id    The handler's ID
+     * @param name  The handler's name
+     */
     public void registerHandler(String id, String name) {
         _employees.put(id, new Handler(id, name));
         changed();        
     }
 
+    /**
+     * Registers a new veterinarian and adds them to the employees map.
+     * 
+     * @param id    The vet's ID
+     * @param name  The vet's name
+     */
     public void registerVet(String id, String name) {
         _employees.put(id, new Vet(id, name));
         changed();        
     }
 
+    /**
+     * Registers a new tree and adds it to the trees map.
+     * Depending on the type ("CADUCA" or "PERENE"), it registers the tree as Deciduous or Evergreen.
+     * 
+     * @param id        The tree's ID
+     * @param name      The tree's name
+     * @param age       The tree' age
+     * @param baseDiff  The base cleaning difficulty of the tree.
+     * @param type      The type of tree 
+     */
     public void registerTree(String id, String name, int age, int baseDiff, String type) {
         if (type == "CADUCA")
             _trees.put(id, new Deciduous(id, name, age, baseDiff, _currentSeason, type));
@@ -328,8 +365,13 @@ public class Hotel implements Serializable {
         changed();  
     }
 
+    /**
+     * Adds a tree to a specific habitat.
+     * 
+     * @param habitatId The ID of the habitat where the tree will be added.
+     * @param treeId    The ID of the tree to add to the habitat.
+     */
     public void addTreeToHabitat(String habitatId, String treeId) {
-
         Habitat habitat = _habitats.get(habitatId);
 
         if (_trees.containsKey(treeId)) {
@@ -338,14 +380,26 @@ public class Hotel implements Serializable {
         }
     }
 
-    
+    /**
+     * Adds a new responsibility to an employee by their ID.
+     * 
+     * @param employeeId        The ID of the employee to assign the responsibility to.
+     * @param responsabilityId  The ID of the responsibility to be assigned.
+     */
     public void addEmployeeResponsability(String employeeId, String responsabilityId) {
         _employees.get(employeeId).addNewResponsability(responsabilityId);
         changed();
     }
 
+    /**
+     * Registers a new vaccine and associates it with applicable species.
+     * Species are passed as a comma-separated string of species IDs.
+     * 
+     * @param id                The vaccine's ID
+     * @param name              The vaccine's name
+     * @param applicableSpecies A comma-separated string of species IDs the vaccine applies to.
+     */
     public void registerVaccine(String id, String name, String applicableSpecies) {
-
         Vaccine vaccine = new Vaccine(id, name);
 
         if (applicableSpecies != null) {
@@ -360,6 +414,7 @@ public class Hotel implements Serializable {
         _vaccines.put(id, vaccine);
         changed();
     }
+
 
 
 
