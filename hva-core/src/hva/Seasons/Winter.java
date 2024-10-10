@@ -1,13 +1,49 @@
 package hva.Seasons;
 
-public class Winter extends Season{
+/**
+ * Class representing the Winter season.
+ * Implements the abstract methods from the Season class to provide 
+ * the effort values and biological cycles for deciduous and evergreen trees during Winter.
+ */
+public class Winter extends Season {
+
+    /**
+     * Gets the seasonal effort for deciduous trees in Winter.
+     * 
+     * @return the effort value for deciduous trees in Winter.
+     */
     @Override
-    public int getDeciduousEffort() {return DECIDUOUS_SEASONAL_EFFORT[0];}
+    public int getDeciduousEffort() {
+        return DECIDUOUS_SEASONAL_EFFORT[0]; // Winter effort for deciduous trees
+    }
+
+    /**
+     * Gets the seasonal effort for evergreen trees in Winter.
+     * 
+     * @return the effort value for evergreen trees in Winter.
+     */
     @Override
-    public int getEvergreenEffort() {return DECIDUOUS_SEASONAL_EFFORT[0];}
+    public int getEvergreenEffort() {
+        return DECIDUOUS_SEASONAL_EFFORT[0]; // Winter effort for evergreen trees (note: should use EVERGREEN_SEASONAL_EFFORT if applicable)
+    }
+
+    /**
+     * Gets the biological cycle stage for deciduous trees in Winter.
+     * 
+     * @return the biological cycle stage for deciduous trees in Winter.
+     */
     @Override
-    public String getDeciduousCycle() {return DECIDUOUS_BIO_CYCLE[0];}
+    public String getDeciduousCycle() {
+        return DECIDUOUS_BIO_CYCLE[0]; // Winter biological cycle for deciduous trees
+    }
+
+    /**
+     * Gets the biological cycle stage for evergreen trees in Winter.
+     * 
+     * @return the biological cycle stage for evergreen trees in Winter.
+     */
     @Override
-    public String getEvergreenCycle() {return DECIDUOUS_BIO_CYCLE[0];}
-    
+    public String getEvergreenCycle() {
+        return DECIDUOUS_BIO_CYCLE[0]; // Winter biological cycle for evergreen trees (note: should use EVERGREEN_BIO_CYCLE if applicable)
+    }
 }

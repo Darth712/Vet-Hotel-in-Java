@@ -5,62 +5,96 @@ import hva.Species;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Vaccine implements Serializable{
-    private String _id;
-    private String _name;
-    private int _timesUsed;
-    private List<Species> _applicableSpecies;
+/**
+ * Class representing a vaccine used for animals.
+ * Implements Serializable for object serialization.
+ */
+public class Vaccine implements Serializable {
+    private String _id;                     // Identifier for the vaccine
+    private String _name;                   // Name of the vaccine
+    private int _timesUsed;                 // Number of times the vaccine has been used
+    private List<Species> _applicableSpecies; // List of species applicable for the vaccine
 
-    public Vaccine (String id, String name) {
+    /**
+     * Constructor for the Vaccine class.
+     *
+     * @param id   The ID of the vaccine.
+     * @param name The name of the vaccine.
+     */
+    public Vaccine(String id, String name) {
         _id = id;
         _name = name;
         _timesUsed = 0;
         _applicableSpecies = new ArrayList<Species>();
-    }  
-
-    public void addSpecies(Species applicabSpecies){
-        _applicableSpecies.add(applicabSpecies);
-    }
-
-    public String getId() {
-        return _id;
-    }
-
-    public String getName() {
-        return _name;
-    }
-
-    public void use() {
-        _timesUsed++;
-    }
-
-    public int getTimesUsed() {
-        return _timesUsed;
     }
 
     /**
-     * 
-     * @return
+     * Adds a species to the list of species that can receive this vaccine.
+     *
+     * @param applicableSpecies The species to add to the list of applicable species.
+     */
+    public void addSpecies(Species applicableSpecies) {
+        _applicableSpecies.add(applicableSpecies);
+    }
+
+    /**
+     * Gets the ID of the vaccine.
+     *
+     * @return The ID of the vaccine.
+     */
+    public String getId() {
+        return _id; // Return the vaccine ID
+    }
+
+    /**
+     * Gets the name of the vaccine.
+     *
+     * @return The name of the vaccine.
+     */
+    public String getName() {
+        return _name; // Return the vaccine name
+    }
+
+    /**
+     * Marks the vaccine as used, incrementing the usage count.
+     */
+    public void use() {
+        _timesUsed++; // Increment the usage count
+    }
+
+    /**
+     * Gets the number of times the vaccine has been used.
+     *
+     * @return The number of times the vaccine has been used.
+     */
+    public int getTimesUsed() {
+        return _timesUsed; // Return the times used
+    }
+
+    /**
+     * Returns a string representation of the applicable species IDs.
+     *
+     * @return A string of applicable species IDs, formatted as "|id1,id2,id3".
      */
     public String speciesString() {
         if (_applicableSpecies == null || _applicableSpecies.isEmpty()) {
             return ""; // Return empty string if the list is empty or null
         }
-    
+
         // Initialize ans with the first element
         String ans = "|" + _applicableSpecies.get(0).getId();
-    
+
         // Loop through the rest of the list starting from index 1
         for (int i = 1; i < _applicableSpecies.size(); i++) {
             ans += "," + _applicableSpecies.get(i).getId();
         }
-    
-        return ans;
+
+        return ans; // Return the formatted string
     }
 
     @Override
     public String toString() {
-        return "VACINA|" + _id +"|" +_name +"|"+_timesUsed+this.speciesString();
+        return "VACINA|" + _id + "|" + _name + "|" + _timesUsed + this.speciesString();
+        // Return a string representation of the vaccine
     }
-
 }
