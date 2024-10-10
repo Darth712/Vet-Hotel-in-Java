@@ -34,7 +34,7 @@ public class ToStringVisitor extends Visitor<String>{
 
     @Override
     public String visit(Employee employee) {
-        return employee.getType() + "|" + employee.getId() + "|" + employee.getName() + "|" + employee.responsabilityString();
+        return employee.getType() + "|" + employee.getId() + "|" + employee.getName() + employee.responsabilityString();
     }
 
     @Override
