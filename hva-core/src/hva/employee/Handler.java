@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Class representing a Handler, a type of employee responsible for habitats in the system.
  */
-public class Handler extends Employee {
+public class Handler extends Employee{
 
     /**
      * Constructs a new Handler with the specified ID and name.
@@ -38,13 +38,5 @@ public class Handler extends Employee {
         return "TRT";
     }
 
-    /**
-     * Returns a string representation of the Handler, including its type, ID, name, and responsibilities.
-     * 
-     * @return a formatted string representing the handler's details and responsibilities
-     */
-    @Override
-    public String toString() {
-        return this.getType() + super.toString() + this.responsabilityString();
-    }
+  
 }

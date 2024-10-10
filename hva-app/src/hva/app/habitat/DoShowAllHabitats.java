@@ -1,11 +1,14 @@
 package hva.app.habitat;
 
 import hva.Hotel;
+import hva.app.ToStringVisitor;
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
 
 
 class DoShowAllHabitats extends Command<Hotel> {
+
+    private final ToStringVisitor tsv = new ToStringVisitor();
 
     DoShowAllHabitats(Hotel receiver) {
         super(Label.SHOW_ALL_HABITATS, receiver);
@@ -13,6 +16,9 @@ class DoShowAllHabitats extends Command<Hotel> {
 
     @Override
     protected void execute() {
-        _display.popup(_receiver.ShowAllHabitats());
+        _receiver.getAllHabitats() 
+            .stream()               
+            .map(habitat -> habitat.accept(tsv)) 
+            .forEach(_display::popup); 
     }
 }

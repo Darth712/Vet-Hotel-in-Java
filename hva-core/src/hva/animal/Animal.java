@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 import hva.Species;
 import hva.habitat.Habitat;
+import hva.visitor.*;
 import hva.Vaccination;
 
 
@@ -12,7 +13,7 @@ import hva.Vaccination;
  * Represents an animal in the system, with attributes such as species, health status,
  * vaccinations, and habitat.
  */
-public class Animal implements Serializable {
+public class Animal implements Serializable, Visitable{
 
     /** The unique identifier for the animal. */
     private String _id;
@@ -165,20 +166,19 @@ public class Animal implements Serializable {
         _hasVaccinated = true;
     }
 
-    /**
-     * Generates a string representation of the animal. If the animal has been vaccinated,
-     * the health history is included, otherwise it is marked as "VOID".
-     * 
-     * @return the string representation of the animal
-     */
-    @Override
-    public String toString() {
-        if (_hasVaccinated)
-            return "ANIMAL|" + _id + "|" + _name + "|" + _species.getId() + "|" + _healthHistory + "|" + _habitat.getId();
-        
-        return "ANIMAL|" + _id + "|" + _name + "|" + _species.getId() + "|VOID|" + _habitat.getId();
+    public boolean hasVaccinated() {
+        return _hasVaccinated;
     }
-    // public void _hasVaccinated  , -> true if vaccinated
+
+  
+
+    // public void _hasVaccinated  , -> true if vaccinated  POR FAZER
+
+    @Override
+    public <T> T accept(Visitor<T> visitor) {
+      return visitor.visit(this);
+    }
+
 }
 
 

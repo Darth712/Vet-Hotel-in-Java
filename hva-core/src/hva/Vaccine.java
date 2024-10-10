@@ -1,7 +1,8 @@
 package hva;
 
 import java.io.Serializable;
-import hva.Species;
+import hva.visitor.*;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  * Class representing a vaccine used for animals.
  * Implements Serializable for object serialization.
  */
-public class Vaccine implements Serializable {
+public class Vaccine implements Serializable, Visitable{
     private String _id;                     // Identifier for the vaccine
     private String _name;                   // Name of the vaccine
     private int _timesUsed;                 // Number of times the vaccine has been used
@@ -93,8 +94,8 @@ public class Vaccine implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "VACINA|" + _id + "|" + _name + "|" + _timesUsed + this.speciesString();
-        // Return a string representation of the vaccine
+    public <T> T accept(Visitor<T> visitor) {
+      return visitor.visit(this);
     }
+ 
 }

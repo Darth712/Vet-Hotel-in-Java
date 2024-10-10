@@ -8,8 +8,7 @@ import hva.Seasons.Season;
  */
 public class Deciduous extends Tree {
 
-    // Type of leaves for the deciduous tree
-    private String _leafType;
+ 
 
     /**
      * Constructor for the Deciduous tree.
@@ -26,13 +25,5 @@ public class Deciduous extends Tree {
         _leafType = type; // Set the leaf type for this deciduous tree
     }
 
-    /**
-     * Returns a string representation of the Deciduous tree.
-     * 
-     * @return A formatted string containing the tree's attributes and its current seasonal cycle.
-     */
-    @Override
-    public String toString() {
-        return super.toString() + "|" + _leafType + "|" + _currentSeason.getDeciduousCycle();
-    }
+  
 }

@@ -1,16 +1,17 @@
 package hva.habitat;
 
 import java.io.Serializable;
-import java.util.Map;
+
 import java.util.TreeMap;
 import hva.Species;
 import hva.animal.Animal;
 import hva.tree.Tree;
+import hva.visitor.*;
 
 /**
  * Class representing a Habitat, which contains trees, animals, and influences (species).
  */
-public class Habitat implements Serializable {
+public class Habitat implements Serializable, Visitable{
 
     /** The unique identifier of the habitat. */
     private String _id;
@@ -140,22 +141,9 @@ public class Habitat implements Serializable {
         return _trees.size();
     }
 
-    /**
-     * Returns a string representation of the habitat, including its ID, name, area, and number of trees.
-     * 
-     * @return a string representing the habitat and its contents
-     */
     @Override
-    public String toString() {
-        StringBuilder habitatInfo = new StringBuilder("HABITAT|" + _id + "|" + _name + "|" + _area + "|" + this.numOfTrees());
-
-        // If there are trees in the habitat, add their details to the output
-        if (!_trees.isEmpty()) {
-            habitatInfo.append("\n");
-            for (Map.Entry<String, Tree> tree : _trees.entrySet()) {
-                habitatInfo.append(tree.toString()).append("\n");
-            }
-        }
-        return habitatInfo.toString();
+    public <T> T accept(Visitor<T> visitor) {
+      return visitor.visit(this);
     }
+    
 }
