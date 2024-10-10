@@ -41,7 +41,8 @@ public class ToStringVisitor extends Visitor<String>{
     public String visit(Habitat habitat) {
         StringBuilder habitatInfo = new StringBuilder("HABITAT|" + habitat.getId() + 
                                                "|" + habitat.getName() + 
-                                                "|" + habitat.getArea());
+                                                "|" + habitat.getArea() +
+                                                "|" + habitat.numOfTrees());
         if (!habitat.getTrees().isEmpty()) {
             habitatInfo.append("\n");
             for (Tree tree : habitat.getTrees().values()) {
