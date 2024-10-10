@@ -1,5 +1,6 @@
 package hva.animal;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
@@ -13,6 +14,9 @@ import hva.Vaccination;
  * vaccinations, and habitat.
  */
 public class Animal implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 202407081733L;
 
     /** The unique identifier for the animal. */
     private String _id;

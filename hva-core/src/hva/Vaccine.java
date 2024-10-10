@@ -1,5 +1,6 @@
 package hva;
 
+import java.io.Serial;
 import java.io.Serializable;
 import hva.Species;
 import java.util.List;
@@ -10,6 +11,10 @@ import java.util.ArrayList;
  * Implements Serializable for object serialization.
  */
 public class Vaccine implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 202407081733L;
+
     private String _id;                     // Identifier for the vaccine
     private String _name;                   // Name of the vaccine
     private int _timesUsed;                 // Number of times the vaccine has been used

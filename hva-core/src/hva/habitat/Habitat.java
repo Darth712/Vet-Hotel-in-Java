@@ -1,5 +1,6 @@
 package hva.habitat;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.TreeMap;
@@ -11,6 +12,9 @@ import hva.tree.Tree;
  * Class representing a Habitat, which contains trees, animals, and influences (species).
  */
 public class Habitat implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 202407081733L;
 
     /** The unique identifier of the habitat. */
     private String _id;

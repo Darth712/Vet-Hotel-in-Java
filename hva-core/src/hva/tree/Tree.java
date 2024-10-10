@@ -1,5 +1,6 @@
 package hva.tree;
 
+import java.io.Serial;
 import java.io.Serializable;
 import hva.Seasons.Season;
 
@@ -8,6 +9,9 @@ import hva.Seasons.Season;
  * This class implements Serializable for object serialization.
  */
 public abstract class Tree implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 202407081733L;
 
     private String _id;                // Unique identifier for the tree
     private String _name;              // Name of the tree

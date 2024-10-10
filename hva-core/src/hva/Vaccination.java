@@ -1,5 +1,6 @@
 package hva;
 
+import java.io.Serial;
 import java.io.Serializable;
 import hva.animal.Animal;
 
@@ -8,6 +9,9 @@ import hva.animal.Animal;
  * Implements Serializable for object serialization.
  */
 public class Vaccination implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 202407081733L;
 
     private String _vaccineId;  // Identifier for the vaccine
     private String _vetId;      // Identifier for the veterinarian administering the vaccine
