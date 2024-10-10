@@ -1,0 +1,19 @@
+package hva.visitor;
+
+import hva.employee.Handler;
+import hva.employee.Vet;
+import hva.habitat.Habitat;
+import hva.tree.Deciduous;
+import hva.tree.Evergreen;
+import hva.Vaccine;
+import hva.Vaccination;
+
+public interface Visitor {
+    String visit(Handler handler);
+    String visit(Vet vet);
+    String visit(Habitat habitat);
+    String visit(Deciduous deciduous);
+    String visit(Evergreen evergreen);
+    String visit(Vaccine vaccine);
+    String visit(Vaccination vaccination);
+}

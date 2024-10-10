@@ -1,0 +1,55 @@
+package hva.ToStringVisitor;
+
+import hva.employee.Handler;
+import hva.employee.Vet;
+import hva.habitat.Habitat;
+import hva.tree.Deciduous;
+import hva.tree.Evergreen;
+import hva.Vaccine;
+import hva.Vaccination;
+import hva.visitor.Visitor;
+
+public class ToStringVisitor implements Visitor {
+
+    /**
+     * Returns a string representation of the Handler, including its type, ID, name, and responsibilities.
+     * 
+     * @return a formatted string representing the handler's details and responsibilities
+     */
+    @Override
+    public String toString() {
+        return this.getType() + super.toString() + this.responsabilityString();
+    }
+
+    @Override
+    public String visit(Vet vet) {
+        return "Vet|" + vet.getId() + "|" + vet.getName() + "|" + vet.responsabilityString();
+    }
+
+    @Override
+    public String visit(Habitat habitat) {
+        StringBuilder sb = new StringBuilder("HABITAT|" + habitat.getId() + "|" + habitat.getName() + "|" + habitat.getArea());
+        habitat.getTrees().forEach((id, tree) -> sb.append("\n").append(tree.accept(this)));
+        return sb.toString();
+    }
+
+    @Override
+    public String visit(Deciduous deciduous) {
+        return "Deciduous|" + deciduous.getId() + "|" + deciduous.getName() + "|" + deciduous.getAge() + "|" + deciduous.getCurrentSeason().getDeciduousCycle();
+    }
+
+    @Override
+    public String visit(Evergreen evergreen) {
+        return "Evergreen|" + evergreen.getId() + "|" + evergreen.getName() + "|" + evergreen.getAge() + "|" + evergreen.getCurrentSeason().getEvergreenCycle();
+    }
+
+    @Override
+    public String visit(Vaccine vaccine) {
+        return "Vaccine|" + vaccine.getId() + "|" + vaccine.getName() + "|" + vaccine.getTimesUsed();
+    }
+
+    @Override
+    public String visit(Vaccination vaccination) {
+        return "Vaccination|" + vaccination.getId() + "|" + vaccination.getVet() + "|" + vaccination.getAnimal();
+    }
+}
