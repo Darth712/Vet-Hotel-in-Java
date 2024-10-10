@@ -1,98 +1,161 @@
 package hva.habitat;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.TreeMap;
 import hva.Species;
 import hva.animal.Animal;
 import hva.tree.Tree;
 
-import java.util.Map;
+/**
+ * Class representing a Habitat, which contains trees, animals, and influences (species).
+ */
+public class Habitat implements Serializable {
 
-
-public class Habitat implements Serializable{
-
+    /** The unique identifier of the habitat. */
     private String _id;
+
+    /** The name of the habitat. */
     private String _name;
+
+    /** The area of the habitat (in square meters, for example). */
     private int _area;
-    private TreeMap<String,Tree> _trees;
-    private TreeMap<String,Animal> _animals;
-    private TreeMap<String,Species> _influence;
 
+    /** A collection of trees present in the habitat, mapped by tree ID. */
+    private TreeMap<String, Tree> _trees;
 
+    /** A collection of animals present in the habitat, mapped by animal ID. */
+    private TreeMap<String, Animal> _animals;
+
+    /** A collection of species influencing the habitat, mapped by descriptions. */
+    private TreeMap<String, Species> _influence;
+
+    /**
+     * Constructs a Habitat object with the specified ID, name, and area.
+     * Initializes empty maps for trees, animals, and influence species.
+     * 
+     * @param id    the unique identifier for the habitat
+     * @param name  the name of the habitat
+     * @param area  the area of the habitat
+     */
     public Habitat(String id, String name, int area) {
         _id = id;
         _name = name;
         _area = area;
-        _trees = new TreeMap<String,Tree>();
-        _animals = new TreeMap<String,Animal>();
-        _influence = new TreeMap<String,Species>();
+        _trees = new TreeMap<String, Tree>();
+        _animals = new TreeMap<String, Animal>();
+        _influence = new TreeMap<String, Species>();
     }
 
+    /** @return the habitat's unique ID */
     public String getId() {
         return _id;
     }
 
+    /** @return the name of the habitat */
     public String getName() {
         return _name;
     }
 
+    /** @return the area of the habitat */
     public int getArea() {
         return _area;
     }
 
+    /** @return the collection of trees in the habitat */
     public TreeMap<String, Tree> getTrees() {
         return _trees;
     }
 
+    /** @return the collection of animals in the habitat */
     public TreeMap<String, Animal> getAnimals() {
         return _animals;
     }
 
+    /** @return the collection of species influencing the habitat */
     public TreeMap<String, Species> getInfluence() {
         return _influence;
     }
 
+    /**
+     * Adds a tree to the habitat.
+     * 
+     * @param treeId the unique ID of the tree
+     * @param tree   the Tree object to be added
+     */
     public void addTree(String treeId, Tree tree) {
         _trees.put(treeId, tree);
     }
 
+    /**
+     * Adds an animal to the habitat.
+     * 
+     * @param animal the Animal object to be added
+     */
     public void addAnimal(Animal animal) {
         _animals.put(animal.getId(), animal);
     }
 
+    /**
+     * Adds a species to the influence map of the habitat.
+     * 
+     * @param species     the species influencing the habitat
+     * @param description a description of the influence
+     */
     public void addInfluence(Species species, String description) {
         _influence.put(description, species);
     }
+
+    /**
+     * Updates the area of the habitat.
+     * 
+     * @param area the new area of the habitat
+     */
     public void setArea(int area) {
         _area = area;
     }
 
+    /**
+     * Adds a new tree to the habitat.
+     * 
+     * @param tree the Tree object to be added
+     */
     public void addNewTree(Tree tree) {
         _trees.put(tree.getId(), tree);
     }
 
+    /**
+     * Adds a new animal to the habitat.
+     * 
+     * @param animal the Animal object to be added
+     */
     public void addNewAnimal(Animal animal) {
         _animals.put(animal.getId(), animal);
     }
 
+    /**
+     * @return the number of trees in the habitat
+     */
     public int numOfTrees() {
         return _trees.size();
     }
 
+    /**
+     * Returns a string representation of the habitat, including its ID, name, area, and number of trees.
+     * 
+     * @return a string representing the habitat and its contents
+     */
     @Override
     public String toString() {
         StringBuilder habitatInfo = new StringBuilder("HABITAT|" + _id + "|" + _name + "|" + _area + "|" + this.numOfTrees());
-        
+
+        // If there are trees in the habitat, add their details to the output
         if (!_trees.isEmpty()) {
-            habitatInfo.append("\n");    
+            habitatInfo.append("\n");
             for (Map.Entry<String, Tree> tree : _trees.entrySet()) {
-                habitatInfo.append(tree.toString()).append("\n"); 
+                habitatInfo.append(tree.toString()).append("\n");
             }
         }
         return habitatInfo.toString();
     }
 }
-
-    
-
-

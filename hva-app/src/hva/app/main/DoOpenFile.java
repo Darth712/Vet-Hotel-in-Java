@@ -9,7 +9,7 @@ import hva.exceptions.UnavailableFileException;
 import pt.tecnico.uilib.forms.Form;
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
-//FIXME import other classes if needed
+
 
 class DoOpenFile extends Command<HotelManager> {
     DoOpenFile(HotelManager receiver) {

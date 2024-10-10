@@ -6,7 +6,7 @@ import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
 
 
-//FIXME import other classes if needed
+
 
 class DoRegisterAnimal extends Command<Hotel> {
 
@@ -21,7 +21,7 @@ class DoRegisterAnimal extends Command<Hotel> {
 
     @Override
     protected final void execute() throws CommandException {
-        //FIXME implement command
+        
     }
 
 }

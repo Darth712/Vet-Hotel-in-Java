@@ -3,7 +3,7 @@ package hva.app.animal;
 import hva.Hotel;
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
-//FIXME import other classes if needed
+
 
 class DoTransferToHabitat extends Command<Hotel> {
 
@@ -15,7 +15,7 @@ class DoTransferToHabitat extends Command<Hotel> {
 
     @Override
     protected final void execute() throws CommandException {
-        //FIXME implement command
+   
     }
 
 }

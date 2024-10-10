@@ -3,7 +3,7 @@ package hva.app.habitat;
 import hva.Hotel;
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
-//FIXME import other classes if needed
+
 
 class DoShowAllHabitats extends Command<Hotel> {
 
