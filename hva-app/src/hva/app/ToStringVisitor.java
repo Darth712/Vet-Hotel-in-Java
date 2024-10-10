@@ -1,4 +1,3 @@
-
 package hva.app;
 
 import hva.animal.Animal;
