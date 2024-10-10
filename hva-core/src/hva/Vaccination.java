@@ -11,7 +11,7 @@ import hva.animal.Animal;
 public class Vaccination implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 202407081733L;
+    private static final long serialVersionUID = 202407081739L;
 
     private String _vaccineId;  // Identifier for the vaccine
     private String _vetId;      // Identifier for the veterinarian administering the vaccine

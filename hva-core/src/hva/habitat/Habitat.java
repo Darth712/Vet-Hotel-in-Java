@@ -14,7 +14,7 @@ import hva.tree.Tree;
 public class Habitat implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 202407081733L;
+    private static final long serialVersionUID = 202407081736L;
 
     /** The unique identifier of the habitat. */
     private String _id;

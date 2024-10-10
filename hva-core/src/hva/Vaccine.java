@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Vaccine implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 202407081733L;
+    private static final long serialVersionUID = 202407081740L;
 
     private String _id;                     // Identifier for the vaccine
     private String _name;                   // Name of the vaccine

@@ -11,7 +11,7 @@ import hva.Seasons.Season;
 public abstract class Tree implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 202407081733L;
+    private static final long serialVersionUID = 202407081737L;
 
     private String _id;                // Unique identifier for the tree
     private String _name;              // Name of the tree

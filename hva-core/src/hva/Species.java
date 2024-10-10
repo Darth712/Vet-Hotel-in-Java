@@ -13,8 +13,8 @@ import hva.animal.Animal;
 public class Species implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 202407081733L;
-    
+    private static final long serialVersionUID = 202407081738L;
+
     private String _id;                      // Unique identifier for the species
     private String _name;                    // Name of the species
     private static int _population;          // Static variable to track total population of all species

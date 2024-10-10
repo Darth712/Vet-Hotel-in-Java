@@ -11,7 +11,7 @@ import java.util.List;
 public abstract class Employee implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 202407081733L;
+    private static final long serialVersionUID = 202407081735L;
 
     /** The unique identifier for the employee. */
     private String _id;
