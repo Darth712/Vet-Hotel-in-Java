@@ -1,5 +1,6 @@
 package hva.employee;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,6 +11,9 @@ import hva.visitor.*;
  * This class is meant to be extended by specific types of employees.
  */
 public abstract class Employee implements Serializable, Visitable{
+
+    @Serial
+    private static final long serialVersionUID = 202407081733L;
 
     /** The unique identifier for the employee. */
     private String _id;

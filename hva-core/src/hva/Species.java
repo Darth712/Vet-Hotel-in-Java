@@ -1,5 +1,6 @@
 package hva;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +11,10 @@ import hva.animal.Animal;
  * Implements Serializable for object serialization.
  */
 public class Species implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 202407081733L;
+    
     private String _id;                      // Unique identifier for the species
     private String _name;                    // Name of the species
     private static int _population;          // Static variable to track total population of all species
