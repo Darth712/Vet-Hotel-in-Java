@@ -56,13 +56,5 @@ public class Vet extends Employee {
         return "VET";
     }
 
-    /**
-     * Returns a string representation of the Vet, including its type, ID, name, and responsibilities.
-     * 
-     * @return a formatted string representing the vet's details and responsibilities
-     */
-    @Override
-    public String toString() {
-        return this.getType() + super.toString() + this.responsabilityString();
-    }
+ 
 }

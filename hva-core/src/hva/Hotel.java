@@ -18,7 +18,7 @@ import hva.tree.Tree;
 import java.util.Map;
 
 import java.util.TreeMap;
-import java.util.HashMap;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.ArrayList;
@@ -53,6 +53,37 @@ public class Hotel implements Serializable {
     public Map<String, Habitat> getHabitats() {
         return _habitats;
     }
+
+    /**
+     * Gets the map of animals.
+     * 
+     * @return the animals map
+     */
+
+    public Map<String, Animal> getAnimals() {
+        return _animals;
+    }
+
+    /**
+     * Gets the map of employees.
+     * 
+     * @return the employees map
+     */
+
+     public Map<String, Employee> getEmployees() {
+        return _employees;
+    }
+
+    /**
+     * Gets the map of vaccines.
+     * 
+     * @return the vaccines map
+     */
+
+     public Map<String, Vaccine> getVaccines() {
+        return _vaccines;
+    }
+
 
     /**
      * Sets the changed status of the hotel.
@@ -288,8 +319,8 @@ public class Hotel implements Serializable {
      * 
      * @return a collection of all habitats
      */
-    public Collection<Habitat> ShowAllHabitats() {
-        return Collections.unmodifiableCollection(_habitats.values());
+    public Collection<Habitat> getAllHabitats() {
+        return getHabitats().values();
     }
 
     /**
@@ -299,7 +330,7 @@ public class Hotel implements Serializable {
      * @param name  the habitat's name
      * @param area  the habitat's area
      */
-    public void registerHabitat(String id, String name, int area) {
+    public void registerHabitat(String id, String name, int area) { // NAO ESTÁ COMPLETO!!!
         _habitats.put(id, new Habitat(id, name, area));  // Adds the new habitat
         changed();  // Marks the hotel data as changed
     }
@@ -309,8 +340,8 @@ public class Hotel implements Serializable {
      * 
      * @return a collection of all animals
      */
-    public Collection<Animal> ShowAllAnimals() {
-        return Collections.unmodifiableCollection(_animals.values());
+    public Collection<Animal> getAllAnimals() {
+        return getAnimals().values();
     }
 
     /**
@@ -318,8 +349,8 @@ public class Hotel implements Serializable {
      * 
      * @return a collection of all employees
      */
-    public Collection<Employee> ShowAllEmployees() {
-        return Collections.unmodifiableCollection(_employees.values());
+    public Collection<Employee> getAllEmployees() {
+        return getEmployees().values();
     }
 
     /**
@@ -327,7 +358,7 @@ public class Hotel implements Serializable {
      * 
      * @return a collection of all vaccines
      */
-    public Collection<Vaccine> ShowAllVaccines() {
-        return Collections.unmodifiableCollection(_vaccines.values());
+    public Collection<Vaccine> getAllVaccines() {
+        return getVaccines().values();
     }
 }

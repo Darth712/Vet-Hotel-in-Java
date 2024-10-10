@@ -4,11 +4,13 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
+import hva.visitor.*;
+
 /**
  * Abstract class representing an employee in the system.
  * This class is meant to be extended by specific types of employees.
  */
-public abstract class Employee implements Serializable {
+public abstract class Employee implements Serializable, Visitable{
 
     @Serial
     private static final long serialVersionUID = 202407081735L;
@@ -87,13 +89,8 @@ public abstract class Employee implements Serializable {
         return ans;
     }
 
-    /**
-     * Returns a string representation of the employee, including their ID and name.
-     * 
-     * @return a string in the format "|ID|Name"
-     */
     @Override
-    public String toString() {
-        return "|" + _id + "|" + _name;
+    public <T> T accept(Visitor<T> visitor) {
+      return visitor.visit(this);
     }
 }

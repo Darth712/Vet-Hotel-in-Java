@@ -8,8 +8,8 @@ import hva.Seasons.Season;
  */
 public class Evergreen extends Tree {
 
-    // Type of leaves for the evergreen tree
-    private String _leafType;
+ 
+   
 
     /**
      * Constructor for the Evergreen tree.
@@ -26,13 +26,5 @@ public class Evergreen extends Tree {
         _leafType = type; // Set the leaf type for this evergreen tree
     }
 
-    /**
-     * Returns a string representation of the Evergreen tree.
-     * 
-     * @return A formatted string containing the tree's attributes and its current seasonal cycle.
-     */
-    @Override
-    public String toString() {
-        return super.toString() + "|" + _leafType + "|" + _currentSeason.getEvergreenCycle();
-    }
+  
 }

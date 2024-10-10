@@ -4,11 +4,12 @@ import java.io.Serial;
 import java.io.Serializable;
 import hva.Seasons.Season;
 
+
 /**
  * Abstract class representing a generic tree.
  * This class implements Serializable for object serialization.
  */
-public abstract class Tree implements Serializable {
+public abstract class Tree implements Serializable{
 
     @Serial
     private static final long serialVersionUID = 202407081737L;
@@ -102,14 +103,6 @@ public abstract class Tree implements Serializable {
         _currentSeason = currentSeason; // Update the current season
     }
 
-    /**
-     * Returns a string representation of the Tree.
-     * 
-     * @return A formatted string containing the tree's attributes.
-     */
-    @Override
-    public String toString() {
-        return "ÁRVORE|" + _id + "|" + _name + "|" + _age + "|" + _baseCleaningDiff; 
-        // Return a string representation of the tree
-    }
+
+ 
 }

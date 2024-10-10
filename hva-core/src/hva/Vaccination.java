@@ -3,12 +3,14 @@ package hva;
 import java.io.Serial;
 import java.io.Serializable;
 import hva.animal.Animal;
+import hva.visitor.*;
 
 /**
  * Class representing a vaccination record for an animal.
  * Implements Serializable for object serialization.
  */
-public class Vaccination implements Serializable {
+public class Vaccination implements Serializable, Visitable{
+
 
     @Serial
     private static final long serialVersionUID = 202407081739L;
@@ -37,7 +39,7 @@ public class Vaccination implements Serializable {
      *
      * @return The ID of the vaccine.
      */
-    public String getId() {
+    public String getVaccineId() {
         return _vaccineId;            // Return the vaccine ID
     }
 
@@ -55,13 +57,13 @@ public class Vaccination implements Serializable {
      *
      * @return The ID of the animal.
      */
-    public String getAnimal() {
-        return _animal.getId();       // Return the animal ID
+    public Animal getAnimal() {
+        return _animal;       // Return the animal ID
     }
 
     @Override
-    public String toString() {
-        return "REGISTO_VACINA|" + _vaccineId + "|" + _vetId + "|" + _animal.getSpecies().getId();
-        // Return a string representation of the vaccination record
+    public <T> T accept(Visitor<T> visitor) {
+      return visitor.visit(this);
     }
+  
 }
