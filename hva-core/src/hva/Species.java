@@ -17,7 +17,7 @@ public class Species implements Serializable {
 
     private String _id;                      // Unique identifier for the species
     private String _name;                    // Name of the species
-    private static int _population;          // Static variable to track total population of all species
+    private int _population;          // variable to track total population of a certain species
     private Map<String, Animal> _animals;    // Map to store animals of this species
 
     /**
