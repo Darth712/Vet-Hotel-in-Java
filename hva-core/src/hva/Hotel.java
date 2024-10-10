@@ -45,6 +45,11 @@ public class Hotel implements Serializable {
     private List<Vaccination> _vaccinations = new ArrayList<Vaccination>();
     private boolean _changed;
 
+
+    public Season getSeason() {
+        return _currentSeason;
+    }
+
     /**
      * Gets the map of habitats.
      * 
@@ -162,8 +167,7 @@ public class Hotel implements Serializable {
         String id = parts[1];
         String name = parts[2];
         
-        Species species = new Species(id, name);  // Creates a new species object
-        _species.put(id, species);  // Adds the species to the species map
+        registerSpecies(id, name);
     }
 
     /**
@@ -178,14 +182,7 @@ public class Hotel implements Serializable {
       int difficulty = Integer.parseInt(parts[4]);
       String type = parts[5].toUpperCase();
       
-      if (type == "PERENE") {
-        Evergreen tree = new Evergreen(id, name, age, difficulty, _currentSeason, type);
-       _trees.put(id, tree);
-      }
-      if (type == "CADUCA") {
-        Deciduous tree = new Deciduous(id, name, age, difficulty, _currentSeason, type);
-       _trees.put(id, tree);
-      }
+      registerTree(id, name, age, difficulty, type);
 
     }
 
@@ -199,20 +196,14 @@ public class Hotel implements Serializable {
         String name = parts[2];
         int area = Integer.parseInt(parts[3]);
 
-        Habitat habitat = new Habitat(id, name, area);  // Creates a new habitat object
+        registerHabitat(id, name, area);
 
-        // If the entry includes tree IDs, add those trees to the habitat
         if (parts.length > 4) {
             String[] treeIds = parts[4].split(",");
             for (String treeId : treeIds) {
-                Tree tree = _trees.get(treeId);
-                if (tree != null) {
-                    habitat.addTree(treeId, tree);  // Adds trees to the habitat
-                }
+                addTreeToHabitat(id, treeId);
             }
         }
-
-        _habitats.put(id, habitat);  // Adds the habitat to the habitats map
     }
 
     /**
@@ -231,12 +222,7 @@ public class Hotel implements Serializable {
             throw new UnrecognizedEntryException("Species or Habitat not found for Animal: " + id);
         }
 
-        Animal animal = new Animal(id, name, species, habitat);  // Creates a new animal object
-        habitat.addAnimal(animal);  // Adds the animal to the habitat
-        species.addAnimal(animal);  // Adds the animal to the species
-
-        habitat.getAnimals().put(id, animal);  // Adds the animal to the animals map in the habitat
-        _animals.put(id, animal);  // Adds the animal to the global animals map
+        registerAnimal(id, name, species, habitat);
     }
 
     /**
@@ -247,22 +233,19 @@ public class Hotel implements Serializable {
     private void parseHandler(String[] parts) {
         String id = parts[1];
         String name = parts[2];
-
-        Handler handler = new Handler(id, name);  // Creates a new handler object
-
-        // If the entry includes habitat IDs, assign those habitats to the handler
+    
+        registerHandler(id, name);
+    
         if (parts.length > 3) {
             String[] habitatIds = parts[3].split(",");
             for (String habitatId : habitatIds) {
-                Habitat habitat = _habitats.get(habitatId);
-                if (habitat != null) {
-                    handler.addNewResponsability(habitatId);  // Assigns responsibility for the habitat to the handler
+                if (_habitats.containsKey(habitatId)) {
+                    addEmployeeResponsability(id, habitatId);
                 }
             }
         }
-
-        _employees.put(id, handler);  // Adds the handler to the employees map
     }
+    
 
     /**
      * Parses the vet (employee) entry and creates a vet object.
@@ -273,20 +256,17 @@ public class Hotel implements Serializable {
         String id = parts[1];
         String name = parts[2];
 
-        Vet vet = new Vet(id, name);  // Creates a new vet object
-
-        // If the entry includes species IDs, assign those species to the vet
+        registerVet(id, name);
+       
         if (parts.length > 3) {
             String[] speciesIds = parts[3].split(",");
             for (String speciesId : speciesIds) {
-                Species species = _species.get(speciesId);
-                if (species != null) {
-                    vet.addNewResponsability(speciesId);  // Assigns responsibility for the species to the vet
+                if (_species.containsKey(speciesId)) {
+                    addEmployeeResponsability(id, speciesId);  
                 }
             }
         }
 
-        _employees.put(id, vet);  // Adds the vet to the employees map
     }
 
     /**
@@ -297,31 +277,13 @@ public class Hotel implements Serializable {
     private void parseVaccine(String[] parts) {
         String id = parts[1];
         String name = parts[2];
-
-        Vaccine vaccine = new Vaccine(id, name);  // Creates a new vaccine object
-
-        // If the entry includes species IDs, associate the vaccine with those species
-        if (parts.length > 3) {
-            String[] speciesIds = parts[3].split(",");
-            for (String speciesId : speciesIds) {
-                Species species = _species.get(speciesId);
-                if (species != null) {
-                    vaccine.addSpecies(species);  // Associates the vaccine with the species
-                }
-            }
-        }
-
-        _vaccines.put(id, vaccine);  // Adds the vaccine to the vaccines map
+    
+    
+        String applicableSpecies = (parts.length > 3) ? parts[3] : null;
+    
+        registerVaccine(id, name, applicableSpecies);
     }
 
-    /**
-     * Displays all habitats in an unmodifiable collection.
-     * 
-     * @return a collection of all habitats
-     */
-    public Collection<Habitat> getAllHabitats() {
-        return getHabitats().values();
-    }
 
     /**
      * Registers a new habitat.
@@ -330,9 +292,84 @@ public class Hotel implements Serializable {
      * @param name  the habitat's name
      * @param area  the habitat's area
      */
-    public void registerHabitat(String id, String name, int area) { // NAO ESTÁ COMPLETO!!!
-        _habitats.put(id, new Habitat(id, name, area));  // Adds the new habitat
-        changed();  // Marks the hotel data as changed
+    public void registerHabitat(String id, String name, int area) { 
+        _habitats.put(id, new Habitat(id, name, area));  
+        changed();  
+    }
+
+    public void registerSpecies(String id, String name) { 
+        _species.put(id, new Species(id, name));  
+        changed();  
+    }    
+
+    public void registerAnimal(String id, String name, Species species, Habitat habitat) { 
+        Animal animal = new Animal(id, name, species, habitat);
+        _animals.put(id, animal);
+        habitat.addAnimal(animal);  // Adds the animal to the habitat
+        species.addAnimal(animal);  
+        changed();  
+    }    
+
+    public void registerHandler(String id, String name) {
+        _employees.put(id, new Handler(id, name));
+        changed();        
+    }
+
+    public void registerVet(String id, String name) {
+        _employees.put(id, new Vet(id, name));
+        changed();        
+    }
+
+    public void registerTree(String id, String name, int age, int baseDiff, String type) {
+        if (type == "CADUCA")
+            _trees.put(id, new Deciduous(id, name, age, baseDiff, _currentSeason, type));
+        if (type == "PERENE")
+            _trees.put(id, new Evergreen(id, name, age, baseDiff, _currentSeason, type));  
+        changed();  
+    }
+
+    public void addTreeToHabitat(String habitatId, String treeId) {
+
+        Habitat habitat = _habitats.get(habitatId);
+
+        if (_trees.containsKey(treeId)) {
+            habitat.addTree(treeId, _trees.get(treeId));  
+            changed();
+        }
+    }
+
+    
+    public void addEmployeeResponsability(String employeeId, String responsabilityId) {
+        _employees.get(employeeId).addNewResponsability(responsabilityId);
+        changed();
+    }
+
+    public void registerVaccine(String id, String name, String applicableSpecies) {
+
+        Vaccine vaccine = new Vaccine(id, name);
+
+        if (applicableSpecies != null) {
+            String[] speciesIds = applicableSpecies.split(",");
+            for (String speciesId : speciesIds) {
+                if (_species.containsKey(speciesId)) {
+                    vaccine.addSpecies(speciesId);  // Associates the vaccine with the species
+                }
+            }
+        }
+
+        _vaccines.put(id, vaccine);
+        changed();
+    }
+
+
+
+    /**
+     * Displays all habitats in an unmodifiable collection.
+     * 
+     * @return a collection of all habitats
+     */
+    public Collection<Habitat> getAllHabitats() {
+        return getHabitats().values();
     }
 
     /**

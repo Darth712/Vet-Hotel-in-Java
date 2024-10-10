@@ -19,7 +19,7 @@ public class Vaccine implements Serializable, Visitable{
     private String _id;                     // Identifier for the vaccine
     private String _name;                   // Name of the vaccine
     private int _timesUsed;                 // Number of times the vaccine has been used
-    private List<Species> _applicableSpecies; // List of species applicable for the vaccine
+    private List<String> _applicableSpecies; // List of species applicable for the vaccine
 
     /**
      * Constructor for the Vaccine class.
@@ -31,7 +31,7 @@ public class Vaccine implements Serializable, Visitable{
         _id = id;
         _name = name;
         _timesUsed = 0;
-        _applicableSpecies = new ArrayList<Species>();
+        _applicableSpecies = new ArrayList<String>();
     }
 
     /**
@@ -39,7 +39,7 @@ public class Vaccine implements Serializable, Visitable{
      *
      * @param applicableSpecies The species to add to the list of applicable species.
      */
-    public void addSpecies(Species applicableSpecies) {
+    public void addSpecies(String applicableSpecies) {
         _applicableSpecies.add(applicableSpecies);
     }
 
@@ -84,18 +84,15 @@ public class Vaccine implements Serializable, Visitable{
      */
     public String speciesString() {
         if (_applicableSpecies == null || _applicableSpecies.isEmpty()) {
-            return ""; // Return empty string if the list is empty or null
+            return ""; 
         }
+        String ans = "|" + _applicableSpecies.get(0);
 
-        // Initialize ans with the first element
-        String ans = "|" + _applicableSpecies.get(0).getId();
-
-        // Loop through the rest of the list starting from index 1
         for (int i = 1; i < _applicableSpecies.size(); i++) {
-            ans += "," + _applicableSpecies.get(i).getId();
+            ans += "," + _applicableSpecies.get(i);
         }
 
-        return ans; // Return the formatted string
+        return ans; 
     }
 
     /**
