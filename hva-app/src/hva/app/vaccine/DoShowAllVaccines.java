@@ -8,7 +8,7 @@ import pt.tecnico.uilib.menus.CommandException;
 
 class DoShowAllVaccines extends Command<Hotel> {
 
-    private final ToStringVisitor tsv = new ToStringVisitor();
+    private final ToStringVisitor TSV = new ToStringVisitor();
 
     DoShowAllVaccines(Hotel receiver) {
         super(Label.SHOW_ALL_VACCINES, receiver);
@@ -20,7 +20,7 @@ class DoShowAllVaccines extends Command<Hotel> {
         
         _receiver.getAllVaccines()  
             .stream()              
-            .map(employee -> employee.accept(tsv))  
+            .map(employee -> employee.accept(TSV))  
             .forEach(_display::popup); 
     }
 }

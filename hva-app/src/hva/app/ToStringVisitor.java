@@ -12,9 +12,10 @@ import hva.Vaccination;
 import hva.visitor.Visitor;
 
 /**
- * Concrete implementation of the Visitor class, specifically for converting objects to their string representations.
- * This visitor traverses various object types (Animal, Employee, Habitat, Vaccine, Vaccination) and returns their
- * formatted string representations.
+ * Concrete implementation of the Visitor class, 
+ * specifically for converting objects to their string representations.
+ * This visitor traverses various object types (Animal, Employee, Habitat, Vaccine, Vaccination) 
+ * and returns their formatted string representations.
  */
 public class ToStringVisitor extends Visitor<String>{
 
@@ -44,7 +45,9 @@ public class ToStringVisitor extends Visitor<String>{
      */
     @Override
     public String visit(Employee employee) {
-        return employee.getType() + "|" + employee.getId() + "|" + employee.getName() + employee.responsabilityString();
+        return 
+        employee.getType() + "|" + employee.getId() + "|" + 
+        employee.getName() + employee.responsabilityString();
     }
 
     /**
@@ -55,10 +58,11 @@ public class ToStringVisitor extends Visitor<String>{
      */
     @Override
     public String visit(Habitat habitat) {
-        StringBuilder habitatInfo = new StringBuilder("HABITAT|" + habitat.getId() + 
-                                               "|" + habitat.getName() + 
-                                               "|" + habitat.getArea() + 
-                                               "|" + habitat.numOfTrees());
+        StringBuilder habitatInfo = new StringBuilder
+        ("HABITAT|" + habitat.getId() + 
+         "|" + habitat.getName() + 
+         "|" + habitat.getArea() + 
+         "|" + habitat.numOfTrees());
         
         if (!habitat.getTrees().isEmpty()) {
             habitatInfo.append("\n");

@@ -8,7 +8,7 @@ import pt.tecnico.uilib.menus.CommandException;
 
 class DoShowAllHabitats extends Command<Hotel> {
 
-    private final ToStringVisitor tsv = new ToStringVisitor();
+    private final ToStringVisitor TSV = new ToStringVisitor();
 
     DoShowAllHabitats(Hotel receiver) {
         super(Label.SHOW_ALL_HABITATS, receiver);
@@ -18,7 +18,7 @@ class DoShowAllHabitats extends Command<Hotel> {
     protected void execute() {
         _receiver.getAllHabitats() 
             .stream()               
-            .map(habitat -> habitat.accept(tsv)) 
+            .map(habitat -> habitat.accept(TSV)) 
             .forEach(_display::popup); 
     }
 }
