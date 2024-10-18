@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.TreeMap;
 import hva.animal.Animal;
-
+import hva.employee.Vet;
 /**
  * Class representing a species of animals.
  * Implements Serializable for object serialization.
@@ -17,9 +17,8 @@ public class Species implements Serializable {
 
     private String _id;                      // Unique identifier for the species
     private String _name;                    // Name of the species
-    private int _population;          // variable to track total population of a certain species
     private Map<String, Animal> _animals;    // Map to store animals of this species
-
+    private Map<String, Vet> _vets;
     /**
      * Constructor for the Species class.
      *
@@ -28,8 +27,7 @@ public class Species implements Serializable {
      */
     public Species(String id, String name) {
         _id = id;
-        _name = name;
-        _population++;                   // Increment population when a new species is created
+        _name = name;                // Increment population when a new species is created
         _animals = new TreeMap<>();      // Initialize the map to store animals
     }
 
@@ -57,8 +55,10 @@ public class Species implements Serializable {
      * @return The current population of the species.
      */
     public int getPopulation() {
-        return _population;     
+        return _animals.size();     
     }
+
+    
 
     /**
      * Gets the map of animals belonging to this species.
@@ -67,6 +67,13 @@ public class Species implements Serializable {
      */
     public Map<String, Animal> getAnimals() {
         return _animals;                         
+    }
+    public Map<String, Vet> getVets() {
+        return _vets;                         
+    }
+    
+    public void addVet(Vet vet) {
+        _vets.put(vet.getId(),vet);
     }
 
     /**
@@ -78,17 +85,5 @@ public class Species implements Serializable {
         _animals.put(animal.getId(), animal);  // Store the animal in the map using its ID
     }
 
-    /**
-     * Increases the population count.
-     */
-    public void increasePopulation() {
-        _population++;       
-    }
-
-    /**
-     * Decreases the population count.
-     */
-    public void decreasePopulation() {
-        _population--; 
-    }
+  
 }

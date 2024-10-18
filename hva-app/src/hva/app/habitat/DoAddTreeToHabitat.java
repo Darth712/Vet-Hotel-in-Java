@@ -2,6 +2,8 @@ package hva.app.habitat;
 
 import hva.Hotel;
 import hva.exceptions.TreeExistsException;
+import hva.exceptions.UnknownHabitatException;
+import hva.app.exceptions.UnknownHabitatKeyException;
 import hva.app.ToStringVisitor;
 import hva.app.exceptions.DuplicateTreeKeyException;
 import pt.tecnico.uilib.menus.Command;
@@ -25,10 +27,14 @@ class DoAddTreeToHabitat extends Command<Hotel> {
     @Override
     protected void execute() throws CommandException {
         try{
+            _receiver.assertUnknownHabitat(stringField("habitatID"));
             _receiver.registerTree(stringField("treeId"), stringField("treeName"), 
             integerField("treeAge"), integerField("treeDiff"), stringField("type"));
             _receiver.addTreeToHabitat(stringField("habitatId"), stringField("treeId"));
             _display.popup(_receiver.getTree(stringField("treeId")).accept(TSV));
+        } catch (UnknownHabitatException e) {
+            throw new UnknownHabitatKeyException(e.getId());
+
         } catch (TreeExistsException e) {
             throw new DuplicateTreeKeyException(e.getId());
         }

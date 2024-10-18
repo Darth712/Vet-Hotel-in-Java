@@ -8,4 +8,8 @@ public interface Message {
     static String fileNotFound(String filename) {
         return "O ficheiro '" + filename + "' não existe.";
     }
+
+    static String globalSatisfaction(int satisfaction) {
+        return ""+satisfaction;
+    }
 }

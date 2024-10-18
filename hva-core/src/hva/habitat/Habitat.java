@@ -8,7 +8,7 @@ import hva.animal.Animal;
 import hva.tree.Tree;
 import hva.visitor.*;
 import java.util.Collection;
-
+import hva.employee.Handler;
 /**
  * Class representing a Habitat, which contains trees, animals, and influences (species).
  */
@@ -35,7 +35,7 @@ public class Habitat implements Serializable, Visitable{
     /** A collection of species influencing the habitat, mapped by descriptions. */
     private TreeMap<String, String> _influence;
 
-
+    private TreeMap<String, Handler> _handlers;
 
     /**
      * Constructs a Habitat object with the specified ID, name, and area.
@@ -52,6 +52,7 @@ public class Habitat implements Serializable, Visitable{
         _trees = new TreeMap<String, Tree>();
         _animals = new TreeMap<String, Animal>();
         _influence = new TreeMap<String, String>();
+        _handlers = new TreeMap<String, Handler>();
     }
 
     // Getters
@@ -83,6 +84,10 @@ public class Habitat implements Serializable, Visitable{
     /** @return the collection of species influencing the habitat */
     public TreeMap<String, String> getInfluence() {
         return _influence;
+    }
+
+    public TreeMap<String, Handler> getHandlers() {
+        return _handlers;
     }
 
     
@@ -128,6 +133,10 @@ public class Habitat implements Serializable, Visitable{
     public void addInfluence(String speciesId, String influence) {
         _influence.put(speciesId, influence);
     }
+
+    public void addHandler(Handler handler) {
+        _handlers.put(handler.getId(), handler); 
+    }    
 
     /**
      * Adds a new tree to the habitat.

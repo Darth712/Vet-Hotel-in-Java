@@ -1,5 +1,9 @@
 package hva.app.animal;
 
 public interface Message {
-    // EMPTY
+
+
+    static String thisAnimalSatisfaction(int satisfaction) {
+        return "" +satisfaction;
+      }
 }

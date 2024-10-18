@@ -1,5 +1,8 @@
 package hva.app.employee;
 
 public interface Message {
-    // EMPTY
+
+    static String thisEmployeeSatisfaction(int satisfaction) {
+        return "" +satisfaction;
+      }
 }

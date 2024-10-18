@@ -19,7 +19,7 @@ import java.util.Collection;
 import java.util.ArrayList;
 import java.util.List;
 import hva.visitor.*;
-
+import hva.satisfaction.*;
 
 
 /**
@@ -134,7 +134,7 @@ public class Hotel implements Serializable, Visitable{
                     registerEntry(parts);
 
                 } catch(AnimalExistsException | HabitatExistsException | 
-                UnknownHabitatException | UnknownSpeciesException | TreeExistsException e) {
+                UnknownHabitatException | UnknownSpeciesException | TreeExistsException | EmployeeExistsException e) {
                     e.printStackTrace();
                 } 
             }
@@ -147,7 +147,7 @@ public class Hotel implements Serializable, Visitable{
 
     public void registerEntry(String... parts) throws AnimalExistsException,
     UnrecognizedEntryException, UnknownHabitatException, UnknownSpeciesException, 
-    HabitatExistsException, TreeExistsException{
+    HabitatExistsException, TreeExistsException, EmployeeExistsException{
         switch (parts[0].toUpperCase()) {  // First part determines the entity type
             case "ESPÉCIE":
                 parseSpecies(parts);
@@ -251,7 +251,7 @@ public class Hotel implements Serializable, Visitable{
      * 
      * @param parts array of strings representing the handler data
      */
-    private void parseHandler(String[] parts) {
+    private void parseHandler(String[] parts) throws EmployeeExistsException{
         String id = parts[1];
         String name = parts[2];
     
@@ -262,6 +262,7 @@ public class Hotel implements Serializable, Visitable{
             for (String habitatId : habitatIds) {
                 if (_habitats.containsKey(habitatId)) {
                     addEmployeeResponsability(id, habitatId);
+                    _habitats.get(habitatId).addHandler((Handler) _employees.get(id));
                 }
             }
         }
@@ -273,7 +274,7 @@ public class Hotel implements Serializable, Visitable{
      * 
      * @param parts array of strings representing the vet data
      */
-    private void parseVet(String[] parts) {
+    private void parseVet(String[] parts) throws EmployeeExistsException{
         String id = parts[1];
         String name = parts[2];
 
@@ -284,6 +285,7 @@ public class Hotel implements Serializable, Visitable{
             for (String speciesId : speciesIds) {
                 if (_species.containsKey(speciesId)) {
                     addEmployeeResponsability(id, speciesId);  
+                    _species.get(speciesId).addVet((Vet) _employees.get(id));
                 }
             }
         }
@@ -377,6 +379,11 @@ public class Hotel implements Serializable, Visitable{
           throw new UnknownHabitatException(key);
       }
 
+    public void assertUnknownEmployee(String key) throws UnknownEmployeeException{
+        if (!_employees.containsKey(key))
+          throw new UnknownEmployeeException(key);
+      }
+
     public void assertTreeExists(String key) throws TreeExistsException{
         if (_trees.containsKey(key))
           throw new TreeExistsException(key);
@@ -387,13 +394,21 @@ public class Hotel implements Serializable, Visitable{
           throw new UnknownSpeciesException(key);
       }
 
+      public void assertExmployeeExists(String id) throws EmployeeExistsException {
+        if (_employees.containsKey(id)) {
+            throw new EmployeeExistsException(id);
+        }
+    }
+
+
     /**
      * Registers a new handler and adds them to the employees map.
      * 
      * @param id    The handler's ID
      * @param name  The handler's name
      */
-    public void registerHandler(String id, String name) {
+    public void registerHandler(String id, String name) throws EmployeeExistsException{
+        assertExmployeeExists(id);
         _employees.put(id, new Handler(id, name));
         changed();        
     }
@@ -404,7 +419,8 @@ public class Hotel implements Serializable, Visitable{
      * @param id    The vet's ID
      * @param name  The vet's name
      */
-    public void registerVet(String id, String name) {
+    public void registerVet(String id, String name) throws EmployeeExistsException{
+        assertExmployeeExists(id);
         _employees.put(id, new Vet(id, name));
         changed();        
     }
@@ -546,6 +562,7 @@ public class Hotel implements Serializable, Visitable{
     public void changeHabitatArea(String id, int area) throws UnknownHabitatException{
         assertUnknownHabitat(id);
         _habitats.get(id).setArea(area);
+        changed();
 
     }
 
@@ -555,18 +572,99 @@ public class Hotel implements Serializable, Visitable{
         assertUnknownHabitat(habitatId);
         assertUnknownSpecies(speciesId);
         _habitats.get(habitatId).addInfluence(speciesId,influence);
+        changed();
+    }
+
+    public int showAnimalSatisfaction(String id) {
+        SatisfactionStrategy method = new AnimalSatisfaction(_animals.get(id));
+        return (int) Math.round(method.calculate());
+
+    }
+
+    public int showEmployeeSatisfaction(String id) {
+
+        int satisfaction = 0;
+
+        if(_employees.get(id).getId().equals("TRT")) {
+            SatisfactionStrategy method = new HandlerSatisfaction((Handler) _employees.get(id));
+            satisfaction = (int) Math.round(method.calculate());
+        }
+        if(_employees.get(id).getId().equals("VET")) {
+            SatisfactionStrategy method = new VetSatisfaction((Vet) _employees.get(id));
+            satisfaction = (int) Math.round(method.calculate());
+        }
+        
+        return satisfaction;
+    }
+
+   // REFAZER ISTO TA MAL FEITO
+    public void removeResponsability(String employeeId, String resId) throws UnknownResponsabilityException{
+
+        if(_employees.get(employeeId).getId().equals("TRT")) {
+            assertUnknownResponsability(employeeId, resId);
+            Handler handler = (Handler) _employees.get(employeeId);
+            handler.getResponsibilities().remove("resId");
+        }
+        if(_employees.get(employeeId).getId().equals("VET")) {
+            assertUnknownResponsability(employeeId, resId);
+            Vet vet = (Vet) _employees.get(employeeId);
+            vet.getResponsibilities().remove("resId");
+        }
+
+        changed();
+      
+    }
+
+    public void addResponsability(String employeeId, String resId) throws UnknownResponsabilityException{
+
+        if(_employees.get(employeeId).getId().equals("TRT")) {
+            assertUnknownResponsability(employeeId, resId);
+            Handler handler = (Handler) _employees.get(employeeId);
+            handler.addNewResponsibility(resId, _habitats.get(resId));
+        }
+        if(_employees.get(employeeId).getId().equals("VET")) {
+            assertUnknownResponsability(employeeId, resId);
+            Vet vet = (Vet) _employees.get(employeeId);
+            vet.addNewResponsibility(resId, _species.get(resId));
+        }
+
+        changed();
+      
+    }
+    
+    // REFAZER ESTE TAMBEM!!!
+    public void assertUnknownResponsability(String employeeId, String resId) throws UnknownResponsabilityException{
+        if(_employees.get(employeeId).getId().equals("TRT")) {
+            Handler handler = (Handler) _employees.get(employeeId);
+            if (!handler.getResponsibilities().containsKey("resId") | !_habitats.containsKey(resId) ) {
+                throw new UnknownResponsabilityException(resId);
+            }
+        }
+
+        if(_employees.get(employeeId).getId().equals("VET") | !_species.containsKey(resId)) {
+            Vet vet = (Vet) _employees.get(employeeId);
+            if (!vet.getResponsibilities().containsKey("resId")) {
+                throw new UnknownResponsabilityException(resId);
+            }
+        }
+
     }
 
 
+    public int showGlobalSatisfaction() {
+        int totalSatisfaction = 0;
+        for (String animalId : _animals.keySet()) {
+        totalSatisfaction += showAnimalSatisfaction(animalId);   
+        }
 
-    /**
-     * Accepts a visitor and allows it to perform operations on this instance.
-     * Part of the Visitor design pattern.
-     * 
-     * @param <T> the type of the result produced by the visitor
-     * @param visitor the visitor performing the operation
-     * @return the result of the visitor's operation, String
-     */
+        for (String employeeId : _employees.keySet()) {
+            totalSatisfaction += showEmployeeSatisfaction(employeeId);
+        }    
+
+        return totalSatisfaction;
+    }  
+
+    // há outras maneiras de se fazer.
     @Override
     public <T> T accept(Visitor<T> visitor) {
       return visitor.visit(this);

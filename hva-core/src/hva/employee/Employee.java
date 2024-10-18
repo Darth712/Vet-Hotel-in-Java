@@ -20,6 +20,8 @@ public abstract class Employee implements Serializable, Visitable{
 
     /** The name of the employee. */
     private String _name;
+
+    
    
 
     /**
