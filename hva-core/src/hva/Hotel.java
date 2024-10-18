@@ -7,8 +7,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import hva.exceptions.*;
-import hva.exceptions.ImportFileException;
-import hva.exceptions.UnrecognizedEntryException;
 import hva.Seasons.*;
 import hva.animal.*;
 import hva.app.exceptions.DuplicateHabitatKeyException;
@@ -314,10 +312,19 @@ public class Hotel implements Serializable {
      * @param area  the habitat's area
      * @throws DuplicateHabitatKeyException in case the Habitat already exists
      */
-    public void registerHabitat(String id, String name, int area) throws DuplicateHabitatKeyException{ 
+    public void registerHabitat(String id, String name, int area) throws HabitatExistsException{ 
+        assertHabitatExists(id);
         _habitats.put(id, new Habitat(id, name, area));  
         changed();  
     }
+
+    public void assertHabitatExists(String id) throws HabitatExistsException {
+        if (_habitats.containsKey(id)) {
+            throw new HabitatExistsException(id);
+        }
+    }
+
+   
 
     /**
      * Registers a new species and adds it to the species map.
