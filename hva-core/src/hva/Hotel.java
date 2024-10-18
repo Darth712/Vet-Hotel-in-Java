@@ -7,8 +7,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import hva.exceptions.*;
-import hva.exceptions.ImportFileException;
-import hva.exceptions.UnrecognizedEntryException;
 import hva.Seasons.*;
 import hva.animal.*;
 import hva.employee.*;
