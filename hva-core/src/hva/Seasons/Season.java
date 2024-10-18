@@ -27,6 +27,10 @@ public class Season implements Serializable{
         return _state.getSeason();
     }
 
+    public int getCode() {
+        return _state.getCode();
+    }
+
     /**
      * Sets the Season state to a new one
      * 

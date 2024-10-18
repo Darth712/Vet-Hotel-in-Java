@@ -7,9 +7,13 @@ package hva.Seasons;
  */
 public class Summer extends SeasonState {
 
+    private final int CODE = 1;
+
     public Summer(Season season) {
-        super (season);
+        super(season);
     }
+
+    public int getCode() { return CODE;}
 
     @Override
     public void nextSeason() {
@@ -23,7 +27,7 @@ public class Summer extends SeasonState {
      */
     @Override
     public int getDeciduousEffort() {
-        return getAllDeciduousEffort()[2]; // Summer is the 4th season in the array (index 2)
+        return getAllDeciduousEffort()[CODE]; // Summer is the 2nd season in the array (index 1)
     }
 
     /**
@@ -33,7 +37,7 @@ public class Summer extends SeasonState {
      */
     @Override
     public int getEvergreenEffort() {
-        return getAllEvergreenEffort()[2]; // Evergreen trees use the same effort value as deciduous in Summer
+        return getAllEvergreenEffort()[CODE]; // Evergreen trees use the same effort value as deciduous in Summer
     }
 
     /**
@@ -43,7 +47,7 @@ public class Summer extends SeasonState {
      */
     @Override
     public String getDeciduousCycle() {
-        return getAllDeciduousCycle()[2]; // Summer's biological cycle for deciduous trees
+        return getAllDeciduousCycle()[CODE]; // Summer's biological cycle for deciduous trees
     }
 
     /**
@@ -53,6 +57,6 @@ public class Summer extends SeasonState {
      */
     @Override
     public String getEvergreenCycle() {
-        return getAllEvergreenCycle()[2]; // Evergreen trees use the same biological cycle as deciduous in Summer
+        return getAllEvergreenCycle()[CODE]; // Evergreen trees use the same biological cycle as deciduous in Summer
     }
 }

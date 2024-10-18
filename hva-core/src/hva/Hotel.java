@@ -18,7 +18,7 @@ import java.util.TreeMap;
 import java.util.Collection;
 import java.util.ArrayList;
 import java.util.List;
-
+import hva.visitor.*;
 
 
 
@@ -26,7 +26,7 @@ import java.util.List;
  * This class represents a hotel that hosts animals and trees in various habitats. 
  * It manages animals, employees, habitats, species, vaccines, and trees.
  */
-public class Hotel implements Serializable {
+public class Hotel implements Serializable, Visitable{
 
     @Serial
     private static final long serialVersionUID = 202407081733L;
@@ -552,5 +552,19 @@ public class Hotel implements Serializable {
         _habitats.get(habitatId).addInfluence(speciesId,influence);
     }
 
-}
 
+
+    /**
+     * Accepts a visitor and allows it to perform operations on this instance.
+     * Part of the Visitor design pattern.
+     * 
+     * @param <T> the type of the result produced by the visitor
+     * @param visitor the visitor performing the operation
+     * @return the result of the visitor's operation, String
+     */
+    @Override
+    public <T> T accept(Visitor<T> visitor) {
+      return visitor.visit(this);
+    }
+
+}

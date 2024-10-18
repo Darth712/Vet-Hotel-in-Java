@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import hva.Vaccination;
 import hva.visitor.Visitor;
+import hva.Hotel;
 
 /**
  * Concrete implementation of the Visitor class, 
@@ -156,5 +157,10 @@ public class ToStringVisitor extends Visitor<String>{
     public String visit(Vaccination vaccination) {
         return "REGISTO_VACINA|" + vaccination.getVaccineId() + "|" + vaccination.getVet() + 
                "|" + vaccination.getAnimal().getSpecies().getId();
+    }
+
+    @Override
+    public String visit(Hotel hotel) {
+        return String.valueOf(hotel.getSeason().getCode());
     }
 }

@@ -7,9 +7,16 @@ package hva.Seasons;
  */
 public class Fall extends SeasonState {
 
+    private final int CODE = 2;
+
     public Fall(Season season) {
-        super (season);
+        super(season);
     }
+
+    public int getCode() { return CODE;}
+
+
+
     @Override
     public void nextSeason() {
         getSeason().setSeasonState(new Winter(getSeason()));  // Change to the next state
@@ -22,7 +29,7 @@ public class Fall extends SeasonState {
      */
     @Override
     public int getDeciduousEffort() {
-        return getAllDeciduousEffort()[3]; // Fall is the 4th season in the array (index 3)
+        return getAllDeciduousEffort()[CODE]; // Fall is the 3th season in the array (index 2)
     }
 
     /**
@@ -32,7 +39,7 @@ public class Fall extends SeasonState {
      */
     @Override
     public int getEvergreenEffort() {
-        return getAllEvergreenEffort()[3]; // Evergreen trees use the same effort value as deciduous in Fall
+        return getAllEvergreenEffort()[CODE]; // Evergreen trees use the same effort value as deciduous in Fall
     }
 
     /**
@@ -42,7 +49,7 @@ public class Fall extends SeasonState {
      */
     @Override
     public String getDeciduousCycle() {
-        return getAllDeciduousCycle()[3]; // Fall's biological cycle for deciduous trees
+        return getAllDeciduousCycle()[CODE]; // Fall's biological cycle for deciduous trees
     }
 
     /**
@@ -52,6 +59,6 @@ public class Fall extends SeasonState {
      */
     @Override
     public String getEvergreenCycle() {
-        return getAllEvergreenCycle()[3]; // Evergreen trees use the same biological cycle as deciduous in Fall
+        return getAllEvergreenCycle()[CODE]; // Evergreen trees use the same biological cycle as deciduous in Fall
     }
 }
