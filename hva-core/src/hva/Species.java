@@ -28,7 +28,8 @@ public class Species implements Serializable {
     public Species(String id, String name) {
         _id = id;
         _name = name;                // Increment population when a new species is created
-        _animals = new TreeMap<>();      // Initialize the map to store animals
+        _animals = new TreeMap<>();  
+        _vets = new TreeMap<>();    // Initialize the map to store animals
     }
 
     /**

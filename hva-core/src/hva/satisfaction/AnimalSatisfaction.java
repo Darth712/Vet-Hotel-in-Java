@@ -20,7 +20,13 @@ public class AnimalSatisfaction implements SatisfactionStrategy{
     }
 
     public int adequacy() {
+        
         String adeq = _animal.getHabitat().getInfluence().get(_animal.getSpecies().getId());
+
+        if (adeq == null) {
+            return 0;
+        }
+
         if(adeq.equals("POS"))
             return 20;
         if(adeq.equals("NEG"))
