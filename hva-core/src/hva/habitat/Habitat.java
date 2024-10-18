@@ -33,7 +33,7 @@ public class Habitat implements Serializable, Visitable{
     private TreeMap<String, Animal> _animals;
 
     /** A collection of species influencing the habitat, mapped by descriptions. */
-    private TreeMap<String, Species> _influence;
+    private TreeMap<String, String> _influence;
 
 
 
@@ -51,7 +51,7 @@ public class Habitat implements Serializable, Visitable{
         _area = area;
         _trees = new TreeMap<String, Tree>();
         _animals = new TreeMap<String, Animal>();
-        _influence = new TreeMap<String, Species>();
+        _influence = new TreeMap<String, String>();
     }
 
     // Getters
@@ -81,7 +81,7 @@ public class Habitat implements Serializable, Visitable{
     }
 
     /** @return the collection of species influencing the habitat */
-    public TreeMap<String, Species> getInfluence() {
+    public TreeMap<String, String> getInfluence() {
         return _influence;
     }
 
