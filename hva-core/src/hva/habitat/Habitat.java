@@ -52,6 +52,7 @@ public class Habitat implements Serializable, Visitable{
         _influence = new TreeMap<String, Species>();
     }
 
+    // Getters
     /** @return the habitat's unique ID */
     public String getId() {
         return _id;
@@ -82,6 +83,17 @@ public class Habitat implements Serializable, Visitable{
         return _influence;
     }
 
+    //Setters
+    /**
+     * Sets the area of the habitat.
+     * 
+     * @param area the new area of the habitat
+     */
+    public void setArea(int area) {
+        _area = area;
+    }
+
+
     /**
      * Adds a tree to the habitat.
      * 
@@ -109,15 +121,6 @@ public class Habitat implements Serializable, Visitable{
      */
     public void addInfluence(Species species, String description) {
         _influence.put(description, species);
-    }
-
-    /**
-     * Updates the area of the habitat.
-     * 
-     * @param area the new area of the habitat
-     */
-    public void setArea(int area) {
-        _area = area;
     }
 
     /**
