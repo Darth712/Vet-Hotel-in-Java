@@ -125,7 +125,7 @@ public class ToStringVisitor extends Visitor<String>{
     @Override
     public String visit(Vaccine vaccine) {
         StringBuilder vaccineInfo = new StringBuilder
-        ("HABITAT|" + vaccine.getId() + 
+        ("VACINA|" + vaccine.getId() + 
          "|" + vaccine.getName() + 
          "|" + vaccine.getTimesUsed());
 
