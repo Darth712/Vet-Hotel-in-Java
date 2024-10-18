@@ -35,8 +35,8 @@ public class AnimalSatisfaction implements SatisfactionStrategy{
     }
 
     public double calculate() {
-        return (20 + 3*(sameSpeciesHabitat()-1) - 2*differentSpeciesHabitat() + _animal.getHabitat().getArea())
-        / (_animal.getHabitat().getAnimals().size() + adequacy());
+        return 20 + 3*(sameSpeciesHabitat()-1) - 2*differentSpeciesHabitat() + (_animal.getHabitat().getArea()
+        / _animal.getHabitat().getAnimals().size()) + adequacy();
     }
     
 }
