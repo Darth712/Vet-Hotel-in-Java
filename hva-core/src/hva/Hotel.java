@@ -469,7 +469,7 @@ public class Hotel implements Serializable {
             String[] speciesIds = applicableSpecies.split(",");
             for (String speciesId : speciesIds) {
                 if (_species.containsKey(speciesId)) {
-                    vaccine.addSpecies(speciesId);  // Associates the vaccine with the species
+                    vaccine.addSpecies(speciesId, _species.get(speciesId));  // Associates the vaccine with the species
                 }
             }
         }

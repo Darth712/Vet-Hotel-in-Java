@@ -4,8 +4,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import hva.visitor.*;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.TreeMap;
 
 /**
  * Class representing a vaccine used for animals.
@@ -19,7 +18,7 @@ public class Vaccine implements Serializable, Visitable{
     private String _id;                     // Identifier for the vaccine
     private String _name;                   // Name of the vaccine
     private int _timesUsed;                 // Number of times the vaccine has been used
-    private List<String> _applicableSpecies; // List of species applicable for the vaccine
+    private TreeMap<String,Species> _applicableSpecies; // List of species applicable for the vaccine
 
     /**
      * Constructor for the Vaccine class.
@@ -31,7 +30,12 @@ public class Vaccine implements Serializable, Visitable{
         _id = id;
         _name = name;
         _timesUsed = 0;
-        _applicableSpecies = new ArrayList<String>();
+        _applicableSpecies = new TreeMap<String,Species>();
+    }
+
+
+    public TreeMap<String,Species> getApplicableSpecies() {
+        return _applicableSpecies;
     }
 
     /**
@@ -39,8 +43,8 @@ public class Vaccine implements Serializable, Visitable{
      *
      * @param applicableSpecies The species to add to the list of applicable species.
      */
-    public void addSpecies(String applicableSpecies) {
-        _applicableSpecies.add(applicableSpecies);
+    public void addSpecies(String id, Species species) {
+        _applicableSpecies.put(id, species);
     }
 
     /**
@@ -77,23 +81,7 @@ public class Vaccine implements Serializable, Visitable{
         return _timesUsed; // Return the times used
     }
 
-    /**
-     * Returns a string representation of the applicable species IDs.
-     *
-     * @return A string of applicable species IDs, formatted as "|id1,id2,id3".
-     */
-    public String speciesString() {
-        if (_applicableSpecies == null || _applicableSpecies.isEmpty()) {
-            return ""; 
-        }
-        String ans = "|" + _applicableSpecies.get(0);
-
-        for (int i = 1; i < _applicableSpecies.size(); i++) {
-            ans += "," + _applicableSpecies.get(i);
-        }
-
-        return ans; 
-    }
+ 
 
     /**
      * Accepts a visitor and allows it to perform operations on this instance.

@@ -62,13 +62,14 @@ public class ToStringVisitor extends Visitor<String>{
         StringBuilder handlerInfo = new StringBuilder(
             handler.getType() + "|" + handler.getId() + "|" + 
         handler.getName());
-        StringJoiner resInfo = new StringJoiner(",");
-        handler.getResponsibilities().forEach((id, habitat) -> {
-            resInfo.add(id);
-        });
+        if(!handler.getResponsibilities().isEmpty()) {
+            StringJoiner resInfo = new StringJoiner(",");
+            handler.getResponsibilities().forEach((id, species) -> {
+                resInfo.add(id);
+            });
 
-        handlerInfo.append("|").append(resInfo.toString());
-
+            handlerInfo.append("|").append(resInfo.toString());
+        }   
         return handlerInfo.toString();  // Return the full string
     }
 
@@ -77,13 +78,15 @@ public class ToStringVisitor extends Visitor<String>{
         StringBuilder vetInfo = new StringBuilder(
             vet.getType() + "|" + vet.getId() + "|" + 
         vet.getName());
-        StringJoiner resInfo = new StringJoiner(",");
-        vet.getResponsibilities().forEach((id, species) -> {
-            resInfo.add(id);
-        });
 
-        vetInfo.append("|").append(resInfo.toString());
+        if(!vet.getResponsibilities().isEmpty()) {
+            StringJoiner resInfo = new StringJoiner(",");
+            vet.getResponsibilities().forEach((id, species) -> {
+                resInfo.add(id);
+            });
 
+            vetInfo.append("|").append(resInfo.toString());
+        }    
         return vetInfo.toString();  // Return the full string
     }
 
@@ -121,9 +124,25 @@ public class ToStringVisitor extends Visitor<String>{
      */
     @Override
     public String visit(Vaccine vaccine) {
-        return "VACINA|" + vaccine.getId() + "|" + vaccine.getName() + "|" + 
-               vaccine.getTimesUsed() + vaccine.speciesString();
-    }
+        StringBuilder vaccineInfo = new StringBuilder
+        ("HABITAT|" + vaccine.getId() + 
+         "|" + vaccine.getName() + 
+         "|" + vaccine.getTimesUsed());
+
+        
+        if (!vaccine.getApplicableSpecies().isEmpty()) {
+            StringJoiner applicableSpecies = new StringJoiner(",");
+            vaccine.getApplicableSpecies().forEach((id, species) -> {
+                applicableSpecies.add(id);
+            });
+
+            vaccineInfo.append("|").append(applicableSpecies.toString());
+        }
+
+         return vaccineInfo.toString();
+
+        }
+    
 
     /**
      * Visits a Vaccination object and returns a string representation of its details
