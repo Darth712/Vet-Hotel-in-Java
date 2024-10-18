@@ -27,7 +27,7 @@ class DoAddTreeToHabitat extends Command<Hotel> {
     @Override
     protected void execute() throws CommandException {
         try{
-            _receiver.assertUnknownHabitat(stringField("habitatID"));
+            _receiver.assertUnknownHabitat(stringField("habitatId"));
             _receiver.registerTree(stringField("treeId"), stringField("treeName"), 
             integerField("treeAge"), integerField("treeDiff"), stringField("type"));
             _receiver.addTreeToHabitat(stringField("habitatId"), stringField("treeId"));
