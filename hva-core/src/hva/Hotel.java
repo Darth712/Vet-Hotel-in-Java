@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
+import hva.exceptions.*;
 import hva.exceptions.ImportFileException;
 import hva.exceptions.UnrecognizedEntryException;
 import hva.Seasons.*;
@@ -131,37 +133,50 @@ public class Hotel implements Serializable {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");  // Splits the line into parts using '|' as a delimiter
+                try{
+                    registerEntry(parts);
 
-                switch (parts[0].toUpperCase()) {  // First part determines the entity type
-                    case "ESPÉCIE":
-                        parseSpecies(parts);
-                        break;
-                    case "ÁRVORE":
-                        parseTree(parts);
-                        break;
-                    case "HABITAT":
-                        parseHabitat(parts);
-                        break;
-                    case "ANIMAL":
-                        parseAnimal(parts);
-                        break;
-                    case "TRATADOR":
-                        parseHandler(parts);
-                        break;
-                    case "VETERINÁRIO":
-                        parseVet(parts);
-                        break;
-                    case "VACINA":
-                        parseVaccine(parts);
-                        break;
-                    default:
-                        throw new UnrecognizedEntryException("Unrecognized entry: " + parts[0]);
-                }
+                } catch(AnimalExistsException | UnknownHabitatException | UnknownSpeciesException e) {
+                    e.printStackTrace();
+                } 
             }
         } catch (IOException | UnrecognizedEntryException e) {
             throw new ImportFileException(filename, e);
         }
+            
     }
+
+
+    public void registerEntry(String... parts) throws AnimalExistsException,
+    UnrecognizedEntryException, UnknownHabitatException, UnknownSpeciesException{
+        switch (parts[0].toUpperCase()) {  // First part determines the entity type
+            case "ESPÉCIE":
+                parseSpecies(parts);
+                break;
+            case "ÁRVORE":
+                parseTree(parts);
+                break;
+            case "HABITAT":
+                parseHabitat(parts);
+                break;
+            case "ANIMAL":
+                parseAnimal(parts);
+                break;
+            case "TRATADOR":
+                parseHandler(parts);
+                break;
+            case "VETERINÁRIO":
+                parseVet(parts);
+                break;
+            case "VACINA":
+                parseVaccine(parts);
+                break;
+            default:
+                throw new UnrecognizedEntryException("Unrecognized entry: " + parts[0]);
+        }
+    
+    }
+
 
     /**
      * Parses the species entry and creates a species object.
@@ -217,11 +232,12 @@ public class Hotel implements Serializable {
      * @param parts array of strings representing the animal data
      * @throws UnrecognizedEntryException if species or habitat is not found
      */
-    private void parseAnimal(String[] parts) throws UnrecognizedEntryException {
+    private void parseAnimal(String[] parts) throws UnrecognizedEntryException, 
+    AnimalExistsException, UnknownHabitatException, UnknownSpeciesException{
         String id = parts[1];
         String name = parts[2];
-        Species species = _species.get(parts[3]);
-        Habitat habitat = _habitats.get(parts[4]);
+        String species = parts[3];
+        String habitat = parts[4];
 
         if (species == null || habitat == null) {
             throw new UnrecognizedEntryException("Species or Habitat not found for Animal: " + id);
@@ -323,13 +339,34 @@ public class Hotel implements Serializable {
      * @param species The species the animal belongs to.
      * @param habitat The habitat where the animal resides.
      */
-    public void registerAnimal(String id, String name, Species species, Habitat habitat) { 
+    public void registerAnimal(String id, String name, String s, String h) throws AnimalExistsException, 
+    UnknownHabitatException, UnknownSpeciesException, UnrecognizedEntryException{ 
+        assertAnimalExists(id);
+        assertUnknownSpecies(s);
+        assertUnknownHabitat(h);
+        Species species = _species.get(s);
+        Habitat habitat = _habitats.get(h);
         Animal animal = new Animal(id, name, species, habitat);
         _animals.put(id, animal);
         habitat.addAnimal(animal);  // Adds the animal to the habitat
         species.addAnimal(animal);  
         changed();  
     }    
+
+    public void assertAnimalExists(String key) throws AnimalExistsException{
+        if (_animals.containsKey(key))
+          throw new AnimalExistsException(key);
+      }
+    
+    public void assertUnknownHabitat(String key) throws UnknownHabitatException{
+        if (!_habitats.containsKey(key))
+          throw new UnknownHabitatException(key);
+      }
+
+    public void assertUnknownSpecies(String key) throws UnknownSpeciesException{
+        if (!_species.containsKey(key))
+          throw new UnknownSpeciesException(key);
+      }
 
     /**
      * Registers a new handler and adds them to the employees map.
