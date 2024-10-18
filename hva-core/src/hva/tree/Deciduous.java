@@ -1,6 +1,7 @@
 package hva.tree;
 
 import hva.Seasons.Season;
+import hva.Seasons.SeasonState;
 
 /**
  * Class representing a deciduous tree.
@@ -20,7 +21,7 @@ public class Deciduous extends Tree {
      * @param currentSeason  Current season affecting the tree's behavior.
      * @param type           Type of leaves (e.g., broadleaf, needleleaf).
      */
-    public Deciduous(String id, String name, int age, int baseCleaningDiff, Season currentSeason, String type) {
+    public Deciduous(String id, String name, int age, int baseCleaningDiff, SeasonState currentSeason, String type) {
         super(id, name, age, baseCleaningDiff, currentSeason);
         _leafType = type; // Set the leaf type for this deciduous tree
     }

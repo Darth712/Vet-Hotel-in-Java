@@ -35,7 +35,7 @@ public class Hotel implements Serializable {
     @Serial
     private static final long serialVersionUID = 202407081733L;
 
-    private Season _currentSeason;
+    private SeasonState _currentSeason;
     private Map<String, Habitat> _habitats = new TreeMap<String, Habitat>();  
     private Map<String, Animal> _animals = new TreeMap<String, Animal>();  
     private Map<String, Species> _species = new TreeMap<String, Species>();  
@@ -46,7 +46,7 @@ public class Hotel implements Serializable {
     private boolean _changed;
 
 
-    public Season getSeason() {
+    public SeasonState getSeason() {
         return _currentSeason;
     }
 
@@ -113,6 +113,10 @@ public class Hotel implements Serializable {
      */
     public boolean hasChanged() { 
         return _changed;
+    }
+
+    public void advanceSeason () {
+        _currentSeason.nextSeason();
     }
 
     /**
