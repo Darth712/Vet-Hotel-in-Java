@@ -9,7 +9,6 @@ import java.io.IOException;
 import hva.exceptions.*;
 import hva.Seasons.*;
 import hva.animal.*;
-import hva.app.exceptions.DuplicateHabitatKeyException;
 import hva.employee.*;
 import hva.habitat.*;
 import hva.tree.Deciduous;

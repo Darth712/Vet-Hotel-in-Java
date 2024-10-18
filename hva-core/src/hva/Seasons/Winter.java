@@ -16,42 +16,42 @@ public class Winter extends SeasonState {
         getSeason().setSeasonState(new Spring(getSeason()));  // Change to the next state
     }
     /**
-     * Gets the seasonal effort for deciduous trees in Winter.
+     * Retrieves the seasonal effort required for deciduous trees during the Winter.
      * 
      * @return the effort value for deciduous trees in Winter.
      */
     @Override
     public int getDeciduousEffort() {
-        return DECIDUOUS_SEASONAL_EFFORT[0]; // Winter effort for deciduous trees
+        return getAllDeciduousEffort()[0]; // Winter is the 4th season in the array (index 0)
     }
 
     /**
-     * Gets the seasonal effort for evergreen trees in Winter.
+     * Retrieves the seasonal effort required for evergreen trees during the Winter.
      * 
      * @return the effort value for evergreen trees in Winter.
      */
     @Override
     public int getEvergreenEffort() {
-        return DECIDUOUS_SEASONAL_EFFORT[0]; // Winter effort for evergreen trees (note: should use EVERGREEN_SEASONAL_EFFORT if applicable)
+        return getAllEvergreenEffort()[0]; // Evergreen trees use the same effort value as deciduous in Winter
     }
 
     /**
-     * Gets the biological cycle stage for deciduous trees in Winter.
+     * Retrieves the biological cycle description for deciduous trees during the Winter.
      * 
-     * @return the biological cycle stage for deciduous trees in Winter.
+     * @return the biological cycle for deciduous trees in Winter.
      */
     @Override
     public String getDeciduousCycle() {
-        return DECIDUOUS_BIO_CYCLE[0]; // Winter biological cycle for deciduous trees
+        return getAllDeciduousCycle()[0]; // Winter's biological cycle for deciduous trees
     }
 
     /**
-     * Gets the biological cycle stage for evergreen trees in Winter.
+     * Retrieves the biological cycle description for evergreen trees during the Winter.
      * 
-     * @return the biological cycle stage for evergreen trees in Winter.
+     * @return the biological cycle for evergreen trees in Winter.
      */
     @Override
     public String getEvergreenCycle() {
-        return DECIDUOUS_BIO_CYCLE[0]; // Winter biological cycle for evergreen trees (note: should use EVERGREEN_BIO_CYCLE if applicable)
+        return getAllEvergreenCycle()[0]; // Evergreen trees use the same biological cycle as deciduous in Winter
     }
 }

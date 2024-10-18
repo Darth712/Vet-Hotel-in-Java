@@ -22,7 +22,7 @@ public class Fall extends SeasonState {
      */
     @Override
     public int getDeciduousEffort() {
-        return DECIDUOUS_SEASONAL_EFFORT[3]; // Fall is the 4th season in the array (index 3)
+        return getAllDeciduousEffort()[3]; // Fall is the 4th season in the array (index 3)
     }
 
     /**
@@ -32,7 +32,7 @@ public class Fall extends SeasonState {
      */
     @Override
     public int getEvergreenEffort() {
-        return DECIDUOUS_SEASONAL_EFFORT[3]; // Evergreen trees use the same effort value as deciduous in Fall
+        return getAllEvergreenEffort()[3]; // Evergreen trees use the same effort value as deciduous in Fall
     }
 
     /**
@@ -42,7 +42,7 @@ public class Fall extends SeasonState {
      */
     @Override
     public String getDeciduousCycle() {
-        return DECIDUOUS_BIO_CYCLE[3]; // Fall's biological cycle for deciduous trees
+        return getAllDeciduousCycle()[3]; // Fall's biological cycle for deciduous trees
     }
 
     /**
@@ -52,6 +52,6 @@ public class Fall extends SeasonState {
      */
     @Override
     public String getEvergreenCycle() {
-        return DECIDUOUS_BIO_CYCLE[3]; // Evergreen trees use the same biological cycle as deciduous in Fall
+        return getAllEvergreenCycle()[3]; // Evergreen trees use the same biological cycle as deciduous in Fall
     }
 }

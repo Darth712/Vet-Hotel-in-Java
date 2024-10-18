@@ -17,42 +17,42 @@ public class Spring extends SeasonState {
     }
 
     /**
-     * Gets the seasonal effort for deciduous trees in Spring.
+     * Retrieves the seasonal effort required for deciduous trees during the Spring.
      * 
      * @return the effort value for deciduous trees in Spring.
      */
     @Override
     public int getDeciduousEffort() {
-        return DECIDUOUS_SEASONAL_EFFORT[1]; // Spring effort for deciduous trees
+        return getAllDeciduousEffort()[1]; // Spring is the 4th season in the array (index 1)
     }
 
     /**
-     * Gets the seasonal effort for evergreen trees in Spring.
+     * Retrieves the seasonal effort required for evergreen trees during the Spring.
      * 
      * @return the effort value for evergreen trees in Spring.
      */
     @Override
     public int getEvergreenEffort() {
-        return DECIDUOUS_SEASONAL_EFFORT[1]; // Spring effort for evergreen trees (note: should use EVERGREEN_SEASONAL_EFFORT if applicable)
+        return getAllEvergreenEffort()[1]; // Evergreen trees use the same effort value as deciduous in Spring
     }
 
     /**
-     * Gets the biological cycle stage for deciduous trees in Spring.
+     * Retrieves the biological cycle description for deciduous trees during the Spring.
      * 
-     * @return the biological cycle stage for deciduous trees in Spring.
+     * @return the biological cycle for deciduous trees in Spring.
      */
     @Override
     public String getDeciduousCycle() {
-        return DECIDUOUS_BIO_CYCLE[1]; // Spring biological cycle for deciduous trees
+        return getAllDeciduousCycle()[1]; // Spring's biological cycle for deciduous trees
     }
 
     /**
-     * Gets the biological cycle stage for evergreen trees in Spring.
+     * Retrieves the biological cycle description for evergreen trees during the Spring.
      * 
-     * @return the biological cycle stage for evergreen trees in Spring.
+     * @return the biological cycle for evergreen trees in Spring.
      */
     @Override
     public String getEvergreenCycle() {
-        return DECIDUOUS_BIO_CYCLE[1]; // Spring biological cycle for evergreen trees (note: should use EVERGREEN_BIO_CYCLE if applicable)
+        return getAllEvergreenCycle()[1]; // Evergreen trees use the same biological cycle as deciduous in Spring
     }
 }

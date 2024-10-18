@@ -17,42 +17,42 @@ public class Summer extends SeasonState {
     }
 
     /**
-     * Gets the seasonal effort for deciduous trees in Summer.
+     * Retrieves the seasonal effort required for deciduous trees during the Summer.
      * 
      * @return the effort value for deciduous trees in Summer.
      */
     @Override
     public int getDeciduousEffort() {
-        return DECIDUOUS_SEASONAL_EFFORT[2]; // Summer effort for deciduous trees
+        return getAllDeciduousEffort()[2]; // Summer is the 4th season in the array (index 2)
     }
 
     /**
-     * Gets the seasonal effort for evergreen trees in Summer.
+     * Retrieves the seasonal effort required for evergreen trees during the Summer.
      * 
      * @return the effort value for evergreen trees in Summer.
      */
     @Override
     public int getEvergreenEffort() {
-        return DECIDUOUS_SEASONAL_EFFORT[2]; // Summer effort for evergreen trees (note: should use EVERGREEN_SEASONAL_EFFORT if applicable)
+        return getAllEvergreenEffort()[2]; // Evergreen trees use the same effort value as deciduous in Summer
     }
 
     /**
-     * Gets the biological cycle stage for deciduous trees in Summer.
+     * Retrieves the biological cycle description for deciduous trees during the Summer.
      * 
-     * @return the biological cycle stage for deciduous trees in Summer.
+     * @return the biological cycle for deciduous trees in Summer.
      */
     @Override
     public String getDeciduousCycle() {
-        return DECIDUOUS_BIO_CYCLE[2]; // Summer biological cycle for deciduous trees
+        return getAllDeciduousCycle()[2]; // Summer's biological cycle for deciduous trees
     }
 
     /**
-     * Gets the biological cycle stage for evergreen trees in Summer.
+     * Retrieves the biological cycle description for evergreen trees during the Summer.
      * 
-     * @return the biological cycle stage for evergreen trees in Summer.
+     * @return the biological cycle for evergreen trees in Summer.
      */
     @Override
     public String getEvergreenCycle() {
-        return DECIDUOUS_BIO_CYCLE[2]; // Summer biological cycle for evergreen trees (note: should use EVERGREEN_BIO_CYCLE if applicable)
+        return getAllEvergreenCycle()[2]; // Evergreen trees use the same biological cycle as deciduous in Summer
     }
 }

@@ -8,18 +8,20 @@ package hva.Seasons;
 public abstract class SeasonState {
 
     // Seasonal effort required for deciduous trees, with the seasons starting from Winter.
-    protected static final int[] DECIDUOUS_SEASONAL_EFFORT = {0, 1, 2, 5}; // Winter, Spring, Summer, Fall
+    private final int[] DECIDUOUS_SEASONAL_EFFORT = {0, 1, 2, 5}; // Winter, Spring, Summer, Fall
     // Seasonal effort required for evergreen trees, with the seasons starting from Winter.
-    protected static final int[] EVERGREEN_SEASONAL_EFFORT = {2, 1, 1, 1}; // Winter, Spring, Summer, Fall
+    private final int[] EVERGREEN_SEASONAL_EFFORT = {2, 1, 1, 1}; // Winter, Spring, Summer, Fall
 
     // Biological cycles for deciduous trees across the seasons.
-    protected static final String[] DECIDUOUS_BIO_CYCLE = {"SEMFOLHAS", "GERARFOLHAS", "COMFOLHAS", "LARGARFOLHAS"};
+    private final String[] DECIDUOUS_BIO_CYCLE = {"SEMFOLHAS", "GERARFOLHAS", "COMFOLHAS", "LARGARFOLHAS"};
     // Biological cycles for evergreen trees across the seasons.
-    protected static final String[] EVERGREEN_BIO_CYCLE = {"LARGARFOLHAS", "GERARFOLHAS", "COMFOLHAS", "COMFOLHAS"};
+    private final String[] EVERGREEN_BIO_CYCLE = {"LARGARFOLHAS", "GERARFOLHAS", "COMFOLHAS", "COMFOLHAS"};
 
     
 
     private Season _season;
+
+   
 
     /**
      * Constructs a Season State with the specified season.
@@ -52,7 +54,21 @@ public abstract class SeasonState {
         _season = season;
     }
     
+    public int[] getAllDeciduousEffort() {
+        return DECIDUOUS_SEASONAL_EFFORT;
+    }
 
+    public int[] getAllEvergreenEffort() {
+        return EVERGREEN_SEASONAL_EFFORT;
+    }
+
+    public String[] getAllDeciduousCycle() {
+        return DECIDUOUS_BIO_CYCLE;
+    }
+
+    public String[] getAllEvergreenCycle() {
+        return EVERGREEN_BIO_CYCLE;
+    }
     /**
      * Gets the seasonal effort for deciduous trees in the current season.
      * 
