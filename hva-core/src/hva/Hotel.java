@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 import hva.exceptions.*;
 import hva.Seasons.*;
 import hva.animal.*;
@@ -14,15 +13,13 @@ import hva.habitat.*;
 import hva.tree.Deciduous;
 import hva.tree.Evergreen;
 import hva.tree.Tree;
-
 import java.util.Map;
-
 import java.util.TreeMap;
-
 import java.util.Collection;
-
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 
 /**
@@ -35,12 +32,12 @@ public class Hotel implements Serializable {
     private static final long serialVersionUID = 202407081733L;
 
     private Season _currentSeason = new Season();
-    private Map<String, Habitat> _habitats = new TreeMap<String, Habitat>();  
-    private Map<String, Animal> _animals = new TreeMap<String, Animal>();  
-    private Map<String, Species> _species = new TreeMap<String, Species>();  
-    private Map<String, Employee> _employees = new TreeMap<String, Employee>(); 
-    private Map<String, Vaccine> _vaccines = new TreeMap<String, Vaccine>(); 
-    private Map<String, Tree> _trees = new TreeMap<String, Tree>(); 
+    private Map<String, Habitat> _habitats = new TreeMap<String, Habitat>(String.CASE_INSENSITIVE_ORDER);  
+    private Map<String, Animal> _animals = new TreeMap<String, Animal>(String.CASE_INSENSITIVE_ORDER);  
+    private Map<String, Species> _species = new TreeMap<String, Species>(String.CASE_INSENSITIVE_ORDER);  
+    private Map<String, Employee> _employees = new TreeMap<String, Employee>(String.CASE_INSENSITIVE_ORDER); 
+    private Map<String, Vaccine> _vaccines = new TreeMap<String, Vaccine>(String.CASE_INSENSITIVE_ORDER); 
+    private Map<String, Tree> _trees = new TreeMap<String, Tree>(String.CASE_INSENSITIVE_ORDER); 
     private List<Vaccination> _vaccinations = new ArrayList<Vaccination>();
     private boolean _changed;
 
@@ -311,7 +308,7 @@ public class Hotel implements Serializable {
      * @param id    the habitat's ID
      * @param name  the habitat's name
      * @param area  the habitat's area
-     * @throws DuplicateHabitatKeyException in case the Habitat already exists
+     * @throws HabitatExistsException in case the Habitat already exists
      */
     public void registerHabitat(String id, String name, int area) throws HabitatExistsException{ 
         assertHabitatExists(id);
