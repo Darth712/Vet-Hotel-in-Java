@@ -26,7 +26,7 @@ import hva.satisfaction.*;
  * This class represents a hotel that hosts animals and trees in various habitats. 
  * It manages animals, employees, habitats, species, vaccines, and trees.
  */
-public class Hotel implements Serializable, Visitable{
+public class Hotel implements Serializable{
 
     @Serial
     private static final long serialVersionUID = 202407081733L;
@@ -664,10 +664,6 @@ public class Hotel implements Serializable, Visitable{
         return totalSatisfaction;
     }  
 
-    // há outras maneiras de se fazer.
-    @Override
-    public <T> T accept(Visitor<T> visitor) {
-      return visitor.visit(this);
-    }
+    
 
 }

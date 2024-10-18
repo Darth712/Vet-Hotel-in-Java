@@ -17,7 +17,7 @@ class DoShowSatisfactionOfAnimal extends Command<Hotel> {
     protected final void execute() throws CommandException {
         try {
             _receiver.assertUnknownAnimal(stringField("id"));
-            _display.popup(Message.thisAnimalSatisfaction(_receiver.showAnimalSatisfaction(stringField("id"))));
+            _display.popup((_receiver.showAnimalSatisfaction(stringField("id"))));
 
         } catch (UnknownAnimalException e) {
             throw new UnknownAnimalKeyException(e.getId());

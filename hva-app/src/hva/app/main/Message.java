@@ -9,7 +9,4 @@ public interface Message {
         return "O ficheiro '" + filename + "' não existe.";
     }
 
-    static String globalSatisfaction(int satisfaction) {
-        return ""+satisfaction;
-    }
 }

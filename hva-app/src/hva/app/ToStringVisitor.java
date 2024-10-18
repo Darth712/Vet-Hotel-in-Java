@@ -166,8 +166,4 @@ public class ToStringVisitor extends Visitor<String>{
                "|" + vaccination.getAnimal().getSpecies().getId();
     }
 
-    @Override
-    public String visit(Hotel hotel) {
-        return String.valueOf(hotel.getSeason().getCode());
-    }
 }

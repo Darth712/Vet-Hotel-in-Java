@@ -18,6 +18,6 @@ class DoAdvanceSeason extends Command<HotelManager> {
     @Override
     protected final void execute() {
         _receiver.getHotel().advanceSeason();
-        _display.popup(_receiver.getHotel().accept(TSV));
+        _display.popup(_receiver.getHotel().getSeason().getCode());
     }
 }

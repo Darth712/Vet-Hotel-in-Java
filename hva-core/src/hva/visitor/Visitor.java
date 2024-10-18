@@ -6,7 +6,6 @@ import hva.Vaccine;
 import hva.animal.Animal;
 import hva.Vaccination;
 import java.io.Serializable;
-import hva.Hotel;
 import hva.tree.*;
 /**
  * Abstract class representing a visitor in the Visitor design pattern.
@@ -22,5 +21,4 @@ public abstract class Visitor<T> implements Serializable{
     public abstract T visit(Habitat habitat);
     public abstract T visit(Vaccine vaccine);
     public abstract T visit(Vaccination vaccination);
-    public abstract T visit(Hotel hotel);
 }

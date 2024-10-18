@@ -18,7 +18,7 @@ class DoShowSatisfactionOfEmployee extends Command<Hotel> {
     protected void execute() throws CommandException {
         try {
             _receiver.assertUnknownEmployee(stringField("id"));
-            _display.popup(Message.thisEmployeeSatisfaction(_receiver.showEmployeeSatisfaction(stringField("id"))));
+            _display.popup(_receiver.showEmployeeSatisfaction(stringField("id")));
 
         } catch (UnknownEmployeeException e) {
             throw new UnknownEmployeeKeyException(e.getId());
