@@ -2,8 +2,8 @@ package hva;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import hva.animal.Animal;
 
 /**
@@ -30,7 +30,7 @@ public class Species implements Serializable {
         _id = id;
         _name = name;
         _population++;                   // Increment population when a new species is created
-        _animals = new HashMap<>();      // Initialize the map to store animals
+        _animals = new TreeMap<>();      // Initialize the map to store animals
     }
 
     /**
