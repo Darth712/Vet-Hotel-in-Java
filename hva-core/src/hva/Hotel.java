@@ -20,11 +20,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import java.util.Collection;
-import java.util.Collections;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.io.BufferedReader;
-import java.io.FileReader;
+
 
 /**
  * This class represents a hotel that hosts animals and trees in various habitats. 
@@ -365,6 +364,11 @@ public class Hotel implements Serializable {
           throw new AnimalExistsException(key);
       }
     
+      public void assertUnknownAnimal(String key) throws UnknownAnimalException{
+        if (!_animals.containsKey(key))
+          throw new UnknownAnimalException(key);
+      }  
+
     public void assertUnknownHabitat(String key) throws UnknownHabitatException{
         if (!_habitats.containsKey(key))
           throw new UnknownHabitatException(key);
@@ -436,10 +440,19 @@ public class Hotel implements Serializable {
      * @param employeeId        The ID of the employee to assign the responsibility to.
      * @param responsabilityId  The ID of the responsibility to be assigned.
      */
-    public void addEmployeeResponsability(String employeeId, String responsabilityId) {
-        _employees.get(employeeId).addNewResponsability(responsabilityId);
+    public void addEmployeeResponsability(String employeeId, String resId) {
+        if (_employees.get(employeeId).getType() == "TRT") {
+            Handler handler = (Handler) _employees.get(employeeId);
+            handler.addNewResponsibility(resId,_habitats.get(resId));
+        }
+        if (_employees.get(employeeId).getType() == "VET") {
+            Vet vet = (Vet) _employees.get(employeeId);
+            vet.addNewResponsibility(resId, _species.get(resId));
+        }
         changed();
     }
+
+
 
     /**
      * Registers a new vaccine and associates it with applicable species.
@@ -503,4 +516,15 @@ public class Hotel implements Serializable {
     public Collection<Vaccine> getAllVaccines() {
         return getVaccines().values();
     }
+
+
+
+    public void animalToHabitat(String animalId, String habitatId) throws 
+    UnknownAnimalException, UnknownHabitatException, UnrecognizedEntryException{
+        assertUnknownAnimal(animalId);
+        assertUnknownHabitat(habitatId);
+        _animals.get(animalId).setHabitat(_habitats.get(habitatId));
+        changed();
+    }
+
 }

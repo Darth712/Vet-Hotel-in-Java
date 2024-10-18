@@ -2,10 +2,12 @@ package hva.app;
 
 import hva.animal.Animal;
 import hva.employee.Employee;
+import hva.employee.Handler;
+import hva.employee.Vet;
 import hva.habitat.Habitat;
 import hva.tree.Tree;
 import hva.Vaccine;
-
+import java.util.StringJoiner;
 
 
 import hva.Vaccination;
@@ -43,11 +45,46 @@ public class ToStringVisitor extends Visitor<String>{
      * @param employee the Employee object to visit
      * @return a formatted string representing the employee's details
      */
-    @Override
+
+     /*
+      * 
     public String visit(Employee employee) {
-        return 
-        employee.getType() + "|" + employee.getId() + "|" + 
-        employee.getName() + employee.responsabilityString();
+        StringBuilder employeeInfo = new StringBuilder(
+            employee.getType() + "|" + employee.getId() + "|" + 
+        employee.getName());
+
+              
+    }
+
+      */
+    @Override
+    public String visit(Handler handler) {
+        StringBuilder handlerInfo = new StringBuilder(
+            handler.getType() + "|" + handler.getId() + "|" + 
+        handler.getName());
+        StringJoiner resInfo = new StringJoiner(",");
+        handler.getResponsibilities().forEach((id, habitat) -> {
+            resInfo.add(id);
+        });
+
+        handlerInfo.append("|").append(resInfo.toString());
+
+        return handlerInfo.toString();  // Return the full string
+    }
+
+    @Override
+    public String visit(Vet vet) {
+        StringBuilder vetInfo = new StringBuilder(
+            vet.getType() + "|" + vet.getId() + "|" + 
+        vet.getName());
+        StringJoiner resInfo = new StringJoiner(",");
+        vet.getResponsibilities().forEach((id, species) -> {
+            resInfo.add(id);
+        });
+
+        vetInfo.append("|").append(resInfo.toString());
+
+        return vetInfo.toString();  // Return the full string
     }
 
     /**

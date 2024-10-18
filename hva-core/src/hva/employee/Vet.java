@@ -1,11 +1,14 @@
 package hva.employee;
+import hva.Species;
+import hva.visitor.Visitor;
 
-import java.util.ArrayList;
-
+import java.util.TreeMap;
 /**
  * Class representing a Veterinarian (Vet), a type of employee responsible for species in the system.
  */
-public class Vet extends Employee {
+public class Vet extends Employee{
+    
+    private TreeMap<String,Species> _responsibilities;
 
     /**
      * Constructs a new Vet with the specified ID and name.
@@ -15,7 +18,7 @@ public class Vet extends Employee {
      */
     public Vet(String id, String name) {
         super(id, name);
-        _responsability = new ArrayList<String>(); // List of species IDs the vet is responsible for
+        _responsibilities = new TreeMap<String,Species>(); // List of species IDs the vet is responsible for
     }
 
     /**
@@ -41,10 +44,16 @@ public class Vet extends Employee {
      * 
      * @param id  the ID of the species to add as a responsibility
      */
-    @Override
-    public void addNewResponsability(String id) {
-        _responsability.add(id);
+    
+    public void addNewResponsibility(String id, Species species) {
+        _responsibilities.put(id, species);
     }
+
+    public TreeMap<String,Species> getResponsibilities() {
+        return _responsibilities;
+    }
+
+
 
     /**
      * Returns the type of the employee, which in this case is "VET" (representing Veterinarian).
@@ -56,5 +65,16 @@ public class Vet extends Employee {
         return "VET";
     }
 
- 
+    /**
+     * Accepts a visitor and allows it to perform operations on this instance.
+     * Part of the Visitor design pattern.
+     * 
+     * @param <T> the type of the result produced by the visitor
+     * @param visitor the visitor performing the operation
+     * @return the result of the visitor's operation, String
+     */
+    @Override
+    public <T> T accept(Visitor<T> visitor) {
+      return visitor.visit(this);
+    }
 }

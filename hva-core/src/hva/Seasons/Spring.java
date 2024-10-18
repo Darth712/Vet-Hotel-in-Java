@@ -5,7 +5,7 @@ package hva.Seasons;
  * Implements the abstract methods from the Season class to provide 
  * the effort values and biological cycles for deciduous and evergreen trees during Spring.
  */
-public class Spring extends SeasonState {
+public class Spring extends SeasonState{
 
     public Spring(Season season) {
         super(season);

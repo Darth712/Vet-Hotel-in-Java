@@ -1,6 +1,11 @@
 package hva.Seasons;
 
-public class Season {
+import java.io.Serializable;
+
+public class Season implements Serializable{
+
+
+
     private SeasonState _state = new Spring(this);
 
 

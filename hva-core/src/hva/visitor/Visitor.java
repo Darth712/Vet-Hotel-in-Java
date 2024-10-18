@@ -1,6 +1,6 @@
 package hva.visitor;
 
-import hva.employee.Employee;
+import hva.employee.*;
 import hva.habitat.Habitat;
 import hva.Vaccine;
 import hva.animal.Animal;
@@ -15,7 +15,8 @@ import java.io.Serializable;
  */
 public abstract class Visitor<T> implements Serializable{
     public abstract T visit(Animal animal);
-    public abstract T visit(Employee employee);
+    public abstract T visit(Vet vet);
+    public abstract T visit(Handler handler);
     public abstract T visit(Habitat habitat);
     public abstract T visit(Vaccine vaccine);
     public abstract T visit(Vaccination vaccination);

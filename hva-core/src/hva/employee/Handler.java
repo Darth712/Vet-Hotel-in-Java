@@ -1,11 +1,18 @@
 package hva.employee;
 
-import java.util.ArrayList;
+
+import java.util.TreeMap;
+import hva.habitat.Habitat;
+import hva.visitor.Visitor;
 
 /**
  * Class representing a Handler, a type of employee responsible for habitats in the system.
  */
 public class Handler extends Employee{
+
+    private TreeMap<String,Habitat> _responsibilities;
+
+
 
     /**
      * Constructs a new Handler with the specified ID and name.
@@ -15,7 +22,7 @@ public class Handler extends Employee{
      */
     public Handler(String id, String name) {
         super(id, name);
-        _responsability = new ArrayList<String>(); // List of habitat IDs the handler is responsible for
+        _responsibilities = new TreeMap<String,Habitat>(); // List of habitat IDs the handler is responsible for
     }
 
     /**
@@ -23,9 +30,13 @@ public class Handler extends Employee{
      * 
      * @param id  the ID of the habitat to add as a responsibility
      */
-    @Override
-    public void addNewResponsability(String id) {
-        _responsability.add(id);
+  
+    public void addNewResponsibility(String id, Habitat habitat) {
+        _responsibilities.put(id, habitat);
+    }
+
+    public TreeMap<String,Habitat> getResponsibilities() {
+        return _responsibilities;
     }
 
     /**
@@ -38,5 +49,17 @@ public class Handler extends Employee{
         return "TRT";
     }
 
+    /**
+     * Accepts a visitor and allows it to perform operations on this instance.
+     * Part of the Visitor design pattern.
+     * 
+     * @param <T> the type of the result produced by the visitor
+     * @param visitor the visitor performing the operation
+     * @return the result of the visitor's operation, String
+     */
+    @Override
+    public <T> T accept(Visitor<T> visitor) {
+      return visitor.visit(this);
+    }
   
 }

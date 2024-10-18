@@ -1,11 +1,12 @@
 package hva.Seasons;
 
+import java.io.Serializable;
 /**
  * Abstract class representing a Season.
  * Provides abstract methods to get the effort values and biological cycles for both deciduous and evergreen trees.
  * The data is stored in static arrays that describe the behavior of trees across the four seasons.
  */
-public abstract class SeasonState {
+public abstract class SeasonState implements Serializable{
 
     // Seasonal effort required for deciduous trees, with the seasons starting from Winter.
     private final int[] DECIDUOUS_SEASONAL_EFFORT = {0, 1, 2, 5}; // Winter, Spring, Summer, Fall

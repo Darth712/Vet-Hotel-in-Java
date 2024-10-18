@@ -1,15 +1,15 @@
 package hva.exceptions;
 
-public class HabitatExistsException extends HotelException{
+public class UnknownAnimalException extends HotelException{
 
-    private static final long serialVersionUID = 202407081741L;
+    private static final long serialVersionUID = 202407081743L;
     
     /** The Habitat's key. */
 
     private final String _id;
 
     /** @param id */
-    public HabitatExistsException(String id) {
+    public UnknownAnimalException(String id) {
         _id = id;
     }
 
@@ -18,4 +18,5 @@ public class HabitatExistsException extends HotelException{
         return _id;
     }
        
+    
 }

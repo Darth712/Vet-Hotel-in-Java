@@ -2,7 +2,7 @@ package hva.employee;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
+
 
 import hva.visitor.*;
 
@@ -20,9 +20,7 @@ public abstract class Employee implements Serializable, Visitable{
 
     /** The name of the employee. */
     private String _name;
-
-    /** A list of responsibilities (either habitats or species) the employee manages. */
-    protected List<String> _responsability;
+   
 
     /**
      * Constructs a new Employee with the specified ID and name.
@@ -60,45 +58,6 @@ public abstract class Employee implements Serializable, Visitable{
      */
     public abstract String getType();
 
-    /**
-     * Adds a new responsibility (e.g., a habitat or species) to the employee's list of responsibilities.
-     * 
-     * @param id  the ID of the responsibility to add
-     */
-    public abstract void addNewResponsability(String id);
 
-    /**
-     * Constructs a string representing the employee's responsibilities.
-     * If there are no responsibilities, an empty string is returned.
-     * 
-     * @return a string listing the employee's responsibilities, separated by commas
-     */
-    public String responsabilityString() {
-        if (_responsability == null || _responsability.isEmpty()) {
-            return ""; // Return an empty string if there are no responsibilities
-        }
-    
-        // Initialize with the first responsibility
-        String ans = "|" + _responsability.get(0);
-    
-        // Append the remaining responsibilities, separated by commas
-        for (int i = 1; i < _responsability.size(); i++) {
-            ans += "," + _responsability.get(i);
-        }
-    
-        return ans;
-    }
-
-    /**
-     * Accepts a visitor and allows it to perform operations on this instance.
-     * Part of the Visitor design pattern.
-     * 
-     * @param <T> the type of the result produced by the visitor
-     * @param visitor the visitor performing the operation
-     * @return the result of the visitor's operation, String
-     */
-    @Override
-    public <T> T accept(Visitor<T> visitor) {
-      return visitor.visit(this);
-    }
+   
 }

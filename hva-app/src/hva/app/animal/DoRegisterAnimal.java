@@ -3,7 +3,6 @@ package hva.app.animal;
 import hva.Hotel;
 import hva.app.exceptions.DuplicateAnimalKeyException;
 import hva.app.exceptions.UnknownHabitatKeyException;
-import hva.app.exceptions.UnknownSpeciesKeyException;
 import hva.exceptions.*;
 import pt.tecnico.uilib.forms.Form;
 import pt.tecnico.uilib.menus.Command;
