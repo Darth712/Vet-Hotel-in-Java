@@ -1,7 +1,8 @@
 package hva.tree;
 
 import hva.Seasons.Season;
-import hva.Seasons.SeasonState;
+
+import hva.visitor.Visitor;
 
 /**
  * Class representing an evergreen tree.
@@ -27,5 +28,8 @@ public class Evergreen extends Tree {
         _leafType = type; // Set the leaf type for this evergreen tree
     }
 
-  
+    @Override
+    public <T> T accept(Visitor<T> visitor) {
+      return visitor.visit(this);
+    }
 }

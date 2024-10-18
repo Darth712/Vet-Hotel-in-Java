@@ -5,7 +5,7 @@ import hva.animal.Animal;
 import hva.employee.Handler;
 import hva.employee.Vet;
 import hva.habitat.Habitat;
-
+import hva.tree.Tree;
 import hva.Vaccine;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
@@ -99,24 +99,31 @@ public class ToStringVisitor extends Visitor<String>{
      */
     @Override
     public String visit(Habitat habitat) {
-        StringBuilder habitatInfo = new StringBuilder
-        ("HABITAT|" + habitat.getId() + 
-         "|" + habitat.getName() + 
-         "|" + habitat.getArea() + 
-         "|" + habitat.numOfTrees());
-        
-         if (!habitat.getTrees().isEmpty()) {
+        StringBuilder habitatInfo = new StringBuilder()
+            .append("HABITAT|")
+            .append(habitat.getId())
+            .append("|")
+            .append(habitat.getName())
+            .append("|")
+            .append(habitat.getArea())
+            .append("|")
+            .append(habitat.numOfTrees());
+            
+        if (!habitat.getTrees().isEmpty()) {
             habitatInfo.append("\n");
             
-            // Use String.join() to join each tree info with "\n"
             habitatInfo.append(habitat.getTrees().values().stream()
-                .map(tree -> "ÁRVORE|" + tree.getId() + "|" + tree.getName() + 
-                    "|" + tree.getAge() + "|" + tree.getBaseCleaningDifficulty() +
-                    "|" + tree.getLeafType() + "|" + tree.getCurrentSeason().getDeciduousCycle())
+                .map(this::visit)
                 .collect(Collectors.joining("\n")));
         }
 
         return habitatInfo.toString();
+    }
+
+    public String visit(Tree tree) {
+        return "ÁRVORE|" + tree.getId() + "|" + tree.getName() + 
+            "|" + tree.getAge() + "|" + tree.getBaseCleaningDifficulty() +
+            "|" + tree.getLeafType() + "|" + tree.getCurrentSeason().getDeciduousCycle();
     }
 
     /**

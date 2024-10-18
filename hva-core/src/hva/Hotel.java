@@ -55,6 +55,10 @@ public class Hotel implements Serializable, Visitable{
         return _habitats;
     }
 
+    public Tree getTree(String treeID) {
+        return _trees.get(treeID);
+    }
+
     /**
      * Gets the map of animals.
      * 
@@ -498,6 +502,7 @@ public class Hotel implements Serializable, Visitable{
     public Collection<Habitat> getAllHabitats() {
         return getHabitats().values();
     }
+
 
     /**
      * Displays all animals in an unmodifiable collection.

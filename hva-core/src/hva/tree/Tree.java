@@ -3,14 +3,15 @@ package hva.tree;
 import java.io.Serial;
 import java.io.Serializable;
 import hva.Seasons.Season;
-import hva.Seasons.SeasonState;
+
+import hva.visitor.Visitable;
 
 
 /**
  * Abstract class representing a generic tree.
  * This class implements Serializable for object serialization.
  */
-public abstract class Tree implements Serializable{
+public abstract class Tree implements Serializable, Visitable{
 
     @Serial
     private static final long serialVersionUID = 202407081737L;

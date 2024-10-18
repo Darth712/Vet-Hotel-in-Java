@@ -1,7 +1,8 @@
 package hva.tree;
 
 import hva.Seasons.Season;
-import hva.Seasons.SeasonState;
+
+import hva.visitor.Visitor;
 
 /**
  * Class representing a deciduous tree.
@@ -26,5 +27,9 @@ public class Deciduous extends Tree {
         _leafType = type; // Set the leaf type for this deciduous tree
     }
 
+    @Override
+    public <T> T accept(Visitor<T> visitor) {
+      return visitor.visit(this);
+    }
   
 }

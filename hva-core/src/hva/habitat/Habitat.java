@@ -4,10 +4,10 @@ import java.io.Serial;
 import java.io.Serializable;
 
 import java.util.TreeMap;
-import hva.Species;
 import hva.animal.Animal;
 import hva.tree.Tree;
 import hva.visitor.*;
+import java.util.Collection;
 
 /**
  * Class representing a Habitat, which contains trees, animals, and influences (species).
@@ -85,7 +85,7 @@ public class Habitat implements Serializable, Visitable{
         return _influence;
     }
 
-    //Setters
+    
     /**
      * Sets the area of the habitat.
      * 
@@ -95,7 +95,9 @@ public class Habitat implements Serializable, Visitable{
         _area = area;
     }
 
-
+    public Collection<Tree> getAllTrees() {
+        return getTrees().values();
+    }
 
 
     /**
