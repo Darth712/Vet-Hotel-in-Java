@@ -120,11 +120,11 @@ public class Habitat implements Serializable, Visitable{
     /**
      * Adds a species to the influence map of the habitat.
      * 
-     * @param species     the species influencing the habitat
-     * @param description a description of the influence
+     * @param speciesId     the species influencing the habitat
+     * @param influence   the influence
      */
-    public void addInfluence(Species species, String description) {
-        _influence.put(description, species);
+    public void addInfluence(String speciesId, String influence) {
+        _influence.put(speciesId, influence);
     }
 
     /**

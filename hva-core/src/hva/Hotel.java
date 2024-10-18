@@ -405,6 +405,9 @@ public class Hotel implements Serializable {
         changed();        
     }
 
+
+
+
     /**
      * Registers a new tree and adds it to the trees map.
      * Depending on the type ("CADUCA" or "PERENE"), it registers the tree as Deciduous or Evergreen.
@@ -541,4 +544,13 @@ public class Hotel implements Serializable {
 
     }
 
+    public void setHabitatInfluence(String habitatId, String speciesId, String influence) throws
+    UnknownHabitatException, UnknownSpeciesException{
+        
+        assertUnknownHabitat(habitatId);
+        assertUnknownSpecies(speciesId);
+        _habitats.get(habitatId).addInfluence(speciesId,influence);
+    }
+
 }
+
