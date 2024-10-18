@@ -3,6 +3,7 @@ package hva.tree;
 import java.io.Serial;
 import java.io.Serializable;
 import hva.Seasons.Season;
+import hva.Seasons.SeasonState;
 
 
 /**
@@ -19,7 +20,7 @@ public abstract class Tree implements Serializable{
     private int _age;                  // Age of the tree
     protected String _leafType;        // Type of leaves on the tree
     private int _baseCleaningDiff;     // Base cleaning difficulty of the tree
-    protected Season _currentSeason;   // Current season affecting the tree's state
+    protected SeasonState _currentSeason;   // Current season affecting the tree's state
 
     /**
      * Constructor for the Tree class.
@@ -30,7 +31,7 @@ public abstract class Tree implements Serializable{
      * @param baseCleaningDiff Base cleaning difficulty associated with the tree.
      * @param currentSeason   Current season affecting the tree's behavior.
      */
-    public Tree(String id, String name, int age, int baseCleaningDiff, Season currentSeason) {
+    public Tree(String id, String name, int age, int baseCleaningDiff, SeasonState currentSeason) {
         _id = id;
         _name = name;
         _age = age;
@@ -90,7 +91,7 @@ public abstract class Tree implements Serializable{
      *
      * @return The current season as a Season object.
      */
-    public Season getCurrentSeason() {
+    public SeasonState getCurrentSeason() {
         return _currentSeason; // Return the current season
     }
 
@@ -99,7 +100,7 @@ public abstract class Tree implements Serializable{
      *
      * @param currentSeason The current season to set.
      */
-    public void setCurrentSeason(Season currentSeason) {
+    public void setCurrentSeason(SeasonState currentSeason) {
         _currentSeason = currentSeason; // Update the current season
     }
 

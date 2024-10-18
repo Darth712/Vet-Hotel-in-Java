@@ -5,8 +5,16 @@ package hva.Seasons;
  * Implements the abstract methods from the Season class to provide 
  * the effort values and biological cycles for deciduous and evergreen trees during Winter.
  */
-public class Winter extends Season {
+public class Winter extends SeasonState {
 
+    public Winter(Season season) {
+        super (season);
+    }
+
+    @Override
+    public void nextSeason() {
+        getSeason().setSeasonState(new Spring(getSeason()));  // Change to the next state
+    }
     /**
      * Gets the seasonal effort for deciduous trees in Winter.
      * 

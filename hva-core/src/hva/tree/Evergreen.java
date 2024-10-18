@@ -1,6 +1,7 @@
 package hva.tree;
 
 import hva.Seasons.Season;
+import hva.Seasons.SeasonState;
 
 /**
  * Class representing an evergreen tree.
@@ -21,7 +22,7 @@ public class Evergreen extends Tree {
      * @param currentSeason  Current season affecting the tree's behavior.
      * @param type           Type of leaves (e.g., needle leaves).
      */
-    public Evergreen(String id, String name, int age, int baseCleaningDiff, Season currentSeason, String type) {
+    public Evergreen(String id, String name, int age, int baseCleaningDiff, SeasonState currentSeason, String type) {
         super(id, name, age, baseCleaningDiff, currentSeason);
         _leafType = type; // Set the leaf type for this evergreen tree
     }

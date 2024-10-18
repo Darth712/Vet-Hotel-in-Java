@@ -5,7 +5,15 @@ package hva.Seasons;
  * Contains methods to get effort values and biological cycles for deciduous
  * and evergreen trees during this season.
  */
-public class Fall extends Season {
+public class Fall extends SeasonState {
+
+    public Fall(Season season) {
+        super (season);
+    }
+    @Override
+    public void nextSeason() {
+        getSeason().setSeasonState(new Winter(getSeason()));  // Change to the next state
+    }
 
     /**
      * Retrieves the seasonal effort required for deciduous trees during the Fall.

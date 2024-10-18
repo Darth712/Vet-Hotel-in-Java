@@ -1,47 +1,40 @@
 package hva.Seasons;
 
-/**
- * Abstract class representing a Season.
- * Provides abstract methods to get the effort values and biological cycles for both deciduous and evergreen trees.
- * The data is stored in static arrays that describe the behavior of trees across the four seasons.
- */
-public abstract class Season {
-
-    // Seasonal effort required for deciduous trees, with the seasons starting from Winter.
-    protected static final int[] DECIDUOUS_SEASONAL_EFFORT = {0, 1, 2, 5}; // Winter, Spring, Summer, Fall
-    // Seasonal effort required for evergreen trees, with the seasons starting from Winter.
-    protected static final int[] EVERGREEN_SEASONAL_EFFORT = {2, 1, 1, 1}; // Winter, Spring, Summer, Fall
-
-    // Biological cycles for deciduous trees across the seasons.
-    protected static final String[] DECIDUOUS_BIO_CYCLE = {"SEMFOLHAS", "GERARFOLHAS", "COMFOLHAS", "LARGARFOLHAS"};
-    // Biological cycles for evergreen trees across the seasons.
-    protected static final String[] EVERGREEN_BIO_CYCLE = {"LARGARFOLHAS", "GERARFOLHAS", "COMFOLHAS", "COMFOLHAS"};
+public class Season {
+    private SeasonState _state;
 
     /**
-     * Gets the seasonal effort for deciduous trees in the current season.
+     * Constructs a season with the specified state
      * 
-     * @return the effort value for deciduous trees.
+     * @param state
      */
-    public abstract int getDeciduousEffort();
+    public Season(SeasonState state) {
+        _state = state;
+    }
 
     /**
-     * Gets the seasonal effort for evergreen trees in the current season.
+     * Advances the Season state to the next one
      * 
-     * @return the effort value for evergreen trees.
      */
-    public abstract int getEvergreenEffort();
+    public void nextSeason () {
+        _state.nextSeason();
+    }
 
     /**
-     * Gets the biological cycle stage for deciduous trees in the current season.
+     * Gets the Season of the state
      * 
-     * @return the biological cycle stage for deciduous trees.
+     * @return Season
      */
-    public abstract String getDeciduousCycle();
+    public Season getSeasonState(){
+        return _state.getSeason();
+    }
 
     /**
-     * Gets the biological cycle stage for evergreen trees in the current season.
+     * Sets the Season state to a new one
      * 
-     * @return the biological cycle stage for evergreen trees.
+     * @param state
      */
-    public abstract String getEvergreenCycle();
+    public void setSeasonState(SeasonState state) {
+        _state = state;
+    }
 }
