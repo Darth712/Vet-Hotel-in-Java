@@ -9,6 +9,7 @@ import hva.exceptions.ImportFileException;
 import hva.exceptions.UnrecognizedEntryException;
 import hva.Seasons.*;
 import hva.animal.*;
+import hva.app.exceptions.DuplicateHabitatKeyException;
 import hva.employee.*;
 import hva.habitat.*;
 import hva.tree.Deciduous;
@@ -295,8 +296,9 @@ public class Hotel implements Serializable {
      * @param id    the habitat's ID
      * @param name  the habitat's name
      * @param area  the habitat's area
+     * @throws DuplicateHabitatKeyException in case the Habitat already exists
      */
-    public void registerHabitat(String id, String name, int area) { 
+    public void registerHabitat(String id, String name, int area) throws DuplicateHabitatKeyException{ 
         _habitats.put(id, new Habitat(id, name, area));  
         changed();  
     }

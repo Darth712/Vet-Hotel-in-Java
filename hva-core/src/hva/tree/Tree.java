@@ -104,6 +104,4 @@ public abstract class Tree implements Serializable{
         _currentSeason = currentSeason; // Update the current season
     }
 
-
- 
 }
