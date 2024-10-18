@@ -36,7 +36,7 @@ public class Hotel implements Serializable {
     @Serial
     private static final long serialVersionUID = 202407081733L;
 
-    private SeasonState _currentSeason;
+    private Season _currentSeason = new Season();
     private Map<String, Habitat> _habitats = new TreeMap<String, Habitat>();  
     private Map<String, Animal> _animals = new TreeMap<String, Animal>();  
     private Map<String, Species> _species = new TreeMap<String, Species>();  
@@ -47,7 +47,7 @@ public class Hotel implements Serializable {
     private boolean _changed;
 
 
-    public SeasonState getSeason() {
+    public Season getSeason() {
         return _currentSeason;
     }
 
@@ -134,7 +134,8 @@ public class Hotel implements Serializable {
                 try{
                     registerEntry(parts);
 
-                } catch(AnimalExistsException | UnknownHabitatException | UnknownSpeciesException e) {
+                } catch(AnimalExistsException | HabitatExistsException | 
+                UnknownHabitatException | UnknownSpeciesException e) {
                     e.printStackTrace();
                 } 
             }
@@ -146,7 +147,7 @@ public class Hotel implements Serializable {
 
 
     public void registerEntry(String... parts) throws AnimalExistsException,
-    UnrecognizedEntryException, UnknownHabitatException, UnknownSpeciesException{
+    UnrecognizedEntryException, UnknownHabitatException, UnknownSpeciesException, HabitatExistsException{
         switch (parts[0].toUpperCase()) {  // First part determines the entity type
             case "ESPÉCIE":
                 parseSpecies(parts);
@@ -209,7 +210,7 @@ public class Hotel implements Serializable {
      * 
      * @param parts array of strings representing the habitat data
      */
-    private void parseHabitat(String[] parts) {
+    private void parseHabitat(String[] parts) throws HabitatExistsException{
         String id = parts[1];
         String name = parts[2];
         int area = Integer.parseInt(parts[3]);

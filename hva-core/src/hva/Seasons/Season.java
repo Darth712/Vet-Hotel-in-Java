@@ -1,16 +1,9 @@
 package hva.Seasons;
 
 public class Season {
-    private SeasonState _state;
+    private SeasonState _state = new Spring(this);
 
-    /**
-     * Constructs a season with the specified state
-     * 
-     * @param state
-     */
-    public Season(SeasonState state) {
-        _state = state;
-    }
+
 
     /**
      * Advances the Season state to the next one
@@ -36,5 +29,43 @@ public class Season {
      */
     public void setSeasonState(SeasonState state) {
         _state = state;
+    }
+
+    /**
+     * Gets the seasonal effort for deciduous trees in the current season.
+     * 
+     * @return the effort value for deciduous trees.
+     */
+    public int getDeciduousEffort() {
+        return _state.getDeciduousEffort();
+    }
+
+    /**
+     * Gets the seasonal effort for evergreen trees in the current season.
+     * 
+     * @return the effort value for evergreen trees.
+     */
+    public int getEvergreenEffort() {
+        return _state.getEvergreenEffort();
+
+    }
+
+    /**
+     * Gets the biological cycle stage for deciduous trees in the current season.
+     * 
+     * @return the biological cycle stage for deciduous trees.
+     */
+    public String getDeciduousCycle() {
+        return _state.getDeciduousCycle();
+
+    }
+
+    /**
+     * Gets the biological cycle stage for evergreen trees in the current season.
+     * 
+     * @return the biological cycle stage for evergreen trees.
+     */
+    public String getEvergreenCycle() {
+        return _state.getEvergreenCycle();
     }
 }

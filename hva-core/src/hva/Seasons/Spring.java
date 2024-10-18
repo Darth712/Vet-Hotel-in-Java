@@ -8,7 +8,7 @@ package hva.Seasons;
 public class Spring extends SeasonState {
 
     public Spring(Season season) {
-        super (season);
+        super(season);
     }
 
     @Override

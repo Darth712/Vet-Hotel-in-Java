@@ -32,10 +32,11 @@ class DoRegisterAnimal extends Command<Hotel> {
         } catch (AnimalExistsException e) {
             throw new DuplicateAnimalKeyException(e.getId());
         } catch (UnknownSpeciesException e) {
+            Form request = new Form();
+            request.addStringField("speciesName", Prompt.speciesName());
+            request.parse();
+            _receiver.registerSpecies(e.getId(), request.stringField("speciesName"));
             
-            //Form request = new Form();
-           // request.addStringField("speciesName", Prompt.speciesName());
-           // _receiver.registerSpecies(e.getId(), "speciesName");
         } catch (UnknownHabitatException e) {
             throw new UnknownHabitatKeyException(e.getId());
         } catch (UnrecognizedEntryException e) {

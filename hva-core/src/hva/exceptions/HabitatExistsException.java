@@ -1,6 +1,6 @@
 package hva.exceptions;
 
-public class HabitatExistsException {
+public class HabitatExistsException extends HotelException{
     /** The Habitat's key. */
     private final String _id;
 
