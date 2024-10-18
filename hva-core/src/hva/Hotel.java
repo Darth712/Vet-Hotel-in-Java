@@ -133,7 +133,7 @@ public class Hotel implements Serializable {
                     registerEntry(parts);
 
                 } catch(AnimalExistsException | HabitatExistsException | 
-                UnknownHabitatException | UnknownSpeciesException e) {
+                UnknownHabitatException | UnknownSpeciesException | TreeExistsException e) {
                     e.printStackTrace();
                 } 
             }
@@ -145,7 +145,8 @@ public class Hotel implements Serializable {
 
 
     public void registerEntry(String... parts) throws AnimalExistsException,
-    UnrecognizedEntryException, UnknownHabitatException, UnknownSpeciesException, HabitatExistsException{
+    UnrecognizedEntryException, UnknownHabitatException, UnknownSpeciesException, 
+    HabitatExistsException, TreeExistsException{
         switch (parts[0].toUpperCase()) {  // First part determines the entity type
             case "ESPÉCIE":
                 parseSpecies(parts);
@@ -192,7 +193,7 @@ public class Hotel implements Serializable {
      * 
      * @param parts array of strings representing the tree data
      */
-    private void parseTree(String[] parts) {
+    private void parseTree(String[] parts) throws TreeExistsException{
       String id = parts[1];
       String name = parts[2];
       int age = Integer.parseInt(parts[3]);
@@ -219,6 +220,7 @@ public class Hotel implements Serializable {
             String[] treeIds = parts[4].split(",");
             for (String treeId : treeIds) {
                 addTreeToHabitat(id, treeId);
+
             }
         }
     }
@@ -374,6 +376,11 @@ public class Hotel implements Serializable {
           throw new UnknownHabitatException(key);
       }
 
+    public void assertTreeExists(String key) throws TreeExistsException{
+        if (_trees.containsKey(key))
+          throw new TreeExistsException(key);
+    }
+
     public void assertUnknownSpecies(String key) throws UnknownSpeciesException{
         if (!_species.containsKey(key))
           throw new UnknownSpeciesException(key);
@@ -411,10 +418,12 @@ public class Hotel implements Serializable {
      * @param baseDiff  The base cleaning difficulty of the tree.
      * @param type      The type of tree 
      */
-    public void registerTree(String id, String name, int age, int baseDiff, String type) {
-        if (type == "CADUCA")
+    public void registerTree(String id, String name, int age, int baseDiff, String type) throws
+    TreeExistsException{
+        assertTreeExists(id);
+        if (type.equals("CADUCA"))
             _trees.put(id, new Deciduous(id, name, age, baseDiff, _currentSeason, type));
-        if (type == "PERENE")
+        if (type.equals("PERENE"))
             _trees.put(id, new Evergreen(id, name, age, baseDiff, _currentSeason, type));  
         changed();  
     }
@@ -525,6 +534,14 @@ public class Hotel implements Serializable {
         assertUnknownHabitat(habitatId);
         _animals.get(animalId).setHabitat(_habitats.get(habitatId));
         changed();
+    }
+
+
+
+    public void changeHabitatArea(String id, int area) throws UnknownHabitatException{
+        assertUnknownHabitat(id);
+        _habitats.get(id).setArea(area);
+
     }
 
 }

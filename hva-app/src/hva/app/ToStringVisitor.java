@@ -1,14 +1,14 @@
 package hva.app;
 
 import hva.animal.Animal;
-import hva.employee.Employee;
+
 import hva.employee.Handler;
 import hva.employee.Vet;
 import hva.habitat.Habitat;
-import hva.tree.Tree;
+
 import hva.Vaccine;
 import java.util.StringJoiner;
-
+import java.util.stream.Collectors;
 
 import hva.Vaccination;
 import hva.visitor.Visitor;
@@ -104,15 +104,17 @@ public class ToStringVisitor extends Visitor<String>{
          "|" + habitat.getArea() + 
          "|" + habitat.numOfTrees());
         
-        if (!habitat.getTrees().isEmpty()) {
+         if (!habitat.getTrees().isEmpty()) {
             habitatInfo.append("\n");
-            for (Tree tree : habitat.getTrees().values()) {
-                habitatInfo.append("ÁRVORE|" + tree.getId() + "|" + tree.getName() + 
+            
+            // Use String.join() to join each tree info with "\n"
+            habitatInfo.append(habitat.getTrees().values().stream()
+                .map(tree -> "ÁRVORE|" + tree.getId() + "|" + tree.getName() + 
                     "|" + tree.getAge() + "|" + tree.getBaseCleaningDifficulty() +
-                    "|" + tree.getLeafType() + "|" + tree.getCurrentSeason().getDeciduousCycle()
-                    ).append("\n");
-            }
+                    "|" + tree.getLeafType() + "|" + tree.getCurrentSeason().getDeciduousCycle())
+                .collect(Collectors.joining("\n")));
         }
+
         return habitatInfo.toString();
     }
 

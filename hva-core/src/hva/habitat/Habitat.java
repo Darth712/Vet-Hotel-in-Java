@@ -35,6 +35,8 @@ public class Habitat implements Serializable, Visitable{
     /** A collection of species influencing the habitat, mapped by descriptions. */
     private TreeMap<String, Species> _influence;
 
+
+
     /**
      * Constructs a Habitat object with the specified ID, name, and area.
      * Initializes empty maps for trees, animals, and influence species.
@@ -94,6 +96,8 @@ public class Habitat implements Serializable, Visitable{
     }
 
 
+
+
     /**
      * Adds a tree to the habitat.
      * 
@@ -147,6 +151,7 @@ public class Habitat implements Serializable, Visitable{
     public int numOfTrees() {
         return _trees.size();
     }
+
 
     /**
      * Accepts a visitor and allows it to perform operations on this instance.
