@@ -585,11 +585,11 @@ public class Hotel implements Serializable{
 
         int satisfaction = 0;
 
-        if(_employees.get(id).getId().equals("TRT")) {
+        if(_employees.get(id).getType().equals("TRT")) {
             SatisfactionStrategy method = new HandlerSatisfaction((Handler) _employees.get(id));
             satisfaction = (int) Math.round(method.calculate());
         }
-        if(_employees.get(id).getId().equals("VET")) {
+        if(_employees.get(id).getType().equals("VET")) {
             SatisfactionStrategy method = new VetSatisfaction((Vet) _employees.get(id));
             satisfaction = (int) Math.round(method.calculate());
         }
@@ -598,14 +598,16 @@ public class Hotel implements Serializable{
     }
 
    // REFAZER ISTO TA MAL FEITO
-    public void removeResponsability(String employeeId, String resId) throws UnknownResponsabilityException{
+    public void removeResponsability(String employeeId, String resId) throws 
+    UnknownEmployeeException, UnknownResponsabilityException{
 
-        if(_employees.get(employeeId).getId().equals("TRT")) {
+        assertUnknownEmployee(employeeId);
+        if(_employees.get(employeeId).getType().equals("TRT")) {
             assertUnknownResponsability(employeeId, resId);
             Handler handler = (Handler) _employees.get(employeeId);
             handler.getResponsibilities().remove("resId");
         }
-        if(_employees.get(employeeId).getId().equals("VET")) {
+        if(_employees.get(employeeId).getType().equals("VET")) {
             assertUnknownResponsability(employeeId, resId);
             Vet vet = (Vet) _employees.get(employeeId);
             vet.getResponsibilities().remove("resId");
@@ -615,14 +617,16 @@ public class Hotel implements Serializable{
       
     }
 
-    public void addResponsability(String employeeId, String resId) throws UnknownResponsabilityException{
-
-        if(_employees.get(employeeId).getId().equals("TRT")) {
+    public void addResponsability(String employeeId, String resId) throws 
+    UnknownEmployeeException, UnknownResponsabilityException{
+        
+        assertUnknownEmployee(employeeId);
+        if(_employees.get(employeeId).getType().equals("TRT")) {
             assertUnknownResponsability(employeeId, resId);
             Handler handler = (Handler) _employees.get(employeeId);
             handler.addNewResponsibility(resId, _habitats.get(resId));
         }
-        if(_employees.get(employeeId).getId().equals("VET")) {
+        if(_employees.get(employeeId).getType().equals("VET")) {
             assertUnknownResponsability(employeeId, resId);
             Vet vet = (Vet) _employees.get(employeeId);
             vet.addNewResponsibility(resId, _species.get(resId));
@@ -634,14 +638,15 @@ public class Hotel implements Serializable{
     
     // REFAZER ESTE TAMBEM!!!
     public void assertUnknownResponsability(String employeeId, String resId) throws UnknownResponsabilityException{
-        if(_employees.get(employeeId).getId().equals("TRT")) {
+    
+        if(_employees.get(employeeId).getType().equals("TRT")) {
             Handler handler = (Handler) _employees.get(employeeId);
             if (!handler.getResponsibilities().containsKey("resId") | !_habitats.containsKey(resId) ) {
                 throw new UnknownResponsabilityException(resId);
             }
         }
 
-        if(_employees.get(employeeId).getId().equals("VET") | !_species.containsKey(resId)) {
+        if(_employees.get(employeeId).getType().equals("VET") | !_species.containsKey(resId)) {
             Vet vet = (Vet) _employees.get(employeeId);
             if (!vet.getResponsibilities().containsKey("resId")) {
                 throw new UnknownResponsabilityException(resId);
