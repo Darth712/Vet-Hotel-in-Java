@@ -605,12 +605,12 @@ public class Hotel implements Serializable{
         if(_employees.get(employeeId).getType().equals("TRT")) {
             assertResponsabilityNotFound(employeeId, resId);
             Handler handler = (Handler) _employees.get(employeeId);
-            handler.getResponsibilities().remove("resId");
+            handler.getResponsibilities().remove(resId);
         }
         if(_employees.get(employeeId).getType().equals("VET")) {
             assertResponsabilityNotFound(employeeId, resId);
             Vet vet = (Vet) _employees.get(employeeId);
-            vet.getResponsibilities().remove("resId");
+            vet.getResponsibilities().remove(resId);
         }
 
         changed();
