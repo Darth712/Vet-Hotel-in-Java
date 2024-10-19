@@ -658,14 +658,14 @@ public class Hotel implements Serializable{
     
         if(_employees.get(employeeId).getType().equals("TRT")) {
             Handler handler = (Handler) _employees.get(employeeId);
-            if (!handler.getResponsibilities().containsKey("resId")) {
+            if (!handler.getResponsibilities().containsKey(resId)) {
                 throw new ResponsabilityNotFoundException(resId);
             }
         }
 
         if(_employees.get(employeeId).getType().equals("VET")) {
             Vet vet = (Vet) _employees.get(employeeId);
-            if (!vet.getResponsibilities().containsKey("resId")) {
+            if (!vet.getResponsibilities().containsKey(resId)) {
                 throw new ResponsabilityNotFoundException(resId);
             }
         }
