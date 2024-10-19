@@ -599,16 +599,16 @@ public class Hotel implements Serializable{
 
    // REFAZER ISTO TA MAL FEITO
     public void removeResponsability(String employeeId, String resId) throws 
-    UnknownEmployeeException, UnknownResponsabilityException{
+    UnknownEmployeeException, ResponsabilityNotFoundException{
 
         assertUnknownEmployee(employeeId);
         if(_employees.get(employeeId).getType().equals("TRT")) {
-            assertUnknownResponsability(employeeId, resId);
+            assertResponsabilityNotFound(employeeId, resId);
             Handler handler = (Handler) _employees.get(employeeId);
             handler.getResponsibilities().remove("resId");
         }
         if(_employees.get(employeeId).getType().equals("VET")) {
-            assertUnknownResponsability(employeeId, resId);
+            assertResponsabilityNotFound(employeeId, resId);
             Vet vet = (Vet) _employees.get(employeeId);
             vet.getResponsibilities().remove("resId");
         }
@@ -640,16 +640,33 @@ public class Hotel implements Serializable{
     public void assertUnknownResponsability(String employeeId, String resId) throws UnknownResponsabilityException{
     
         if(_employees.get(employeeId).getType().equals("TRT")) {
-            Handler handler = (Handler) _employees.get(employeeId);
-            if (!handler.getResponsibilities().containsKey("resId") | !_habitats.containsKey(resId) ) {
+            if (!_habitats.containsKey(resId) ) {
                 throw new UnknownResponsabilityException(resId);
             }
         }
 
-        if(_employees.get(employeeId).getType().equals("VET") | !_species.containsKey(resId)) {
+        if(_employees.get(employeeId).getType().equals("VET")) {
+            if (!_species.containsKey(resId)) {
+                throw new UnknownResponsabilityException(resId);
+            }
+        }
+
+    }
+
+    // REFAZER ESTE TAMBEM!!!
+    public void assertResponsabilityNotFound(String employeeId, String resId) throws ResponsabilityNotFoundException{
+    
+        if(_employees.get(employeeId).getType().equals("TRT")) {
+            Handler handler = (Handler) _employees.get(employeeId);
+            if (!handler.getResponsibilities().containsKey("resId")) {
+                throw new ResponsabilityNotFoundException(resId);
+            }
+        }
+
+        if(_employees.get(employeeId).getType().equals("VET")) {
             Vet vet = (Vet) _employees.get(employeeId);
             if (!vet.getResponsibilities().containsKey("resId")) {
-                throw new UnknownResponsabilityException(resId);
+                throw new ResponsabilityNotFoundException(resId);
             }
         }
 

@@ -4,7 +4,7 @@ public class TreeExistsException extends HotelException{
 
     private static final long serialVersionUID = 202407081745L;
     
-    /** The Habitat's key. */
+   
 
     private final String _id;
 
