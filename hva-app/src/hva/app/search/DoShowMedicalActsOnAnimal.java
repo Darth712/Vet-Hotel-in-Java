@@ -14,7 +14,7 @@ class DoShowMedicalActsOnAnimal extends Command<Hotel> {
 
     @Override
     protected void execute() throws CommandException {
-
+        
     }
 
 }

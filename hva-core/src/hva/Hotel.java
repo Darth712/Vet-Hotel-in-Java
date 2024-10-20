@@ -541,22 +541,30 @@ public class Hotel implements Serializable{
         assertUnknownVaccine(vaccineKey);
         assertUnknownAnimal(animalkey);
 
-        Vet vet = _employees.get(vetKey);
+        
         Animal animal = _animals.get(animalkey);
         Species species = animal.getSpecies();
         Employee vet =  _employees.get(vetKey);
-        Species species = _animals.get(animalkey).getSpecies();
         Vaccine vaccine = _vaccines.get(vaccineKey);
         assertUnknownVet(vet);
         assertVetNotAuth(vet,species.getId());
 
         Vaccination vaccination = new Vaccination(vaccine, vetKey, animal);
         _vaccinations.add(vaccination);
-        vaccine.use();
-
-        
     }
 
+    public Collection<Vaccination> vetActs(String vetKey) throws UnknownVetException, UnknownEmployeeException {
+        Employee vet = _employees.get(vetKey);
+        List<Vaccination> acts = new ArrayList<>();
+        assertUnknownEmployee(vetKey);
+        assertUnknownVet(vet);
+        for (Vaccination vaccination : _vaccinations) {
+            if (vaccination.getVaccineId().equals(vetKey)) {
+                acts.add(vaccination);
+            }
+        }
+        return acts;
+    }
 
 
     /**
@@ -656,7 +664,7 @@ public class Hotel implements Serializable{
     }
 
     public int showAnimalSatisfaction(String id) {
-        SatisfactionStrategy method = new AnimalSatisfaction(_animals.get(id));
+        CalculateStrategy method = new AnimalSatisfaction(_animals.get(id));
         return (int) Math.round(method.calculate());
 
     }
@@ -666,11 +674,11 @@ public class Hotel implements Serializable{
         int satisfaction = 0;
 
         if(_employees.get(id).getType().equals("TRT")) {
-            SatisfactionStrategy method = new HandlerSatisfaction((Handler) _employees.get(id));
+            CalculateStrategy method = new HandlerSatisfaction((Handler) _employees.get(id));
             satisfaction = (int) Math.round(method.calculate());
         }
         if(_employees.get(id).getType().equals("VET")) {
-            SatisfactionStrategy method = new VetSatisfaction((Vet) _employees.get(id));
+            CalculateStrategy method = new VetSatisfaction((Vet) _employees.get(id));
             satisfaction = (int) Math.round(method.calculate());
         }
         
