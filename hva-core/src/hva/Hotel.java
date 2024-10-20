@@ -542,17 +542,15 @@ public class Hotel implements Serializable{
         assertUnknownAnimal(animalkey);
 
         Vet vet = _employees.get(vetKey);
-        Species species = _animals.get(animalkey).getSpecies();
+        Animal animal = _animals.get(animalkey);
+        Species species = animal.getSpecies();
         Vaccine vaccine = _vaccines.get(vaccineKey);
 
         assertUnknownVet(vet);
         assertVetNotAuth(vet,species.getId());
 
-        vaccine.use();
-
-
-
-        
+        Vaccination vaccination = new Vaccination(vaccine, vetKey, animal);
+        _vaccinations.add(vaccination);
     }
 
 
