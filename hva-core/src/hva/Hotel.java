@@ -298,7 +298,7 @@ public class Hotel implements Serializable{
      * 
      * @param parts array of strings representing the vaccine data
      */
-    private void parseVaccine(String[] parts) throws VaccineExistsException{
+    private void parseVaccine(String[] parts) throws VaccineExistsException, UnknownSpeciesException{
         String id = parts[1];
         String name = parts[2];
     
@@ -393,11 +393,17 @@ public class Hotel implements Serializable{
     public void assertUnknownSpecies(String key) throws UnknownSpeciesException{
         if (!_species.containsKey(key))
           throw new UnknownSpeciesException(key);
-      }
+    }
 
-      public void assertExmployeeExists(String id) throws EmployeeExistsException {
-        if (_employees.containsKey(id)) {
-            throw new EmployeeExistsException(id);
+    public void assertExmployeeExists(String key) throws EmployeeExistsException {
+        if (_employees.containsKey(key)) {
+            throw new EmployeeExistsException(key);
+        }
+    }
+
+    public void assertVaccineExists(String key) throws VaccineExistsException {
+        if (_vaccines.containsKey(key)) {
+            throw new VaccineExistsException(key);
         }
     }
 
@@ -492,15 +498,15 @@ public class Hotel implements Serializable{
      * @param name              The vaccine's name
      * @param applicableSpecies A comma-separated string of species IDs the vaccine applies to.
      */
-    public void registerVaccine(String id, String name, String applicableSpecies) throws VaccineExistsException{
+    public void registerVaccine(String id, String name, String applicableSpecies) throws VaccineExistsException, UnknownSpeciesException{
+        assertVaccineExists(id);
         Vaccine vaccine = new Vaccine(id, name);
 
         if (applicableSpecies != null) {
             String[] speciesIds = applicableSpecies.split(",");
             for (String speciesId : speciesIds) {
-                if (_species.containsKey(speciesId)) {
-                    vaccine.addSpecies(speciesId, _species.get(speciesId));  // Associates the vaccine with the species
-                }
+                assertUnknownSpecies(speciesId);
+                vaccine.addSpecies(speciesId, _species.get(speciesId));  // Associates the vaccine with the species
             }
         }
 
