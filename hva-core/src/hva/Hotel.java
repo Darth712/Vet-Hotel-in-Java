@@ -547,18 +547,42 @@ public class Hotel implements Serializable{
         return getVaccines().values();
     }
 
-
-
+    /**
+     * Transfers an animal to another habitat
+     * 
+     * @param animalId
+     * @param habitatId
+     * @throws UnknownAnimalException
+     * @throws UnknownHabitatException
+     * @throws UnrecognizedEntryException
+     */
     public void animalToHabitat(String animalId, String habitatId) throws 
     UnknownAnimalException, UnknownHabitatException, UnrecognizedEntryException{
         assertUnknownAnimal(animalId);
         assertUnknownHabitat(habitatId);
-        _animals.get(animalId).setHabitat(_habitats.get(habitatId));
+        Animal animal = _animals.get(animalId);
+        Habitat currentHabitat = animal.getHabitat();  
+
+        if (currentHabitat != null) {
+            currentHabitat.getAnimals().remove(animalId);  
+        }
+        
+        Habitat newHabitat = _habitats.get(habitatId);
+        animal.setHabitat(newHabitat);
+        
+        
+        newHabitat.addAnimal(animal);  
         changed();
     }
 
 
-
+    /**
+     * Changes the area of a habitat
+     * 
+     * @param id
+     * @param area
+     * @throws UnknownHabitatException
+     */
     public void changeHabitatArea(String id, int area) throws UnknownHabitatException{
         assertUnknownHabitat(id);
         _habitats.get(id).setArea(area);
@@ -566,6 +590,13 @@ public class Hotel implements Serializable{
 
     }
 
+    /**
+     * Setter for the habitat influence according to the species in it
+     * 
+     * @param habitatId
+     * @param speciesId
+     * @param influence
+     */
     public void setHabitatInfluence(String habitatId, String speciesId, String influence) throws
     UnknownHabitatException, UnknownSpeciesException{
         
@@ -686,6 +717,14 @@ public class Hotel implements Serializable{
         return totalSatisfaction;
     }  
 
-    
-
+    /**
+     * Shows all the animals in a specified habitat
+     * 
+     * @param habitatId The habitat's ID
+     * @return Animal Collection
+     */
+    public Collection<Animal> showAnimalsInHabitat(String habitatId) throws UnknownHabitatException{
+        Habitat habitat = _habitats.get(habitatId);
+        return habitat.getAnimals().values();
+    }
 }
