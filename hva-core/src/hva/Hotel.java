@@ -133,7 +133,7 @@ public class Hotel implements Serializable{
                 try{
                     registerEntry(parts);
 
-                } catch(AnimalExistsException | HabitatExistsException | 
+                } catch(AnimalExistsException | HabitatExistsException | VaccineExistsException |
                 UnknownHabitatException | UnknownSpeciesException | TreeExistsException | EmployeeExistsException e) {
                     e.printStackTrace();
                 } 
@@ -147,7 +147,8 @@ public class Hotel implements Serializable{
 
     public void registerEntry(String... parts) throws AnimalExistsException,
     UnrecognizedEntryException, UnknownHabitatException, UnknownSpeciesException, 
-    HabitatExistsException, TreeExistsException, EmployeeExistsException{
+    HabitatExistsException, TreeExistsException, EmployeeExistsException, 
+    VaccineExistsException{
         switch (parts[0].toUpperCase()) {  // First part determines the entity type
             case "ESPÉCIE":
                 parseSpecies(parts);
@@ -297,7 +298,7 @@ public class Hotel implements Serializable{
      * 
      * @param parts array of strings representing the vaccine data
      */
-    private void parseVaccine(String[] parts) {
+    private void parseVaccine(String[] parts) throws VaccineExistsException{
         String id = parts[1];
         String name = parts[2];
     
@@ -491,7 +492,7 @@ public class Hotel implements Serializable{
      * @param name              The vaccine's name
      * @param applicableSpecies A comma-separated string of species IDs the vaccine applies to.
      */
-    public void registerVaccine(String id, String name, String applicableSpecies) {
+    public void registerVaccine(String id, String name, String applicableSpecies) throws VaccineExistsException{
         Vaccine vaccine = new Vaccine(id, name);
 
         if (applicableSpecies != null) {
