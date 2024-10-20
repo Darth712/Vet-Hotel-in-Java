@@ -395,7 +395,7 @@ public class Hotel implements Serializable{
           throw new UnknownSpeciesException(key);
     }
 
-    public void assertExmployeeExists(String key) throws EmployeeExistsException {
+    public void assertEmployeeExists(String key) throws EmployeeExistsException {
         if (_employees.containsKey(key)) {
             throw new EmployeeExistsException(key);
         }
@@ -407,6 +407,26 @@ public class Hotel implements Serializable{
         }
     }
 
+    public void assertUnknownVaccine(String key) throws UnknownVaccineException {
+        if (!_vaccines.containsKey(key)) {
+            throw new UnknownVaccineException(key);
+        }
+    }
+
+    public void assertUnknownVet(Employee employee) throws UnknownVetException {
+        if (employee.getType() != "VET") {
+            throw new UnknownVetException(employee.getId());
+        }
+    }
+
+    public void assertVetNotAuth(Vet vet, String speciesId) throws VetNotAuthException {
+        if (!vet.getResponsibilities().containsKey(speciesId)) {
+            throw new VetNotAuthException(vet.getId(),speciesId);
+        }
+    }
+
+    
+
 
     /**
      * Registers a new handler and adds them to the employees map.
@@ -415,7 +435,7 @@ public class Hotel implements Serializable{
      * @param name  The handler's name
      */
     public void registerHandler(String id, String name) throws EmployeeExistsException{
-        assertExmployeeExists(id);
+        assertEmployeeExists(id);
         _employees.put(id, new Handler(id, name));
         changed();        
     }
@@ -427,7 +447,7 @@ public class Hotel implements Serializable{
      * @param name  The vet's name
      */
     public void registerVet(String id, String name) throws EmployeeExistsException{
-        assertExmployeeExists(id);
+        assertEmployeeExists(id);
         _employees.put(id, new Vet(id, name));
         changed();        
     }
@@ -498,7 +518,8 @@ public class Hotel implements Serializable{
      * @param name              The vaccine's name
      * @param applicableSpecies A comma-separated string of species IDs the vaccine applies to.
      */
-    public void registerVaccine(String id, String name, String applicableSpecies) throws VaccineExistsException, UnknownSpeciesException{
+    public void registerVaccine(String id, String name, String applicableSpecies) throws VaccineExistsException,
+                                UnknownSpeciesException{
         assertVaccineExists(id);
         Vaccine vaccine = new Vaccine(id, name);
 
@@ -514,6 +535,25 @@ public class Hotel implements Serializable{
         changed();
     }
 
+    public void vaccinateAnimal(String vaccineKey,String vetKey, String animalkey) throws UnknownAnimalException, 
+                                UnknownEmployeeException, UnknownVaccineException {
+        assertUnknownEmployee(vetKey);
+        assertUnknownVaccine(vaccineKey);
+        assertUnknownAnimal(animalkey);
+
+        Vet vet = _employees.get(vetKey);
+        Species species = _animals.get(animalkey).getSpecies();
+        Vaccine vaccine = _vaccines.get(vaccineKey);
+
+        assertUnknownVet(vet);
+        assertVetNotAuth(vet,species.getId());
+
+        vaccine.use();
+
+
+
+        
+    }
 
 
 
