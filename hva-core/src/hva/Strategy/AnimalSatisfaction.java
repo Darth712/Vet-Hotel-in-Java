@@ -1,7 +1,7 @@
-package hva.satisfaction;
+package hva.Strategy;
 import hva.animal.*;
 
-public class AnimalSatisfaction implements SatisfactionStrategy{
+public class AnimalSatisfaction implements CalculateStrategy{
 
     private Animal _animal;
 

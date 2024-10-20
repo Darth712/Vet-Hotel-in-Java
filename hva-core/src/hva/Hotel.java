@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import hva.exceptions.*;
 import hva.Seasons.*;
+import hva.Strategy.*;
 import hva.animal.*;
 import hva.employee.*;
 import hva.habitat.*;
@@ -18,8 +19,6 @@ import java.util.TreeMap;
 import java.util.Collection;
 import java.util.ArrayList;
 import java.util.List;
-
-import hva.satisfaction.*;
 
 
 /**
@@ -419,7 +418,8 @@ public class Hotel implements Serializable{
         }
     }
 
-    public void assertVetNotAuth(Vet vet, String speciesId) throws VetNotAuthException {
+    public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotAuthException {
+        Vet vet = (Vet) employee;
         if (!vet.getResponsibilities().containsKey(speciesId)) {
             throw new VetNotAuthException(vet.getId(),speciesId);
         }
@@ -535,22 +535,19 @@ public class Hotel implements Serializable{
         changed();
     }
 
-    public void vaccinateAnimal(String vaccineKey,String vetKey, String animalkey) throws UnknownAnimalException, 
-                                UnknownEmployeeException, UnknownVaccineException {
+    public void vaccinateAnimal(String vaccineKey, String vetKey, String animalkey) throws UnknownAnimalException, 
+                                UnknownEmployeeException, UnknownVaccineException , UnknownVetException, VetNotAuthException{
         assertUnknownEmployee(vetKey);
         assertUnknownVaccine(vaccineKey);
         assertUnknownAnimal(animalkey);
 
-        Vet vet = _employees.get(vetKey);
+        Employee vet =  _employees.get(vetKey);
         Species species = _animals.get(animalkey).getSpecies();
         Vaccine vaccine = _vaccines.get(vaccineKey);
-
         assertUnknownVet(vet);
         assertVetNotAuth(vet,species.getId());
 
         vaccine.use();
-
-
 
         
     }

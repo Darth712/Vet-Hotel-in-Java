@@ -1,10 +1,10 @@
-package hva.satisfaction;
+package hva.Strategy;
 
 import hva.employee.*;
 import hva.habitat.Habitat;
 import hva.tree.Tree;
 
-public class HandlerSatisfaction implements SatisfactionStrategy{
+public class HandlerSatisfaction implements CalculateStrategy{
 
     private Handler _handler;
 

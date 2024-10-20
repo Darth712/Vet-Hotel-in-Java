@@ -1,8 +1,8 @@
-package hva.satisfaction;
+package hva.Strategy;
 
 import hva.employee.Vet;
 
-public class VetSatisfaction implements SatisfactionStrategy{
+public class VetSatisfaction implements CalculateStrategy{
 
     private Vet _vet;
 
