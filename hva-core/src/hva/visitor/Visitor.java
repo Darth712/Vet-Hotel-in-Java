@@ -2,11 +2,11 @@ package hva.visitor;
 
 import hva.employee.*;
 import hva.habitat.Habitat;
-import hva.Vaccine;
 import hva.animal.Animal;
 import hva.Vaccination;
 import java.io.Serializable;
 import hva.tree.*;
+import hva.vaccine.Vaccine;
 /**
  * Abstract class representing a visitor in the Visitor design pattern.
  * This class defines the visit methods for various types in the system.

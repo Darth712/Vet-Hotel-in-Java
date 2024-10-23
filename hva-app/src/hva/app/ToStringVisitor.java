@@ -6,13 +6,14 @@ import hva.employee.Handler;
 import hva.employee.Vet;
 import hva.habitat.Habitat;
 import hva.tree.Tree;
-import hva.Vaccine;
+import hva.vaccine.Vaccine;
+
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 import hva.Vaccination;
 import hva.visitor.Visitor;
-import hva.Hotel;
+
 
 /**
  * Concrete implementation of the Visitor class, 

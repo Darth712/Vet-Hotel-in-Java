@@ -17,7 +17,7 @@ public class HandlerSatisfaction implements CalculateStrategy{
 
         double totalCleaningEffort = habitat.getTrees().values().stream()
         .mapToInt(Tree::getBaseCleaningDifficulty) 
-        .sum();
+        .sum();   // está mal, esforço limpeza != limpezaBase
 
         
         return habitat.getArea() + 3 * habitat.getAnimals().size() + totalCleaningEffort;

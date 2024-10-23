@@ -14,6 +14,8 @@ import hva.habitat.*;
 import hva.tree.Deciduous;
 import hva.tree.Evergreen;
 import hva.tree.Tree;
+import hva.vaccine.Vaccine;
+import hva.vaccine.*;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Collection;
@@ -535,21 +537,30 @@ public class Hotel implements Serializable{
         changed();
     }
 
-    public void vaccinateAnimal(String vaccineKey, String vetKey, String animalkey) throws UnknownAnimalException, 
+    public boolean vaccinateAnimal(String vaccineKey, String vetKey, String animalkey) throws UnknownAnimalException, 
                                 UnknownEmployeeException, UnknownVaccineException , UnknownVetException, VetNotAuthException{
+        
+        
         assertUnknownEmployee(vetKey);
         assertUnknownVaccine(vaccineKey);
         assertUnknownAnimal(animalkey);
-
         Employee vet =  _employees.get(vetKey);
-        Species species = _animals.get(animalkey).getSpecies();
+        Animal animal = _animals.get(animalkey);
         Vaccine vaccine = _vaccines.get(vaccineKey);
         assertUnknownVet(vet);
-        assertVetNotAuth(vet,species.getId());
-
-        vaccine.use();
-
+        assertVetNotAuth(vet,animal.getSpecies().getId());
+        boolean wrongVaccine = true;
+        VaccineDamage vd = new VaccineDamage(vaccine, animal);
+        int damage = vd.calculate();
+        animal.addHealthHistory(vd.getNewHealthStatus(damage));
+        if (damage == -1) {
+            damage = 0;
+            wrongVaccine = false;
         
+        }
+        _vaccinations.add(new Vaccination(vaccine, vetKey, animal, damage));                            
+       
+        return wrongVaccine;
     }
 
 
@@ -651,7 +662,7 @@ public class Hotel implements Serializable{
     }
 
     public int showAnimalSatisfaction(String id) {
-        SatisfactionStrategy method = new AnimalSatisfaction(_animals.get(id));
+        CalculateStrategy method = new AnimalSatisfaction(_animals.get(id));
         return (int) Math.round(method.calculate());
 
     }
@@ -661,11 +672,11 @@ public class Hotel implements Serializable{
         int satisfaction = 0;
 
         if(_employees.get(id).getType().equals("TRT")) {
-            SatisfactionStrategy method = new HandlerSatisfaction((Handler) _employees.get(id));
+            CalculateStrategy method = new HandlerSatisfaction((Handler) _employees.get(id));
             satisfaction = (int) Math.round(method.calculate());
         }
         if(_employees.get(id).getType().equals("VET")) {
-            SatisfactionStrategy method = new VetSatisfaction((Vet) _employees.get(id));
+            CalculateStrategy method = new VetSatisfaction((Vet) _employees.get(id));
             satisfaction = (int) Math.round(method.calculate());
         }
         
@@ -771,4 +782,7 @@ public class Hotel implements Serializable{
         Habitat habitat = _habitats.get(habitatId);
         return habitat.getAnimals().values();
     }
+
+
+
 }
