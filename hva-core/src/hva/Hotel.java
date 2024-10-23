@@ -40,7 +40,7 @@ public class Hotel implements Serializable{
     private List<Vaccination> _vaccinations = new ArrayList<Vaccination>();
     private boolean _changed;
 
-
+    // GETTERS
     /**
      * Gets the current season
      * 
@@ -102,6 +102,52 @@ public class Hotel implements Serializable{
         return _vaccinations;
     }
 
+    /**
+     * Displays all habitats in an unmodifiable collection.
+     * 
+     * @return a collection of all habitats.
+     */
+    public Collection<Habitat> getAllHabitats() {
+        return getHabitats().values();
+    }
+
+
+    /**
+     * Displays all animals in an unmodifiable collection.
+     * 
+     * @return a collection of all animals
+     */
+    public Collection<Animal> getAllAnimals() {
+        return getAnimals().values();
+    }
+
+    /**
+     * Displays all employees in an unmodifiable collection.
+     * 
+     * @return a collection of all employees
+     */
+    public Collection<Employee> getAllEmployees() {
+        return getEmployees().values();
+    }
+
+    /**
+     * Displays all vaccines in an unmodifiable collection.
+     * 
+     * @return a collection of all vaccines
+     */
+    public Collection<Vaccine> getAllVaccines() {
+        return getVaccines().values();
+    }
+
+    /**
+     * Displays all vaccinations in an unmodifiable collection.
+     * 
+     * @return a collection of all vaccinations
+     */
+    public Collection<Vaccination> getAllVaccinations() {
+        return getVaccinations();
+    }
+
 
     /**
      * Sets the changed status of the hotel.
@@ -130,7 +176,6 @@ public class Hotel implements Serializable{
 
     /**
      * Advances the season to the next one while updating the trees' age if needed.
-     * 
      */
     public void advanceSeason () {
         _currentSeason.nextSeason();
@@ -142,6 +187,7 @@ public class Hotel implements Serializable{
         }
     }
 
+    // PARSE
     /**
      * Reads a text input file and creates corresponding domain entities.
      *
@@ -343,7 +389,7 @@ public class Hotel implements Serializable{
         registerVaccine(id, name, applicableSpecies);
     }
 
-
+    // REGISTERS
     /**
      * Registers a new habitat.
      * 
@@ -357,14 +403,6 @@ public class Hotel implements Serializable{
         _habitats.put(id, new Habitat(id, name, area));  
         changed();  
     }
-
-    public void assertHabitatExists(String id) throws HabitatExistsException {
-        if (_habitats.containsKey(id)) {
-            throw new HabitatExistsException(id);
-        }
-    }
-
-   
 
     /**
      * Registers a new species and adds it to the species map.
@@ -401,137 +439,6 @@ public class Hotel implements Serializable{
     }    
 
     /**
- * Checks if the animal already exists.
- * 
- * @param key The unique key representing the animal.
- * @throws AnimalExistsException if the animal already exists in the system.
- */
-public void assertAnimalExists(String key) throws AnimalExistsException {
-    if (_animals.containsKey(key))
-        throw new AnimalExistsException(key);
-}
-
-/**
- * Checks if the animal is unknown.
- * 
- * @param key The unique key representing the animal.
- * @throws UnknownAnimalException if the animal is not found in the system.
- */
-public void assertUnknownAnimal(String key) throws UnknownAnimalException {
-    if (!_animals.containsKey(key))
-        throw new UnknownAnimalException(key);
-}
-
-/**
- * Checks if the habitat is unknown.
- * 
- * @param key The unique key representing the habitat.
- * @throws UnknownHabitatException if the habitat is not found in the system.
- */
-public void assertUnknownHabitat(String key) throws UnknownHabitatException {
-    if (!_habitats.containsKey(key))
-        throw new UnknownHabitatException(key);
-}
-
-/**
- * Checks if the employee is unknown.
- * 
- * @param key The unique key representing the employee.
- * @throws UnknownEmployeeException if the employee is not found in the system.
- */
-public void assertUnknownEmployee(String key) throws UnknownEmployeeException {
-    if (!_employees.containsKey(key))
-        throw new UnknownEmployeeException(key);
-}
-
-/**
- * Checks if the tree already exists.
- * 
- * @param key The unique key representing the tree.
- * @throws TreeExistsException if the tree already exists in the system.
- */
-public void assertTreeExists(String key) throws TreeExistsException {
-    if (_trees.containsKey(key))
-        throw new TreeExistsException(key);
-}
-
-/**
- * Checks if the species is unknown.
- * 
- * @param key The unique key representing the species.
- * @throws UnknownSpeciesException if the species is not found in the system.
- */
-public void assertUnknownSpecies(String key) throws UnknownSpeciesException {
-    if (!_species.containsKey(key))
-        throw new UnknownSpeciesException(key);
-}
-
-/**
- * Checks if the employee already exists.
- * 
- * @param key The unique key representing the employee.
- * @throws EmployeeExistsException if the employee already exists in the system.
- */
-public void assertEmployeeExists(String key) throws EmployeeExistsException {
-    if (_employees.containsKey(key)) {
-        throw new EmployeeExistsException(key);
-    }
-}
-
-/**
- * Checks if the vaccine already exists.
- * 
- * @param key The unique key representing the vaccine.
- * @throws VaccineExistsException if the vaccine already exists in the system.
- */
-public void assertVaccineExists(String key) throws VaccineExistsException {
-    if (_vaccines.containsKey(key)) {
-        throw new VaccineExistsException(key);
-    }
-}
-
-/**
- * Checks if the vaccine is unknown.
- * 
- * @param key The unique key representing the vaccine.
- * @throws UnknownVaccineException if the vaccine is not found in the system.
- */
-public void assertUnknownVaccine(String key) throws UnknownVaccineException {
-    if (!_vaccines.containsKey(key)) {
-        throw new UnknownVaccineException(key);
-    }
-}
-
-/**
- * Checks if the employee is not a veterinarian.
- * 
- * @param employee The employee object to verify.
- * @throws UnknownVetException if the employee is not a veterinarian.
- */
-public void assertUnknownVet(Employee employee) throws UnknownVetException {
-    if (employee.getType() != "VET") {
-        throw new UnknownVetException(employee.getId());
-    }
-}
-
-/**
- * Checks if the veterinarian is not authorized to handle a specific species.
- * 
- * @param employee The veterinarian employee to verify.
- * @param speciesId The species ID the vet should be authorized to handle.
- * @throws VetNotAuthException if the vet is not authorized for the species.
- */
-public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotAuthException {
-    Vet vet = (Vet) employee;
-    if (!vet.getResponsibilities().containsKey(speciesId)) {
-        throw new VetNotAuthException(vet.getId(), speciesId);
-    }
-}
-
-    
-
-
-    /**
      * Registers a new handler and adds them to the employees map.
      * 
      * @param id    The handler's ID
@@ -555,9 +462,6 @@ public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotA
         changed();        
     }
 
-
-
-
     /**
      * Registers a new tree and adds it to the trees map.
      * Depending on the type ("CADUCA" or "PERENE"), it registers the tree as Deciduous or Evergreen.
@@ -576,21 +480,6 @@ public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotA
         if (type.equals("PERENE"))
             _trees.put(id, new Evergreen(id, name, age, baseDiff, _currentSeason, type));  
         changed();  
-    }
-
-    /**
-     * Adds a tree to a specific habitat.
-     * 
-     * @param habitatId The ID of the habitat where the tree will be added.
-     * @param treeId    The ID of the tree to add to the habitat.
-     */
-    public void addTreeToHabitat(String habitatId, String treeId) {
-        Habitat habitat = _habitats.get(habitatId);
-
-        if (_trees.containsKey(treeId)) {
-            habitat.addTree(treeId, _trees.get(treeId));  
-            changed();
-        }
     }
 
     /**
@@ -618,133 +507,174 @@ public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotA
         changed();
     }
 
-    public void vaccinateAnimal(String vaccineKey, String vetKey, String animalkey) throws UnknownAnimalException, 
-                                UnknownEmployeeException, UnknownVaccineException , UnknownVetException, VetNotAuthException{
-        assertUnknownEmployee(vetKey);
-        assertUnknownVaccine(vaccineKey);
-        assertUnknownAnimal(animalkey);
-
-        
-        Animal animal = _animals.get(animalkey);
-        Species species = animal.getSpecies();
-        Employee vet =  _employees.get(vetKey);
-        Vaccine vaccine = _vaccines.get(vaccineKey);
-        assertUnknownVet(vet);
-        assertVetNotAuth(vet,species.getId());
-
-        Vaccination vaccination = new Vaccination(vaccine, vetKey, animal);
-        _vaccinations.add(vaccination);
+    // ASSERTS
+    /**
+     * Checks if the animal already exists.
+     * 
+     * @param key The unique key representing the animal.
+     * @throws AnimalExistsException if the animal already exists in the system.
+     */
+    public void assertAnimalExists(String key) throws AnimalExistsException {
+        if (_animals.containsKey(key))
+            throw new AnimalExistsException(key);
     }
 
     /**
-     * Gets the medical acts done by a specified Vet.
+     * Checks if the animal is unknown.
      * 
-     * @param vetKey
-     * @return Collection of medical acts
-     * @throws UnknownVetException
-     * @throws UnknownEmployeeException
+     * @param key The unique key representing the animal.
+     * @throws UnknownAnimalException if the animal is not found in the system.
      */
-    public Collection<Vaccination> vetActs(String vetKey) throws UnknownVetException, UnknownEmployeeException {
-        Employee vet = _employees.get(vetKey);
-        List<Vaccination> acts = new ArrayList<>();
-        assertUnknownEmployee(vetKey);
-        assertUnknownVet(vet);
-        for (Vaccination vaccination : _vaccinations) {
-            if (vaccination.getVet().equals(vetKey)) {
-                acts.add(vaccination);
-            }
+    public void assertUnknownAnimal(String key) throws UnknownAnimalException {
+        if (!_animals.containsKey(key))
+            throw new UnknownAnimalException(key);
+    }
+
+    /**
+     * Checks if the habitat is unknown.
+     * 
+     * @param key The unique key representing the habitat.
+     * @throws UnknownHabitatException if the habitat is not found in the system.
+     */
+    public void assertUnknownHabitat(String key) throws UnknownHabitatException {
+        if (!_habitats.containsKey(key))
+            throw new UnknownHabitatException(key);
+    }
+
+    /**
+     * Checks if the habitat already exists.
+     * 
+     * @param id
+     * @throws HabitatExistsException
+     */
+    public void assertHabitatExists(String id) throws HabitatExistsException {
+        if (_habitats.containsKey(id)) {
+            throw new HabitatExistsException(id);
         }
-        return acts;
-    }
-
-    /**
-     * Gets the medical acts on a specified animal.
-     * 
-     * @param animalKey
-     * @return Collection of medical acts
-     * @throws UnknownAnimalException
-     */
-    public Collection<Vaccination> actsOnAnimal(String animalKey) throws UnknownAnimalException {
-        assertUnknownAnimal(animalKey);
-        Animal animal = getAnimals().get(animalKey);
-        return animal.getVaccinations();
     }
 
 
     /**
-     * Displays all habitats in an unmodifiable collection.
+     * Checks if the employee is unknown.
      * 
-     * @return a collection of all habitats.
+     * @param key The unique key representing the employee.
+     * @throws UnknownEmployeeException if the employee is not found in the system.
      */
-    public Collection<Habitat> getAllHabitats() {
-        return getHabitats().values();
-    }
-
-
-    /**
-     * Displays all animals in an unmodifiable collection.
-     * 
-     * @return a collection of all animals
-     */
-    public Collection<Animal> getAllAnimals() {
-        return getAnimals().values();
+    public void assertUnknownEmployee(String key) throws UnknownEmployeeException {
+        if (!_employees.containsKey(key))
+            throw new UnknownEmployeeException(key);
     }
 
     /**
-     * Displays all employees in an unmodifiable collection.
+     * Checks if the tree already exists.
      * 
-     * @return a collection of all employees
+     * @param key The unique key representing the tree.
+     * @throws TreeExistsException if the tree already exists in the system.
      */
-    public Collection<Employee> getAllEmployees() {
-        return getEmployees().values();
+    public void assertTreeExists(String key) throws TreeExistsException {
+        if (_trees.containsKey(key))
+            throw new TreeExistsException(key);
     }
 
     /**
-     * Displays all vaccines in an unmodifiable collection.
+     * Checks if the species is unknown.
      * 
-     * @return a collection of all vaccines
+     * @param key The unique key representing the species.
+     * @throws UnknownSpeciesException if the species is not found in the system.
      */
-    public Collection<Vaccine> getAllVaccines() {
-        return getVaccines().values();
+    public void assertUnknownSpecies(String key) throws UnknownSpeciesException {
+        if (!_species.containsKey(key))
+            throw new UnknownSpeciesException(key);
     }
 
     /**
-     * Displays all vaccinations in an unmodifiable collection.
+     * Checks if the employee already exists.
      * 
-     * @return a collection of all vaccinations
+     * @param key The unique key representing the employee.
+     * @throws EmployeeExistsException if the employee already exists in the system.
      */
-    public Collection<Vaccination> getAllVaccinations() {
-        return getVaccinations();
-    }
-
-    /**
-     * Transfers an animal to another habitat.
-     * 
-     * @param animalId
-     * @param habitatId
-     * @throws UnknownAnimalException
-     * @throws UnknownHabitatException
-     * @throws UnrecognizedEntryException
-     */
-    public void animalToHabitat(String animalId, String habitatId) throws 
-    UnknownAnimalException, UnknownHabitatException, UnrecognizedEntryException{
-        assertUnknownAnimal(animalId);
-        assertUnknownHabitat(habitatId);
-        Animal animal = _animals.get(animalId);
-        Habitat currentHabitat = animal.getHabitat();  
-
-        if (currentHabitat != null) {
-            currentHabitat.getAnimals().remove(animalId);  
+    public void assertEmployeeExists(String key) throws EmployeeExistsException {
+        if (_employees.containsKey(key)) {
+            throw new EmployeeExistsException(key);
         }
-        
-        Habitat newHabitat = _habitats.get(habitatId);
-        animal.setHabitat(newHabitat);
-        
-        
-        newHabitat.addAnimal(animal);  
-        changed();
     }
 
+    /**
+     * Checks if the vaccine already exists.
+     * 
+     * @param key The unique key representing the vaccine.
+     * @throws VaccineExistsException if the vaccine already exists in the system.
+     */
+    public void assertVaccineExists(String key) throws VaccineExistsException {
+        if (_vaccines.containsKey(key)) {
+            throw new VaccineExistsException(key);
+        }
+    }
+
+    /**
+     * Checks if the vaccine is unknown.
+     * 
+     * @param key The unique key representing the vaccine.
+     * @throws UnknownVaccineException if the vaccine is not found in the system.
+     */
+    public void assertUnknownVaccine(String key) throws UnknownVaccineException {
+        if (!_vaccines.containsKey(key)) {
+            throw new UnknownVaccineException(key);
+        }
+    }
+
+    /**
+     * Checks if the employee is not a veterinarian.
+     * 
+     * @param employee The employee object to verify.
+     * @throws UnknownVetException if the employee is not a veterinarian.
+     */
+    public void assertUnknownVet(Employee employee) throws UnknownVetException {
+        if (employee.getType() != "VET") {
+            throw new UnknownVetException(employee.getId());
+        }
+    }
+
+    /**
+     * Checks if the veterinarian is not authorized to handle a specific species.
+     * 
+     * @param employee The veterinarian employee to verify.
+     * @param speciesId The species ID the vet should be authorized to handle.
+     * @throws VetNotAuthException if the vet is not authorized for the species.
+     */
+    public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotAuthException {
+        Vet vet = (Vet) employee;
+        if (!vet.getResponsibilities().containsKey(speciesId)) {
+            throw new VetNotAuthException(vet.getId(), speciesId);
+        }
+    }
+
+    // Habitat's Menu
+    /**
+     * Adds a tree to a specific habitat.
+     * 
+     * @param habitatId The ID of the habitat where the tree will be added.
+     * @param treeId    The ID of the tree to add to the habitat.
+     */
+    public void addTreeToHabitat(String habitatId, String treeId) {
+        Habitat habitat = _habitats.get(habitatId);
+
+        if (_trees.containsKey(treeId)) {
+            habitat.addTree(treeId, _trees.get(treeId));  
+            changed();
+        }
+    }
+
+    /**
+     * Shows all the animals in a specified habitat.
+     * 
+     * @param habitatId The habitat's ID
+     * @return Animal Collection
+     */
+    public Collection<Animal> showAnimalsInHabitat(String habitatId) throws UnknownHabitatException{
+        Habitat habitat = _habitats.get(habitatId);
+        return habitat.getAnimals().values();
+    }
 
     /**
      * Changes the area of a habitat.
@@ -776,6 +706,35 @@ public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotA
         changed();
     }
 
+    // Animal's Menu
+    /**
+     * Transfers an animal to another habitat.
+     * 
+     * @param animalId
+     * @param habitatId
+     * @throws UnknownAnimalException
+     * @throws UnknownHabitatException
+     * @throws UnrecognizedEntryException
+     */
+    public void animalToHabitat(String animalId, String habitatId) throws 
+    UnknownAnimalException, UnknownHabitatException, UnrecognizedEntryException{
+        assertUnknownAnimal(animalId);
+        assertUnknownHabitat(habitatId);
+        Animal animal = _animals.get(animalId);
+        Habitat currentHabitat = animal.getHabitat();  
+
+        if (currentHabitat != null) {
+            currentHabitat.getAnimals().remove(animalId);  
+        }
+        
+        Habitat newHabitat = _habitats.get(habitatId);
+        animal.setHabitat(newHabitat);
+        
+        
+        newHabitat.addAnimal(animal);  
+        changed();
+    }
+
     /**
      * Shows the satisfaction from a specified Animal.
      * 
@@ -788,6 +747,26 @@ public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotA
 
     }
 
+    // Vaccine's Menu
+    public void vaccinateAnimal(String vaccineKey, String vetKey, String animalkey) throws UnknownAnimalException, 
+                                UnknownEmployeeException, UnknownVaccineException , UnknownVetException, VetNotAuthException{
+        assertUnknownEmployee(vetKey);
+        assertUnknownVaccine(vaccineKey);
+        assertUnknownAnimal(animalkey);
+
+        
+        Animal animal = _animals.get(animalkey);
+        Species species = animal.getSpecies();
+        Employee vet =  _employees.get(vetKey);
+        Vaccine vaccine = _vaccines.get(vaccineKey);
+        assertUnknownVet(vet);
+        assertVetNotAuth(vet,species.getId());
+
+        Vaccination vaccination = new Vaccination(vaccine, vetKey, animal);
+        _vaccinations.add(vaccination);
+    }
+
+    // Employee's Menu
     /**
      * Checks if the employee is a Handler.
      * 
@@ -945,6 +924,40 @@ public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotA
 
     }
 
+    // Search Menu
+    /**
+     * Gets the medical acts done by a specified Vet.
+     * 
+     * @param vetKey
+     * @return Collection of medical acts
+     * @throws UnknownVetException
+     * @throws UnknownEmployeeException
+     */
+    public Collection<Vaccination> vetActs(String vetKey) throws UnknownVetException, UnknownEmployeeException {
+        Employee vet = _employees.get(vetKey);
+        List<Vaccination> acts = new ArrayList<>();
+        assertUnknownEmployee(vetKey);
+        assertUnknownVet(vet);
+        for (Vaccination vaccination : _vaccinations) {
+            if (vaccination.getVet().equals(vetKey)) {
+                acts.add(vaccination);
+            }
+        }
+        return acts;
+    }
+
+    /**
+     * Gets the medical acts on a specified animal.
+     * 
+     * @param animalKey
+     * @return Collection of medical acts
+     * @throws UnknownAnimalException
+     */
+    public Collection<Vaccination> actsOnAnimal(String animalKey) throws UnknownAnimalException {
+        assertUnknownAnimal(animalKey);
+        Animal animal = getAnimals().get(animalKey);
+        return animal.getVaccinations();
+    }
 
     /**
      * Sums up all the satisfaction from the animals and the employees.
@@ -963,15 +976,4 @@ public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotA
 
         return totalSatisfaction;
     }  
-
-    /**
-     * Shows all the animals in a specified habitat.
-     * 
-     * @param habitatId The habitat's ID
-     * @return Animal Collection
-     */
-    public Collection<Animal> showAnimalsInHabitat(String habitatId) throws UnknownHabitatException{
-        Habitat habitat = _habitats.get(habitatId);
-        return habitat.getAnimals().values();
-    }
 }
