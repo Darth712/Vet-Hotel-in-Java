@@ -9,12 +9,23 @@ public class Spring extends SeasonState{
 
     private final int CODE = 0;
 
+    /**
+     * Constructor for the Spring Class.
+     * 
+     * @param season
+     */
     public Spring(Season season) {
         super(season);
     }
 
+    /**
+     * Gets the Spring code.
+     */
     public int getCode() { return CODE;}
 
+    /**
+    * Advances the season to the next one.
+    */
     @Override
     public void nextSeason() {
         getSeason().setSeasonState(new Summer(getSeason()));  // Change to the next state

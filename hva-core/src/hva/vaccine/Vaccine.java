@@ -35,7 +35,11 @@ public class Vaccine implements Serializable, Visitable{
         _applicableSpecies = new TreeMap<String,Species>();
     }
 
-
+    /**
+     * Gets the treeMap from the applicable species
+     * 
+     * @return Species that don't receive damage from the vaccine
+     */
     public TreeMap<String,Species> getApplicableSpecies() {
         return _applicableSpecies;
     }

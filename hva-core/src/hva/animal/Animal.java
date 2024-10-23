@@ -170,6 +170,11 @@ public class Animal implements Serializable, Visitable{
         _hasVaccinated = true;
     }
 
+    /**
+     * Checks if the animal has been vaccinated
+     * 
+     * @return boolean
+     */
     public boolean hasVaccinated() {
         return _hasVaccinated;
     }

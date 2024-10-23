@@ -10,9 +10,6 @@ import hva.visitor.Visitor;
  */
 public class Evergreen extends Tree {
 
- 
-   
-
     /**
      * Constructor for the Evergreen tree.
      * 
@@ -25,9 +22,17 @@ public class Evergreen extends Tree {
      */
     public Evergreen(String id, String name, int age, int baseCleaningDiff, Season currentSeason, String type) {
         super(id, name, age, baseCleaningDiff, currentSeason);
-        _leafType = type; // Set the leaf type for this evergreen tree
+        setLeafType(type); // Set the leaf type for this evergreen tree
     }
 
+    /**
+     * Accepts a visitor and allows it to perform operations on this instance.
+     * Part of the Visitor design pattern.
+     * 
+     * @param <T> the type of the result produced by the visitor
+     * @param visitor the visitor performing the operation
+     * @return the result of the visitor's operation, String
+     */
     @Override
     public <T> T accept(Visitor<T> visitor) {
       return visitor.visit(this);

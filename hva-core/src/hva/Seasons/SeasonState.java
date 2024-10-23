@@ -4,7 +4,7 @@ import java.io.Serializable;
 /**
  * Abstract class representing a Season.
  * Provides abstract methods to get the effort values and biological cycles for both deciduous and evergreen trees.
- * The data is stored in static arrays that describe the behavior of trees across the four seasons.
+ * The data is stored in arrays that describe the behavior of trees across the four seasons.
  */
 public abstract class SeasonState implements Serializable{
 
@@ -33,15 +33,20 @@ public abstract class SeasonState implements Serializable{
         _season = season;
     }
 
+    /**
+     * Gets the code from a certain season.
+     * 
+     * @return
+     */
     public abstract int getCode();
     /**
-     * Advances the current season to the next one
+     * Advances the current season to the next one.
      */
     public abstract void nextSeason();
 
 
     /**
-     * Gets the season
+     * Gets the season.
      * 
      * @return _season
      */
@@ -49,7 +54,7 @@ public abstract class SeasonState implements Serializable{
         return _season;
     }
     /**
-     * Sets the season state to a new one
+     * Sets the season state to a new one.
      * 
      * @param season
      */
@@ -57,21 +62,42 @@ public abstract class SeasonState implements Serializable{
         _season = season;
     }
     
-    public int[] getAllDeciduousEffort() {
-        return DECIDUOUS_SEASONAL_EFFORT;
-    }
+    /**
+ * Retrieves the seasonal cleaning effort for all deciduous trees.
+ * 
+ * @return An array of integers representing the seasonal cleaning effort for deciduous trees.
+ */
+public int[] getAllDeciduousEffort() {
+    return DECIDUOUS_SEASONAL_EFFORT;
+}
 
-    public int[] getAllEvergreenEffort() {
-        return EVERGREEN_SEASONAL_EFFORT;
-    }
+/**
+ * Retrieves the seasonal cleaning effort for all evergreen trees.
+ * 
+ * @return An array of integers representing the seasonal cleaning effort for evergreen trees.
+ */
+public int[] getAllEvergreenEffort() {
+    return EVERGREEN_SEASONAL_EFFORT;
+}
 
-    public String[] getAllDeciduousCycle() {
-        return DECIDUOUS_BIO_CYCLE;
-    }
+/**
+ * Retrieves the biological cycle for all deciduous trees.
+ * 
+ * @return An array of strings representing the biological cycle for deciduous trees.
+ */
+public String[] getAllDeciduousCycle() {
+    return DECIDUOUS_BIO_CYCLE;
+}
 
-    public String[] getAllEvergreenCycle() {
-        return EVERGREEN_BIO_CYCLE;
-    }
+/**
+ * Retrieves the biological cycle for all evergreen trees.
+ * 
+ * @return An array of strings representing the biological cycle for evergreen trees.
+ */
+public String[] getAllEvergreenCycle() {
+    return EVERGREEN_BIO_CYCLE;
+}
+
     /**
      * Gets the seasonal effort for deciduous trees in the current season.
      * 
