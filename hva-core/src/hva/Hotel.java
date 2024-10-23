@@ -623,22 +623,27 @@ public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotA
     public boolean vaccinateAnimal(String vaccineKey, String vetKey, String animalkey) throws UnknownAnimalException, 
                                 UnknownEmployeeException, UnknownVaccineException , UnknownVetException, VetNotAuthException{
         
-        
         assertUnknownEmployee(vetKey);
         assertUnknownVaccine(vaccineKey);
         assertUnknownAnimal(animalkey);
-
-        
         Animal animal = _animals.get(animalkey);
-        Species species = animal.getSpecies();
         Employee vet =  _employees.get(vetKey);
-        Animal animal = _animals.get(animalkey);
         Vaccine vaccine = _vaccines.get(vaccineKey);
         assertUnknownVet(vet);
-        assertVetNotAuth(vet,species.getId());
+        assertVetNotAuth(vet,animal.getSpecies().getId());
+        boolean wrongVaccine = true;
+        VaccineDamage vd = new VaccineDamage(vaccine, animal);
+        int damage = vd.calculate();
+        animal.addHealthHistory(vd.getNewHealthStatus(damage));
+        if (damage == -1) {
+            damage = 0;
+            wrongVaccine = false;
+        
+        }
+        _vaccinations.add(new Vaccination(vaccine, vetKey, animal, damage));                            
+       
+        return wrongVaccine;
 
-        Vaccination vaccination = new Vaccination(vaccine, vetKey, animal);
-        _vaccinations.add(vaccination);
     }
 
     /**
@@ -674,20 +679,7 @@ public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotA
         Animal animal = getAnimals().get(animalKey);
         return animal.getVaccinations();
     }
-        assertVetNotAuth(vet,animal.getSpecies().getId());
-        boolean wrongVaccine = true;
-        VaccineDamage vd = new VaccineDamage(vaccine, animal);
-        int damage = vd.calculate();
-        animal.addHealthHistory(vd.getNewHealthStatus(damage));
-        if (damage == -1) {
-            damage = 0;
-            wrongVaccine = false;
-        
-        }
-        _vaccinations.add(new Vaccination(vaccine, vetKey, animal, damage));                            
        
-        return wrongVaccine;
-    }
 
 
 
@@ -804,7 +796,6 @@ public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotA
      */
     public int showAnimalSatisfaction(String id) {
         CalculateStrategy method = new AnimalSatisfaction(_animals.get(id));
-        CalculateStrategy method = new AnimalSatisfaction(_animals.get(id));
         return (int) Math.round(method.calculate());
 
     }
@@ -839,17 +830,14 @@ public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotA
 
         int satisfaction = 0;
 
-        if(isAHandler(id)) {
-            CalculateStrategy method = new HandlerSatisfaction((Handler) _employees.get(id));
-        if(_employees.get(id).getType().equals("TRT")) {
+        if (isAHandler(id)) {
             CalculateStrategy method = new HandlerSatisfaction((Handler) _employees.get(id));
             satisfaction = (int) Math.round(method.calculate());
         }
-        if(isAVet(id)) {
+        
+        if (isAVet(id)) {
             CalculateStrategy method = new VetSatisfaction((Vet) _employees.get(id));
-        if(_employees.get(id).getType().equals("VET")) {
-            CalculateStrategy method = new VetSatisfaction((Vet) _employees.get(id));
-            satisfaction = (int) Math.round(method.calculate());
+            satisfaction = (int) Math.round(method.calculate());  
         }
         
         return satisfaction;
