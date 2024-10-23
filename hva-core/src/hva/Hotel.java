@@ -88,6 +88,10 @@ public class Hotel implements Serializable{
         return _vaccines;
     }
 
+    public List<Vaccination> getVaccinations(){
+        return _vaccinations;
+    }
+
 
     /**
      * Sets the changed status of the hotel.
@@ -559,11 +563,17 @@ public class Hotel implements Serializable{
         assertUnknownEmployee(vetKey);
         assertUnknownVet(vet);
         for (Vaccination vaccination : _vaccinations) {
-            if (vaccination.getVaccineId().equals(vetKey)) {
+            if (vaccination.getVet().equals(vetKey)) {
                 acts.add(vaccination);
             }
         }
         return acts;
+    }
+
+    public Collection<Vaccination> actsOnAnimal(String animalKey) throws UnknownAnimalException {
+        assertUnknownAnimal(animalKey);
+        Animal animal = getAnimals().get(animalKey);
+        return animal.getVaccinations();
     }
 
 
@@ -602,6 +612,15 @@ public class Hotel implements Serializable{
      */
     public Collection<Vaccine> getAllVaccines() {
         return getVaccines().values();
+    }
+
+    /**
+     * Displays all vaccinations in an unmodifiable collection.
+     * 
+     * @return a collection of all vaccinations
+     */
+    public Collection<Vaccination> getAllVaccinations() {
+        return getVaccinations();
     }
 
     /**
