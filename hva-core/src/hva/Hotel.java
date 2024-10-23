@@ -769,9 +769,10 @@ public class Hotel implements Serializable{
             wrongVaccine = false;
 
         }
-        _vaccinations.add(new Vaccination(vaccine, vetKey, animal, vd.getNewHealthStatus(damage)));                            
-
+        _vaccinations.add(new Vaccination(vaccine, vetKey, animal, damage));                            
+        changed();
         return wrongVaccine;
+
 
     }
 
@@ -967,6 +968,17 @@ public class Hotel implements Serializable{
         Animal animal = getAnimals().get(animalKey);
         return animal.getVaccinations();
     }
+
+    public Collection<Vaccination> getWrongVaccinations(){
+        List<Vaccination> wrongVaccinations = new ArrayList<Vaccination>();
+        for(Vaccination vaccination: _vaccinations) {
+            if (vaccination.getDamage() > 0) {
+                wrongVaccinations.add(vaccination);
+            }
+        }
+        return wrongVaccinations; 
+    }
+
 
     /**
      * Sums up all the satisfaction from the animals and the employees.
