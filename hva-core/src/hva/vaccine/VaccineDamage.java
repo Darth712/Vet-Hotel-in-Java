@@ -71,7 +71,7 @@ public class VaccineDamage{
     public String getNewHealthStatus(int damage) {
 
         if (damage == 0) {
-            return "CONFUSAO";
+            return "CONFUSÃO";
         } else if (damage >= 1 && damage <= 4) {
             return "ACIDENTE";
         } else if (damage >= 5) {

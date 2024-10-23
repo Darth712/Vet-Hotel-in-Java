@@ -163,7 +163,7 @@ public class ToStringVisitor extends Visitor<String>{
      */
     @Override
     public String visit(Vaccination vaccination) {
-        return "REGISTO_VACINA|" + vaccination.getVaccineId() + "|" + vaccination.getVet() + 
+        return "REGISTO-VACINA|" + vaccination.getVaccineId() + "|" + vaccination.getVet() + 
                "|" + vaccination.getAnimal().getSpecies().getId();
     }
 

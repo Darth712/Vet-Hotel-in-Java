@@ -13,11 +13,13 @@ public class HandlerSatisfaction implements CalculateStrategy{
         _handler = handler;
     }
 
+
+
     public double habitatWork(Habitat habitat) {
 
         double totalCleaningEffort = habitat.getTrees().values().stream()
-        .mapToInt(Tree::getBaseCleaningDifficulty) 
-        .sum();   // está mal, esforço limpeza != limpezaBase
+        .mapToDouble(Tree::getCleaningEffort) 
+        .sum();  
 
         
         return habitat.getArea() + 3 * habitat.getAnimals().size() + totalCleaningEffort;

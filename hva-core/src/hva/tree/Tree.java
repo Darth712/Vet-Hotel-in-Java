@@ -130,4 +130,18 @@ public abstract class Tree implements Serializable, Visitable{
         _leafType = leafType;
     }
 
+    public double getCleaningEffort() {
+
+        double cleaning_effort = getBaseCleaningDifficulty() * Math.log(getAge() +1);
+        if (getLeafType().equals("CADUCA")) {
+            cleaning_effort *= getCurrentSeason().getDeciduousEffort();
+        }
+        if (getLeafType().equals("PERENE")) {
+            cleaning_effort *= getCurrentSeason().getEvergreenEffort();
+        }        
+
+        return cleaning_effort;
+        
+    }    
+
 }
