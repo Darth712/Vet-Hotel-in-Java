@@ -22,7 +22,7 @@ public abstract class Tree implements Serializable, Visitable{
     private String _leafType;        // Type of leaves on the tree
     private int _baseCleaningDiff;     // Base cleaning difficulty of the tree
     private Season _currentSeason;   // Current season affecting the tree's state
-    private Season _bornSeason;        // Season where the tree was born
+    private int _bornSeason;        // Season where the tree was born
 
 
     /**
@@ -40,7 +40,7 @@ public abstract class Tree implements Serializable, Visitable{
         _age = age;
         _baseCleaningDiff = baseCleaningDiff;
         _currentSeason = currentSeason; 
-        _bornSeason = currentSeason;
+        _bornSeason = currentSeason.getCode();
     }
 
     // Getters for the tree attributes
@@ -108,7 +108,7 @@ public abstract class Tree implements Serializable, Visitable{
      *
      * @return The born season
      */
-    public Season getBornSeason() {
+    public int getBornSeason() {
         return _bornSeason;
     }
 

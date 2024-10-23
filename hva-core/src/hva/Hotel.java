@@ -129,14 +129,14 @@ public class Hotel implements Serializable{
     }
 
     /**
-     * Advances the season to the next one.
+     * Advances the season to the next one while updating the trees' age if needed.
      * 
      */
     public void advanceSeason () {
         _currentSeason.nextSeason();
         for (String treeId : _trees.keySet()) {
             Tree tree = getTree(treeId);
-            if(tree.getBornSeason().equals(_currentSeason)) {
+            if(tree.getBornSeason() == _currentSeason.getCode()) {
                 tree.newAge();
             }
         }

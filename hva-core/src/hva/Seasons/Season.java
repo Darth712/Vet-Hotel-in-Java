@@ -77,4 +77,5 @@ public class Season implements Serializable{
     public String getEvergreenCycle() {
         return _state.getEvergreenCycle();
     }
+
 }
