@@ -55,37 +55,65 @@ public class Habitat implements Serializable, Visitable{
         _handlers = new TreeMap<String, Handler>();
     }
 
-    // Getters
-    /** @return the habitat's unique ID */
+    /**
+     * Gets the habitat's ID
+     * 
+     *  @return the habitat's unique ID
+     */
     public String getId() {
         return _id;
     }
 
-    /** @return the name of the habitat */
+    /**
+     * Gets the habitat's name
+     * 
+     *  @return the name of the habitat 
+     */
     public String getName() {
         return _name;
     }
 
-    /** @return the area of the habitat */
+    /**
+     * Gets the habitat's area
+     * 
+     *  @return the area of the habitat 
+     */
     public int getArea() {
         return _area;
     }
 
-    /** @return the collection of trees in the habitat */
+    /**
+     * Gets the trees living in this habitat
+     * 
+     *  @return the collection of trees in the habitat 
+     */
     public TreeMap<String, Tree> getTrees() {
         return _trees;
     }
 
-    /** @return the collection of animals in the habitat */
+    /**
+     * Gets the animals living in this habitat
+     * 
+     *  @return the collection of animals in the habitat 
+     */
     public TreeMap<String, Animal> getAnimals() {
         return _animals;
     }
 
-    /** @return the collection of species influencing the habitat */
+    /**
+     * Gets the influence from the species
+     * 
+     *  @return the collection of species influencing the habitat 
+     */
     public TreeMap<String, String> getInfluence() {
         return _influence;
     }
 
+    /**
+     * Gets the handlers working in this habitat
+     * 
+     * @return
+     */
     public TreeMap<String, Handler> getHandlers() {
         return _handlers;
     }

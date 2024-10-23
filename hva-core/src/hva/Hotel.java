@@ -41,6 +41,11 @@ public class Hotel implements Serializable{
     private boolean _changed;
 
 
+    /**
+     * Gets the current season
+     * 
+     * @return current season
+     */
     public Season getSeason() {
         return _currentSeason;
     }
@@ -48,7 +53,7 @@ public class Hotel implements Serializable{
     /**
      * Gets the map of habitats.
      * 
-     * @return the habitats map
+     * @return the habitat's map
      */
     public Map<String, Habitat> getHabitats() {
         return _habitats;
@@ -61,7 +66,7 @@ public class Hotel implements Serializable{
     /**
      * Gets the map of animals.
      * 
-     * @return the animals map
+     * @return the animal's map
      */
 
     public Map<String, Animal> getAnimals() {
@@ -71,7 +76,7 @@ public class Hotel implements Serializable{
     /**
      * Gets the map of employees.
      * 
-     * @return the employees map
+     * @return the employee's map
      */
 
      public Map<String, Employee> getEmployees() {
@@ -81,13 +86,18 @@ public class Hotel implements Serializable{
     /**
      * Gets the map of vaccines.
      * 
-     * @return the vaccines map
+     * @return the vaccine's map
      */
 
      public Map<String, Vaccine> getVaccines() {
         return _vaccines;
     }
 
+    /**
+     * Gets the list of vaccinations.
+     * 
+     * @return the vaccination's list
+     */
     public List<Vaccination> getVaccinations(){
         return _vaccinations;
     }
@@ -118,6 +128,10 @@ public class Hotel implements Serializable{
         return _changed;
     }
 
+    /**
+     * Advances the season to the next one.
+     * 
+     */
     public void advanceSeason () {
         _currentSeason.nextSeason();
     }
@@ -147,12 +161,24 @@ public class Hotel implements Serializable{
             
     }
 
-
+    /**
+     * It registers a new entry to the hotel.
+     * 
+     * @param parts String containing the info to register
+     * @throws AnimalExistsException
+     * @throws UnrecognizedEntryException
+     * @throws UnknownHabitatException
+     * @throws UnknownSpeciesException
+     * @throws HabitatExistsException
+     * @throws TreeExistsException
+     * @throws EmployeeExistsException
+     * @throws VaccineExistsException
+     */
     public void registerEntry(String... parts) throws AnimalExistsException,
     UnrecognizedEntryException, UnknownHabitatException, UnknownSpeciesException, 
     HabitatExistsException, TreeExistsException, EmployeeExistsException, 
     VaccineExistsException{
-        switch (parts[0].toUpperCase()) {  // First part determines the entity type
+        switch (parts[0].toUpperCase()) {  
             case "ESPÉCIE":
                 parseSpecies(parts);
                 break;
@@ -363,71 +389,138 @@ public class Hotel implements Serializable{
         Habitat habitat = _habitats.get(h);
         Animal animal = new Animal(id, name, species, habitat);
         _animals.put(id, animal);
-        habitat.addAnimal(animal);  // Adds the animal to the habitat
+        habitat.addAnimal(animal); 
         species.addAnimal(animal);  
         changed();  
     }    
 
-    public void assertAnimalExists(String key) throws AnimalExistsException{
-        if (_animals.containsKey(key))
-          throw new AnimalExistsException(key);
-      }
-    
-      public void assertUnknownAnimal(String key) throws UnknownAnimalException{
-        if (!_animals.containsKey(key))
-          throw new UnknownAnimalException(key);
-      }  
+    /**
+ * Checks if the animal already exists.
+ * 
+ * @param key The unique key representing the animal.
+ * @throws AnimalExistsException if the animal already exists in the system.
+ */
+public void assertAnimalExists(String key) throws AnimalExistsException {
+    if (_animals.containsKey(key))
+        throw new AnimalExistsException(key);
+}
 
-    public void assertUnknownHabitat(String key) throws UnknownHabitatException{
-        if (!_habitats.containsKey(key))
-          throw new UnknownHabitatException(key);
-      }
+/**
+ * Checks if the animal is unknown.
+ * 
+ * @param key The unique key representing the animal.
+ * @throws UnknownAnimalException if the animal is not found in the system.
+ */
+public void assertUnknownAnimal(String key) throws UnknownAnimalException {
+    if (!_animals.containsKey(key))
+        throw new UnknownAnimalException(key);
+}
 
-    public void assertUnknownEmployee(String key) throws UnknownEmployeeException{
-        if (!_employees.containsKey(key))
-          throw new UnknownEmployeeException(key);
-      }
+/**
+ * Checks if the habitat is unknown.
+ * 
+ * @param key The unique key representing the habitat.
+ * @throws UnknownHabitatException if the habitat is not found in the system.
+ */
+public void assertUnknownHabitat(String key) throws UnknownHabitatException {
+    if (!_habitats.containsKey(key))
+        throw new UnknownHabitatException(key);
+}
 
-    public void assertTreeExists(String key) throws TreeExistsException{
-        if (_trees.containsKey(key))
-          throw new TreeExistsException(key);
+/**
+ * Checks if the employee is unknown.
+ * 
+ * @param key The unique key representing the employee.
+ * @throws UnknownEmployeeException if the employee is not found in the system.
+ */
+public void assertUnknownEmployee(String key) throws UnknownEmployeeException {
+    if (!_employees.containsKey(key))
+        throw new UnknownEmployeeException(key);
+}
+
+/**
+ * Checks if the tree already exists.
+ * 
+ * @param key The unique key representing the tree.
+ * @throws TreeExistsException if the tree already exists in the system.
+ */
+public void assertTreeExists(String key) throws TreeExistsException {
+    if (_trees.containsKey(key))
+        throw new TreeExistsException(key);
+}
+
+/**
+ * Checks if the species is unknown.
+ * 
+ * @param key The unique key representing the species.
+ * @throws UnknownSpeciesException if the species is not found in the system.
+ */
+public void assertUnknownSpecies(String key) throws UnknownSpeciesException {
+    if (!_species.containsKey(key))
+        throw new UnknownSpeciesException(key);
+}
+
+/**
+ * Checks if the employee already exists.
+ * 
+ * @param key The unique key representing the employee.
+ * @throws EmployeeExistsException if the employee already exists in the system.
+ */
+public void assertEmployeeExists(String key) throws EmployeeExistsException {
+    if (_employees.containsKey(key)) {
+        throw new EmployeeExistsException(key);
     }
+}
 
-    public void assertUnknownSpecies(String key) throws UnknownSpeciesException{
-        if (!_species.containsKey(key))
-          throw new UnknownSpeciesException(key);
+/**
+ * Checks if the vaccine already exists.
+ * 
+ * @param key The unique key representing the vaccine.
+ * @throws VaccineExistsException if the vaccine already exists in the system.
+ */
+public void assertVaccineExists(String key) throws VaccineExistsException {
+    if (_vaccines.containsKey(key)) {
+        throw new VaccineExistsException(key);
     }
+}
 
-    public void assertEmployeeExists(String key) throws EmployeeExistsException {
-        if (_employees.containsKey(key)) {
-            throw new EmployeeExistsException(key);
-        }
+/**
+ * Checks if the vaccine is unknown.
+ * 
+ * @param key The unique key representing the vaccine.
+ * @throws UnknownVaccineException if the vaccine is not found in the system.
+ */
+public void assertUnknownVaccine(String key) throws UnknownVaccineException {
+    if (!_vaccines.containsKey(key)) {
+        throw new UnknownVaccineException(key);
     }
+}
 
-    public void assertVaccineExists(String key) throws VaccineExistsException {
-        if (_vaccines.containsKey(key)) {
-            throw new VaccineExistsException(key);
-        }
+/**
+ * Checks if the employee is not a veterinarian.
+ * 
+ * @param employee The employee object to verify.
+ * @throws UnknownVetException if the employee is not a veterinarian.
+ */
+public void assertUnknownVet(Employee employee) throws UnknownVetException {
+    if (employee.getType() != "VET") {
+        throw new UnknownVetException(employee.getId());
     }
+}
 
-    public void assertUnknownVaccine(String key) throws UnknownVaccineException {
-        if (!_vaccines.containsKey(key)) {
-            throw new UnknownVaccineException(key);
-        }
+/**
+ * Checks if the veterinarian is not authorized to handle a specific species.
+ * 
+ * @param employee The veterinarian employee to verify.
+ * @param speciesId The species ID the vet should be authorized to handle.
+ * @throws VetNotAuthException if the vet is not authorized for the species.
+ */
+public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotAuthException {
+    Vet vet = (Vet) employee;
+    if (!vet.getResponsibilities().containsKey(speciesId)) {
+        throw new VetNotAuthException(vet.getId(), speciesId);
     }
-
-    public void assertUnknownVet(Employee employee) throws UnknownVetException {
-        if (employee.getType() != "VET") {
-            throw new UnknownVetException(employee.getId());
-        }
-    }
-
-    public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotAuthException {
-        Vet vet = (Vet) employee;
-        if (!vet.getResponsibilities().containsKey(speciesId)) {
-            throw new VetNotAuthException(vet.getId(),speciesId);
-        }
-    }
+}
 
     
 
@@ -557,6 +650,14 @@ public class Hotel implements Serializable{
         _vaccinations.add(vaccination);
     }
 
+    /**
+     * Gets the medical acts done by a specified Vet.
+     * 
+     * @param vetKey
+     * @return Collection of medical acts
+     * @throws UnknownVetException
+     * @throws UnknownEmployeeException
+     */
     public Collection<Vaccination> vetActs(String vetKey) throws UnknownVetException, UnknownEmployeeException {
         Employee vet = _employees.get(vetKey);
         List<Vaccination> acts = new ArrayList<>();
@@ -570,6 +671,13 @@ public class Hotel implements Serializable{
         return acts;
     }
 
+    /**
+     * Gets the medical acts on a specified animal.
+     * 
+     * @param animalKey
+     * @return Collection of medical acts
+     * @throws UnknownAnimalException
+     */
     public Collection<Vaccination> actsOnAnimal(String animalKey) throws UnknownAnimalException {
         assertUnknownAnimal(animalKey);
         Animal animal = getAnimals().get(animalKey);
@@ -580,7 +688,7 @@ public class Hotel implements Serializable{
     /**
      * Displays all habitats in an unmodifiable collection.
      * 
-     * @return a collection of all habitats
+     * @return a collection of all habitats.
      */
     public Collection<Habitat> getAllHabitats() {
         return getHabitats().values();
@@ -624,7 +732,7 @@ public class Hotel implements Serializable{
     }
 
     /**
-     * Transfers an animal to another habitat
+     * Transfers an animal to another habitat.
      * 
      * @param animalId
      * @param habitatId
@@ -653,7 +761,7 @@ public class Hotel implements Serializable{
 
 
     /**
-     * Changes the area of a habitat
+     * Changes the area of a habitat.
      * 
      * @param id
      * @param area
@@ -667,7 +775,7 @@ public class Hotel implements Serializable{
     }
 
     /**
-     * Setter for the habitat influence according to the species in it
+     * Setter for the habitat influence according to the species in it.
      * 
      * @param habitatId
      * @param speciesId
@@ -682,21 +790,53 @@ public class Hotel implements Serializable{
         changed();
     }
 
+    /**
+     * Shows the satisfaction from a specified Animal.
+     * 
+     * @param id
+     * @return Animal's satisfaction
+     */
     public int showAnimalSatisfaction(String id) {
         CalculateStrategy method = new AnimalSatisfaction(_animals.get(id));
         return (int) Math.round(method.calculate());
 
     }
 
+    /**
+     * Checks if the employee is a Handler.
+     * 
+     * @param id
+     * @return boolean
+     */
+    public boolean isAHandler(String id) {
+        return _employees.get(id).getType().equals("TRT");
+    }
+
+    /**
+     * Checks if the employee is a Vet.
+     * 
+     * @param id
+     * @return boolean
+     */
+    public boolean isAVet(String id) {
+        return _employees.get(id).getType().equals("VET");
+    }
+
+    /**
+     * Shows the satisfaction from a specified Employee.
+     * 
+     * @param id
+     * @return Employee's satisfaction
+     */
     public int showEmployeeSatisfaction(String id) {
 
         int satisfaction = 0;
 
-        if(_employees.get(id).getType().equals("TRT")) {
+        if(isAHandler(id)) {
             CalculateStrategy method = new HandlerSatisfaction((Handler) _employees.get(id));
             satisfaction = (int) Math.round(method.calculate());
         }
-        if(_employees.get(id).getType().equals("VET")) {
+        if(isAVet(id)) {
             CalculateStrategy method = new VetSatisfaction((Vet) _employees.get(id));
             satisfaction = (int) Math.round(method.calculate());
         }
@@ -705,16 +845,24 @@ public class Hotel implements Serializable{
     }
 
    // REFAZER ISTO TA MAL FEITO
+   /**
+    * Removes a certain responsability from an employee 
+    *
+    * @param employeeId 
+    * @param resId responsability's ID
+    * @throws UnknownEmployeeException
+    * @throws ResponsabilityNotFoundException
+    */
     public void removeResponsability(String employeeId, String resId) throws 
     UnknownEmployeeException, ResponsabilityNotFoundException{
 
         assertUnknownEmployee(employeeId);
-        if(_employees.get(employeeId).getType().equals("TRT")) {
+        if(isAHandler(employeeId)) {
             assertResponsabilityNotFound(employeeId, resId);
             Handler handler = (Handler) _employees.get(employeeId);
             handler.getResponsibilities().remove(resId);
         }
-        if(_employees.get(employeeId).getType().equals("VET")) {
+        if(isAVet(employeeId)) {
             assertResponsabilityNotFound(employeeId, resId);
             Vet vet = (Vet) _employees.get(employeeId);
             vet.getResponsibilities().remove(resId);
@@ -724,16 +872,24 @@ public class Hotel implements Serializable{
       
     }
 
+    /**
+     * Adds a certain resposability from an employee.
+     * 
+     * @param employeeId
+     * @param resId responsability's ID
+     * @throws UnknownEmployeeException
+     * @throws UnknownResponsabilityException
+     */
     public void addResponsability(String employeeId, String resId) throws 
     UnknownEmployeeException, UnknownResponsabilityException{
         
         assertUnknownEmployee(employeeId);
-        if(_employees.get(employeeId).getType().equals("TRT")) {
+        if(isAHandler(employeeId)) {
             assertUnknownResponsability(employeeId, resId);
             Handler handler = (Handler) _employees.get(employeeId);
             handler.addNewResponsibility(resId, _habitats.get(resId));
         }
-        if(_employees.get(employeeId).getType().equals("VET")) {
+        if(isAVet(employeeId)) {
             assertUnknownResponsability(employeeId, resId);
             Vet vet = (Vet) _employees.get(employeeId);
             vet.addNewResponsibility(resId, _species.get(resId));
@@ -744,15 +900,23 @@ public class Hotel implements Serializable{
     }
     
     // REFAZER ESTE TAMBEM!!!
+    /**
+     * Checks if the responsability exists.
+     * It depends whether it's a handler or a vet
+     * 
+     * @param employeeId
+     * @param resId
+     * @throws UnknownResponsabilityException
+     */
     public void assertUnknownResponsability(String employeeId, String resId) throws UnknownResponsabilityException{
     
-        if(_employees.get(employeeId).getType().equals("TRT")) {
+        if(isAHandler(employeeId)) {
             if (!_habitats.containsKey(resId) ) {
                 throw new UnknownResponsabilityException(resId);
             }
         }
 
-        if(_employees.get(employeeId).getType().equals("VET")) {
+        if(isAVet(employeeId)) {
             if (!_species.containsKey(resId)) {
                 throw new UnknownResponsabilityException(resId);
             }
@@ -761,16 +925,23 @@ public class Hotel implements Serializable{
     }
 
     // REFAZER ESTE TAMBEM!!!
+    /**
+     * Checks if the employee contains the specified responsability.
+     * 
+     * @param employeeId
+     * @param resId
+     * @throws ResponsabilityNotFoundException
+     */
     public void assertResponsabilityNotFound(String employeeId, String resId) throws ResponsabilityNotFoundException{
     
-        if(_employees.get(employeeId).getType().equals("TRT")) {
+        if(isAHandler(employeeId)) {
             Handler handler = (Handler) _employees.get(employeeId);
             if (!handler.getResponsibilities().containsKey(resId)) {
                 throw new ResponsabilityNotFoundException(resId);
             }
         }
 
-        if(_employees.get(employeeId).getType().equals("VET")) {
+        if(isAVet(employeeId)) {
             Vet vet = (Vet) _employees.get(employeeId);
             if (!vet.getResponsibilities().containsKey(resId)) {
                 throw new ResponsabilityNotFoundException(resId);
@@ -780,6 +951,11 @@ public class Hotel implements Serializable{
     }
 
 
+    /**
+     * Sums up all the satisfaction from the animals and the employees.
+     * 
+     * @return global satisfaction of the hotel
+     */
     public int showGlobalSatisfaction() {
         int totalSatisfaction = 0;
         for (String animalId : _animals.keySet()) {
@@ -794,7 +970,7 @@ public class Hotel implements Serializable{
     }  
 
     /**
-     * Shows all the animals in a specified habitat
+     * Shows all the animals in a specified habitat.
      * 
      * @param habitatId The habitat's ID
      * @return Animal Collection

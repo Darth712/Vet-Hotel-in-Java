@@ -9,12 +9,23 @@ public class Summer extends SeasonState {
 
     private final int CODE = 1;
 
+    /**
+     * Constructor for the Summer Class.
+     * 
+     * @param season
+     */
     public Summer(Season season) {
         super(season);
     }
 
+    /**
+     * Gets the Summer code
+     */
     public int getCode() { return CODE;}
 
+    /**
+     * Advances the season to the next one.
+     */
     @Override
     public void nextSeason() {
         getSeason().setSeasonState(new Fall(getSeason()));  // Change to the next state
