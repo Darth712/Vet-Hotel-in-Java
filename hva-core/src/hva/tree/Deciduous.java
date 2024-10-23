@@ -24,7 +24,7 @@ public class Deciduous extends Tree {
      */
     public Deciduous(String id, String name, int age, int baseCleaningDiff, Season currentSeason, String type) {
         super(id, name, age, baseCleaningDiff, currentSeason);
-        _leafType = type; // Set the leaf type for this deciduous tree
+        setLeafType(type); // Set the leaf type for this deciduous tree
     }
 
     /**

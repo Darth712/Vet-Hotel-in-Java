@@ -4,7 +4,7 @@ import java.io.Serializable;
 /**
  * Abstract class representing a Season.
  * Provides abstract methods to get the effort values and biological cycles for both deciduous and evergreen trees.
- * The data is stored in static arrays that describe the behavior of trees across the four seasons.
+ * The data is stored in arrays that describe the behavior of trees across the four seasons.
  */
 public abstract class SeasonState implements Serializable{
 

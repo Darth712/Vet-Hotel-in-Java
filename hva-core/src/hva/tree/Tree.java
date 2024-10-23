@@ -19,9 +19,11 @@ public abstract class Tree implements Serializable, Visitable{
     private String _id;                // Unique identifier for the tree
     private String _name;              // Name of the tree
     private int _age;                  // Age of the tree
-    protected String _leafType;        // Type of leaves on the tree
+    private String _leafType;        // Type of leaves on the tree
     private int _baseCleaningDiff;     // Base cleaning difficulty of the tree
-    protected Season _currentSeason;   // Current season affecting the tree's state
+    private Season _currentSeason;   // Current season affecting the tree's state
+    private Season _bornSeason;        // Season where the tree was born
+
 
     /**
      * Constructor for the Tree class.
@@ -37,7 +39,8 @@ public abstract class Tree implements Serializable, Visitable{
         _name = name;
         _age = age;
         _baseCleaningDiff = baseCleaningDiff;
-        _currentSeason = currentSeason; // Set the current season for the tree
+        _currentSeason = currentSeason; 
+        _bornSeason = currentSeason;
     }
 
     // Getters for the tree attributes
@@ -69,6 +72,10 @@ public abstract class Tree implements Serializable, Visitable{
         return _age; // Return the age of the tree
     }
 
+    public void newAge() {
+        _age++;
+    }
+
     /**
      * Gets the type of leaves on the tree.
      *
@@ -97,12 +104,30 @@ public abstract class Tree implements Serializable, Visitable{
     }
 
     /**
+     * Gets the season where the tree was born
+     *
+     * @return The born season
+     */
+    public Season getBornSeason() {
+        return _bornSeason;
+    }
+
+    /**
      * Sets the current season affecting the tree.
      *
      * @param currentSeason The current season to set.
      */
     public void setCurrentSeason(Season currentSeason) {
         _currentSeason = currentSeason; // Update the current season
+    }
+
+    /**
+     * Sets the leaf type
+     * 
+     * @param leafType
+     */
+    public void setLeafType(String leafType) {
+        _leafType = leafType;
     }
 
 }

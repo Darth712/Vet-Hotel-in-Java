@@ -10,9 +10,6 @@ import hva.visitor.Visitor;
  */
 public class Evergreen extends Tree {
 
- 
-   
-
     /**
      * Constructor for the Evergreen tree.
      * 
@@ -25,7 +22,7 @@ public class Evergreen extends Tree {
      */
     public Evergreen(String id, String name, int age, int baseCleaningDiff, Season currentSeason, String type) {
         super(id, name, age, baseCleaningDiff, currentSeason);
-        _leafType = type; // Set the leaf type for this evergreen tree
+        setLeafType(type); // Set the leaf type for this evergreen tree
     }
 
     /**

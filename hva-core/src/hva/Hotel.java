@@ -134,6 +134,12 @@ public class Hotel implements Serializable{
      */
     public void advanceSeason () {
         _currentSeason.nextSeason();
+        for (String treeId : _trees.keySet()) {
+            Tree tree = getTree(treeId);
+            if(tree.getBornSeason().equals(_currentSeason)) {
+                tree.newAge();
+            }
+        }
     }
 
     /**
@@ -588,26 +594,6 @@ public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotA
     }
 
     /**
-     * Adds a new responsibility to an employee by their ID.
-     * 
-     * @param employeeId        The ID of the employee to assign the responsibility to.
-     * @param responsabilityId  The ID of the responsibility to be assigned.
-     */
-    public void addEmployeeResponsability(String employeeId, String resId) {
-        if (_employees.get(employeeId).getType() == "TRT") {
-            Handler handler = (Handler) _employees.get(employeeId);
-            handler.addNewResponsibility(resId,_habitats.get(resId));
-        }
-        if (_employees.get(employeeId).getType() == "VET") {
-            Vet vet = (Vet) _employees.get(employeeId);
-            vet.addNewResponsibility(resId, _species.get(resId));
-        }
-        changed();
-    }
-
-
-
-    /**
      * Registers a new vaccine and associates it with applicable species.
      * Species are passed as a comma-separated string of species IDs.
      * 
@@ -873,6 +859,24 @@ public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotA
     }
 
     /**
+     * Adds a new responsibility to an employee by their ID.
+     * 
+     * @param employeeId        The ID of the employee to assign the responsibility to.
+     * @param responsabilityId  The ID of the responsibility to be assigned.
+     */
+    public void addEmployeeResponsability(String employeeId, String resId) {
+        if (isAHandler(employeeId)) {
+            Handler handler = (Handler) _employees.get(employeeId);
+            handler.addNewResponsibility(resId,_habitats.get(resId));
+        }
+        if (isAVet(employeeId)) {
+            Vet vet = (Vet) _employees.get(employeeId);
+            vet.addNewResponsibility(resId, _species.get(resId));
+        }
+        changed();
+    }
+
+    /**
      * Adds a certain resposability from an employee.
      * 
      * @param employeeId
@@ -884,16 +888,7 @@ public void assertVetNotAuth(Employee employee, String speciesId) throws VetNotA
     UnknownEmployeeException, UnknownResponsabilityException{
         
         assertUnknownEmployee(employeeId);
-        if(isAHandler(employeeId)) {
-            assertUnknownResponsability(employeeId, resId);
-            Handler handler = (Handler) _employees.get(employeeId);
-            handler.addNewResponsibility(resId, _habitats.get(resId));
-        }
-        if(isAVet(employeeId)) {
-            assertUnknownResponsability(employeeId, resId);
-            Vet vet = (Vet) _employees.get(employeeId);
-            vet.addNewResponsibility(resId, _species.get(resId));
-        }
+        addEmployeeResponsability(employeeId, resId);
 
         changed();
       
