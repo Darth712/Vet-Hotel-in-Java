@@ -1,8 +1,6 @@
 package hva.tree;
 
-
 import hva.Seasons.Season;
-
 import hva.visitor.Visitor;
 
 /**
@@ -10,8 +8,6 @@ import hva.visitor.Visitor;
  * Inherits from the Tree class and includes additional properties specific to deciduous trees.
  */
 public class Deciduous extends Tree {
-
- 
 
     /**
      * Constructor for the Deciduous tree.
@@ -26,6 +22,11 @@ public class Deciduous extends Tree {
         super(id, name, age, baseCleaningDiff, currentSeason);
     }
 
+    /**
+     * Gets the leaf type from this tree.
+     * 
+     * @return A string of the leaf type
+     */
     public String getLeafType() {
       return "CADUCA";
     }

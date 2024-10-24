@@ -17,9 +17,9 @@ public class Vaccine implements Serializable, Visitable{
     @Serial
     private static final long serialVersionUID = 202407081740L;
 
-    private String _id;                     // Identifier for the vaccine
-    private String _name;                   // Name of the vaccine
-    private int _timesUsed;                 // Number of times the vaccine has been used
+    private String _id;                                 // Vaccine ID
+    private String _name;                               // Vaccine name
+    private int _timesUsed;                             // Number of times the vaccine has been used
     private TreeMap<String,Species> _applicableSpecies; // List of species applicable for the vaccine
 
     /**

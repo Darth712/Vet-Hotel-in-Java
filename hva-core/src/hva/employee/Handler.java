@@ -10,9 +10,7 @@ import hva.visitor.Visitor;
  */
 public class Handler extends Employee{
 
-    private TreeMap<String,Habitat> _responsibilities;
-
-
+    private TreeMap<String,Habitat> _responsibilities; // Map of responsabilties
 
     /**
      * Constructs a new Handler with the specified ID and name.
@@ -22,7 +20,7 @@ public class Handler extends Employee{
      */
     public Handler(String id, String name) {
         super(id, name);
-        _responsibilities = new TreeMap<String,Habitat>(); // List of habitat IDs the handler is responsible for
+        _responsibilities = new TreeMap<String,Habitat>(); 
     }
 
     /**
@@ -40,7 +38,7 @@ public class Handler extends Employee{
     }
 
     /**
-     * Returns the type of the employee, which in this case is "TRT" (probably an abbreviation for Handler/Tratador).
+     * Returns the type of the employee, which in this case is "TRT".
      * 
      * @return the string "TRT" representing the type of employee
      */

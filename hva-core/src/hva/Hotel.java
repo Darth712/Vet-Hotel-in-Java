@@ -32,13 +32,13 @@ public class Hotel implements Serializable{
     private static final long serialVersionUID = 202407081733L;
 
     private Season _currentSeason = new Season();
-    private Map<String, Habitat> _habitats = new TreeMap<String, Habitat>(String.CASE_INSENSITIVE_ORDER);  
-    private Map<String, Animal> _animals = new TreeMap<String, Animal>(String.CASE_INSENSITIVE_ORDER);  
-    private Map<String, Species> _species = new TreeMap<String, Species>(String.CASE_INSENSITIVE_ORDER);  
-    private Map<String, Employee> _employees = new TreeMap<String, Employee>(String.CASE_INSENSITIVE_ORDER); 
-    private Map<String, Vaccine> _vaccines = new TreeMap<String, Vaccine>(String.CASE_INSENSITIVE_ORDER); 
-    private Map<String, Tree> _trees = new TreeMap<String, Tree>(String.CASE_INSENSITIVE_ORDER); 
-    private List<Vaccination> _vaccinations = new ArrayList<Vaccination>();
+    private Map<String, Habitat> _habitats = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);  
+    private Map<String, Animal> _animals = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);  
+    private Map<String, Species> _species = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);  
+    private Map<String, Employee> _employees = new TreeMap<>(String.CASE_INSENSITIVE_ORDER); 
+    private Map<String, Vaccine> _vaccines = new TreeMap<>(String.CASE_INSENSITIVE_ORDER); 
+    private Map<String, Tree> _trees = new TreeMap<>(String.CASE_INSENSITIVE_ORDER); 
+    private List<Vaccination> _vaccinations = new ArrayList<>();
     private boolean _changed;
 
     // GETTERS
@@ -60,6 +60,12 @@ public class Hotel implements Serializable{
         return _habitats;
     }
 
+    /**
+     * Gets a tree from the map of trees.
+     * 
+     * @param treeID
+     * @return A tree
+     */
     public Tree getTree(String treeID) {
         return _trees.get(treeID);
     }
@@ -650,6 +656,54 @@ public class Hotel implements Serializable{
         }
     }
 
+    /**
+     * Checks if the responsability exists.
+     * It depends whether it's a handler or a vet
+     * 
+     * @param employeeId
+     * @param resId
+     * @throws UnknownResponsabilityException
+     */
+    public void assertUnknownResponsability(String employeeId, String resId) throws UnknownResponsabilityException{
+    
+        if(isAHandler(employeeId)) {
+            if (!_habitats.containsKey(resId) ) {
+                throw new UnknownResponsabilityException(resId);
+            }
+        }
+
+        if(isAVet(employeeId)) {
+            if (!_species.containsKey(resId)) {
+                throw new UnknownResponsabilityException(resId);
+            }
+        }
+
+    }
+
+    /**
+     * Checks if the employee contains the specified responsability.
+     * 
+     * @param employeeId
+     * @param resId
+     * @throws ResponsabilityNotFoundException
+     */
+    public void assertResponsabilityNotFound(String employeeId, String resId) throws ResponsabilityNotFoundException{
+    
+        if(isAHandler(employeeId)) {
+            Handler handler = (Handler) _employees.get(employeeId);
+            if (!handler.getResponsibilities().containsKey(resId)) {
+                throw new ResponsabilityNotFoundException(resId);
+            }
+        }
+
+        if(isAVet(employeeId)) {
+            Vet vet = (Vet) _employees.get(employeeId);
+            if (!vet.getResponsibilities().containsKey(resId)) {
+                throw new ResponsabilityNotFoundException(resId);
+            }
+        }
+    }
+
     // Habitat's Menu
     /**
      * Adds a tree to a specific habitat.
@@ -749,6 +803,19 @@ public class Hotel implements Serializable{
     }
 
     // Vaccine's Menu
+    /**
+     * Vaccinates an animal, doing damage if needed.
+     * 
+     * @param vaccineKey
+     * @param vetKey
+     * @param animalkey
+     * @return
+     * @throws UnknownAnimalException
+     * @throws UnknownEmployeeException
+     * @throws UnknownVaccineException
+     * @throws UnknownVetException
+     * @throws VetNotAuthException
+     */
     public boolean vaccinateAnimal(String vaccineKey, String vetKey, String animalkey) throws 
     UnknownAnimalException, UnknownEmployeeException, UnknownVaccineException , 
     UnknownVetException, VetNotAuthException{
@@ -881,56 +948,7 @@ public class Hotel implements Serializable{
 
         changed();
       
-    }
-    
-    /**
-     * Checks if the responsability exists.
-     * It depends whether it's a handler or a vet
-     * 
-     * @param employeeId
-     * @param resId
-     * @throws UnknownResponsabilityException
-     */
-    public void assertUnknownResponsability(String employeeId, String resId) throws UnknownResponsabilityException{
-    
-        if(isAHandler(employeeId)) {
-            if (!_habitats.containsKey(resId) ) {
-                throw new UnknownResponsabilityException(resId);
-            }
-        }
-
-        if(isAVet(employeeId)) {
-            if (!_species.containsKey(resId)) {
-                throw new UnknownResponsabilityException(resId);
-            }
-        }
-
-    }
-
-    /**
-     * Checks if the employee contains the specified responsability.
-     * 
-     * @param employeeId
-     * @param resId
-     * @throws ResponsabilityNotFoundException
-     */
-    public void assertResponsabilityNotFound(String employeeId, String resId) throws ResponsabilityNotFoundException{
-    
-        if(isAHandler(employeeId)) {
-            Handler handler = (Handler) _employees.get(employeeId);
-            if (!handler.getResponsibilities().containsKey(resId)) {
-                throw new ResponsabilityNotFoundException(resId);
-            }
-        }
-
-        if(isAVet(employeeId)) {
-            Vet vet = (Vet) _employees.get(employeeId);
-            if (!vet.getResponsibilities().containsKey(resId)) {
-                throw new ResponsabilityNotFoundException(resId);
-            }
-        }
-
-    }
+    } 
 
     // Search Menu
     /**
@@ -981,7 +999,6 @@ public class Hotel implements Serializable{
         }
         return wrongVaccinations; 
     }
-
 
     /**
      * Sums up all the satisfaction from the animals and the employees.

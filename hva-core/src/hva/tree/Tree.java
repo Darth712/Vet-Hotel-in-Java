@@ -3,9 +3,7 @@ package hva.tree;
 import java.io.Serial;
 import java.io.Serializable;
 import hva.Seasons.Season;
-
 import hva.visitor.Visitable;
-
 
 /**
  * Abstract class representing a generic tree.
@@ -16,14 +14,12 @@ public abstract class Tree implements Serializable, Visitable{
     @Serial
     private static final long serialVersionUID = 202407081737L;
 
-    private String _id;                // Unique identifier for the tree
-    private String _name;              // Name of the tree
-    private int _age;                  // Age of the tree
-   // private String _leafType;        // Type of leaves on the tree
-    private int _baseCleaningDiff;     // Base cleaning difficulty of the tree
-    private Season _currentSeason;   // Current season affecting the tree's state
-    private int _bornSeason;        // Season where the tree was born
-
+    private String _id;                // Tree ID
+    private String _name;              // Tree name
+    private int _age;                  // Tree age
+    private int _baseCleaningDiff;     // Base cleaning difficulty
+    private Season _currentSeason;     // Current season
+    private int _bornSeason;           // Born season
 
     /**
      * Constructor for the Tree class.
@@ -120,8 +116,11 @@ public abstract class Tree implements Serializable, Visitable{
         _currentSeason = currentSeason; // Update the current season
     }
 
-
-
+    /**
+     * Gets the cleaning effort from this tree.
+     * 
+     * @return double of the cleaning effort
+     */
     public double getCleaningEffort() {
 
         double cleaning_effort = getBaseCleaningDifficulty() * Math.log(getAge() +1);

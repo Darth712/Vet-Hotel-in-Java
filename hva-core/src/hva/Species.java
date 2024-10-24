@@ -18,7 +18,7 @@ public class Species implements Serializable {
     private String _id;                      // Unique identifier for the species
     private String _name;                    // Name of the species
     private Map<String, Animal> _animals;    // Map to store animals of this species
-    private Map<String, Vet> _vets;
+    private Map<String, Vet> _vets;          // Map to store the vets 
     /**
      * Constructor for the Species class.
      *
@@ -27,9 +27,9 @@ public class Species implements Serializable {
      */
     public Species(String id, String name) {
         _id = id;
-        _name = name;                // Increment population when a new species is created
+        _name = name;                
         _animals = new TreeMap<>();  
-        _vets = new TreeMap<>();    // Initialize the map to store animals
+        _vets = new TreeMap<>();   
     }
 
     /**
@@ -64,15 +64,26 @@ public class Species implements Serializable {
     /**
      * Gets the map of animals belonging to this species.
      *
-     * @return A map of animals identified by their IDs.
+     * @return A map of animals identified by their IDs
      */
     public Map<String, Animal> getAnimals() {
         return _animals;                         
     }
+
+    /**
+     * Gets the map of vets belonging to this species.
+     * 
+     * @return A map of vets identified by their IDs
+     */
     public Map<String, Vet> getVets() {
         return _vets;                         
     }
     
+    /**
+     * Adds a new vet to the species.
+     * 
+     * @param vet
+     */
     public void addVet(Vet vet) {
         _vets.put(vet.getId(),vet);
     }

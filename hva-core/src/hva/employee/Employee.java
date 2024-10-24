@@ -15,14 +15,8 @@ public abstract class Employee implements Serializable, Visitable{
     @Serial
     private static final long serialVersionUID = 202407081735L;
 
-    /** The unique identifier for the employee. */
-    private String _id;
-
-    /** The name of the employee. */
-    private String _name;
-
-    
-   
+    private String _id;    // Employee ID
+    private String _name;  // Employee name
 
     /**
      * Constructs a new Employee with the specified ID and name.
@@ -60,6 +54,4 @@ public abstract class Employee implements Serializable, Visitable{
      */
     public abstract String getType();
 
-
-   
 }

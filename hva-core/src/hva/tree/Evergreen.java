@@ -1,7 +1,6 @@
 package hva.tree;
 
 import hva.Seasons.Season;
-
 import hva.visitor.Visitor;
 
 /**
@@ -18,13 +17,17 @@ public class Evergreen extends Tree {
      * @param age            Age of the tree.
      * @param baseCleaningDiff Base cleaning difficulty associated with the tree.
      * @param currentSeason  Current season affecting the tree's behavior.
-    
      */
     public Evergreen(String id, String name, int age, int baseCleaningDiff, Season currentSeason) {
         super(id, name, age, baseCleaningDiff, currentSeason);
       
     }
 
+    /**
+     * Gets the leaf type from this tree.
+     * 
+     * @return A string of the leaf type
+     */
     public String getLeafType() {
       return "PERENE";
     }

@@ -8,7 +8,7 @@ import java.util.TreeMap;
  */
 public class Vet extends Employee{
     
-    private TreeMap<String,Species> _responsibilities;
+    private TreeMap<String,Species> _responsibilities; // Map of responsabilities
 
     /**
      * Constructs a new Vet with the specified ID and name.
@@ -18,7 +18,7 @@ public class Vet extends Employee{
      */
     public Vet(String id, String name) {
         super(id, name);
-        _responsibilities = new TreeMap<String,Species>(); // List of species IDs the vet is responsible for
+        _responsibilities = new TreeMap<String,Species>(); 
     }
 
     /**
@@ -56,7 +56,7 @@ public class Vet extends Employee{
 
 
     /**
-     * Returns the type of the employee, which in this case is "VET" (representing Veterinarian).
+     * Returns the type of the employee, which in this case is "VET".
      * 
      * @return the string "VET" representing the type of employee
      */

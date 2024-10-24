@@ -17,25 +17,13 @@ public class Habitat implements Serializable, Visitable{
     @Serial
     private static final long serialVersionUID = 202407081736L;
 
-    /** The unique identifier of the habitat. */
-    private String _id;
-
-    /** The name of the habitat. */
-    private String _name;
-
-    /** The area of the habitat (in square meters, for example). */
-    private int _area;
-
-    /** A collection of trees present in the habitat, mapped by tree ID. */
-    private TreeMap<String, Tree> _trees;
-
-    /** A collection of animals present in the habitat, mapped by animal ID. */
-    private TreeMap<String, Animal> _animals;
-
-    /** A collection of species influencing the habitat, mapped by descriptions. */
-    private TreeMap<String, String> _influence;
-
-    private TreeMap<String, Handler> _handlers;
+    private String _id;                         // Habitat ID
+    private String _name;                       // Habitat name
+    private int _area;                          // Habitat area
+    private TreeMap<String, Tree> _trees;       // Map of trees
+    private TreeMap<String, Animal> _animals;   // Map of animals
+    private TreeMap<String, String> _influence; // Map of influences
+    private TreeMap<String, Handler> _handlers; // Map of handlers
 
     /**
      * Constructs a Habitat object with the specified ID, name, and area.
@@ -118,6 +106,14 @@ public class Habitat implements Serializable, Visitable{
         return _handlers;
     }
 
+    /**
+     * Gets a collection of all the trees from the habitat
+     * 
+     * @return A collection of all trees
+     */
+    public Collection<Tree> getAllTrees() {
+        return getTrees().values();
+    }
     
     /**
      * Sets the area of the habitat.
@@ -127,11 +123,6 @@ public class Habitat implements Serializable, Visitable{
     public void setArea(int area) {
         _area = area;
     }
-
-    public Collection<Tree> getAllTrees() {
-        return getTrees().values();
-    }
-
 
     /**
      * Adds a tree to the habitat.
@@ -162,6 +153,11 @@ public class Habitat implements Serializable, Visitable{
         _influence.put(speciesId, influence);
     }
 
+    /**
+     * Adds a handler to the habitat's map
+     * 
+     * @param handler
+     */
     public void addHandler(Handler handler) {
         _handlers.put(handler.getId(), handler); 
     }    

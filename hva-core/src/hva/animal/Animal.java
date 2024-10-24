@@ -19,31 +19,14 @@ public class Animal implements Serializable, Visitable{
     @Serial
     private static final long serialVersionUID = 202407081734L;
 
-    /** The unique identifier for the animal. */
-    private String _id;
-
-    /** The name of the animal. */
-    private String _name;
-
-    /** The species to which the animal belongs. */
-    private Species _species;
-
-    /** The current health status of the animal. */
-    private String _healthStatus;
-
-    /** The habitat where the animal resides. */
-    private Habitat _habitat;
-
-    /** The history of health statuses for the animal. */
-    private String _healthHistory; // Need to concatenate new healhStatus to healthHistory
-
-    /** A list of vaccinations the animal has received. */
-    private List<Vaccination> _vaccinations = new ArrayList<>();
-
-    /** A flag indicating if the animal has been vaccinated. */
-    private boolean _hasVaccinated = false;
-
-    // vaccinations
+    private String _id;                                           // Animal ID
+    private String _name;                                         // Animal name
+    private Species _species;                                     // Animal species
+    private String _healthStatus;                                 // Current health status
+    private Habitat _habitat;                                     // Animal habitat
+    private String _healthHistory;                                // Health status history
+    private List<Vaccination> _vaccinations = new ArrayList<>();  // List of vaccinations
+    private boolean _hasVaccinated = false;                       // Vaccination status
 
     /**
      * Constructs a new Animal with the specified ID, name, species, and habitat.
