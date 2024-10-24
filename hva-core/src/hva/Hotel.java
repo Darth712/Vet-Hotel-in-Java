@@ -749,8 +749,9 @@ public class Hotel implements Serializable{
     }
 
     // Vaccine's Menu
-    public boolean vaccinateAnimal(String vaccineKey, String vetKey, String animalkey) throws UnknownAnimalException, 
-                            UnknownEmployeeException, UnknownVaccineException , UnknownVetException, VetNotAuthException{
+    public boolean vaccinateAnimal(String vaccineKey, String vetKey, String animalkey) throws 
+    UnknownAnimalException, UnknownEmployeeException, UnknownVaccineException , 
+    UnknownVetException, VetNotAuthException{
 
         assertUnknownEmployee(vetKey);
         assertUnknownVaccine(vaccineKey);
@@ -763,16 +764,15 @@ public class Hotel implements Serializable{
         boolean wrongVaccine = true;
         VaccineDamage vd = new VaccineDamage(vaccine, animal);
         int damage = vd.calculate();
-        animal.addHealthHistory(vd.getNewHealthStatus(damage));
+        String status = vd.getNewHealthStatus(damage);
+         animal.addHealthHistory(status);
         if (damage == -1) {
             damage = 0;
             wrongVaccine = false;
-
         }
-        _vaccinations.add(new Vaccination(vaccine, vetKey, animal, vd.getNewHealthStatus(damage)));                            
+        _vaccinations.add(new Vaccination(vaccine, vetKey, animal, status));                            
         changed();
         return wrongVaccine;
-
 
     }
 
