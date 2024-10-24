@@ -1,7 +1,7 @@
 package hva.exceptions;
 
 public class UnknownVetException extends HotelException {
-    private static final long serialVersionUID = 202407081710L;
+    private static final long serialVersionUID = 202407081709L;
 
     /** The Vet's key. */
     private final String _id;

@@ -2,7 +2,7 @@ package hva.exceptions;
 
 public class EmployeeExistsException extends HotelException{
 
-    private static final long serialVersionUID = 202407081747L;
+    private static final long serialVersionUID = 202407082747L;
     
     /** The Habitat's key. */
 

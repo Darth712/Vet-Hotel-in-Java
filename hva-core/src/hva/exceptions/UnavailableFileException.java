@@ -8,7 +8,7 @@ import java.io.Serial;
 public class UnavailableFileException extends Exception {
 
 	@Serial
-	private static final long serialVersionUID = 202407081733L;
+	private static final long serialVersionUID = 202407081773L;
 
 	/** The requested filename. */
 	String _filename;

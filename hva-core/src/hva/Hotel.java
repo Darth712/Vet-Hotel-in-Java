@@ -783,9 +783,7 @@ public class Hotel implements Serializable{
         }
         
         Habitat newHabitat = _habitats.get(habitatId);
-        animal.setHabitat(newHabitat);
-        
-        
+        animal.setHabitat(newHabitat); 
         newHabitat.addAnimal(animal);  
         changed();
     }

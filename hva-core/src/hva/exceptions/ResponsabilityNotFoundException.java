@@ -1,7 +1,7 @@
 package hva.exceptions;
 
 public class ResponsabilityNotFoundException extends HotelException{
-    private static final long serialVersionUID = 202407081755L;
+    private static final long serialVersionUID = 202407061755L;
 
  
     private final String _id;

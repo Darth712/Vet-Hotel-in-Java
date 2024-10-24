@@ -2,7 +2,7 @@ package hva.exceptions;
 
 public class UnknownAnimalException extends HotelException{
 
-    private static final long serialVersionUID = 202407081743L;
+    private static final long serialVersionUID = 202407081783L;
     
     /** The Habitat's key. */
 

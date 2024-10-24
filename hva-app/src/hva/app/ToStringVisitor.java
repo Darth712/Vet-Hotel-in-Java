@@ -42,23 +42,11 @@ public class ToStringVisitor extends Visitor<String>{
     }
 
     /**
-     * Visits an Employee object and returns a string representation of its details
+     * Visits an Handler object and returns a string representation of its details.
      * 
-     * @param employee the Employee object to visit
-     * @return a formatted string representing the employee's details
+     * @param handler the Handler object to visit
+     * @return a formatted string representing the handler's details
      */
-
-     /*
-      * 
-    public String visit(Employee employee) {
-        StringBuilder employeeInfo = new StringBuilder(
-            employee.getType() + "|" + employee.getId() + "|" + 
-        employee.getName());
-
-              
-    }
-
-      */
     @Override
     public String visit(Handler handler) {
         StringBuilder handlerInfo = new StringBuilder(
@@ -75,6 +63,12 @@ public class ToStringVisitor extends Visitor<String>{
         return handlerInfo.toString();  // Return the full string
     }
 
+    /**
+     * Visits a Vet object and returns a string representation of its details
+     * 
+     * @param vet the vet object to visit
+     * @return a formatted string representing the vet's details
+     */
     @Override
     public String visit(Vet vet) {
         StringBuilder vetInfo = new StringBuilder(
