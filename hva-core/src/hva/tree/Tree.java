@@ -19,7 +19,7 @@ public abstract class Tree implements Serializable, Visitable{
     private String _id;                // Unique identifier for the tree
     private String _name;              // Name of the tree
     private int _age;                  // Age of the tree
-    private String _leafType;        // Type of leaves on the tree
+   // private String _leafType;        // Type of leaves on the tree
     private int _baseCleaningDiff;     // Base cleaning difficulty of the tree
     private Season _currentSeason;   // Current season affecting the tree's state
     private int _bornSeason;        // Season where the tree was born
@@ -81,9 +81,8 @@ public abstract class Tree implements Serializable, Visitable{
      *
      * @return The leaf type as a string.
      */
-    public String getLeafType() {
-        return _leafType; // Return the type of leaves
-    }
+    public abstract String getLeafType();
+     
 
     /**
      * Gets the base cleaning difficulty of the tree.
@@ -121,14 +120,7 @@ public abstract class Tree implements Serializable, Visitable{
         _currentSeason = currentSeason; // Update the current season
     }
 
-    /**
-     * Sets the leaf type
-     * 
-     * @param leafType
-     */
-    public void setLeafType(String leafType) {
-        _leafType = leafType;
-    }
+
 
     public double getCleaningEffort() {
 

@@ -477,9 +477,9 @@ public class Hotel implements Serializable{
     TreeExistsException{
         assertTreeExists(id);
         if (type.equals("CADUCA"))
-            _trees.put(id, new Deciduous(id, name, age, baseDiff, _currentSeason, type));
+            _trees.put(id, new Deciduous(id, name, age, baseDiff, _currentSeason));
         if (type.equals("PERENE"))
-            _trees.put(id, new Evergreen(id, name, age, baseDiff, _currentSeason, type));  
+            _trees.put(id, new Evergreen(id, name, age, baseDiff, _currentSeason));  
         changed();  
     }
 
@@ -769,7 +769,7 @@ public class Hotel implements Serializable{
             wrongVaccine = false;
 
         }
-        _vaccinations.add(new Vaccination(vaccine, vetKey, animal, damage));                            
+        _vaccinations.add(new Vaccination(vaccine, vetKey, animal, vd.getNewHealthStatus(damage)));                            
         changed();
         return wrongVaccine;
 
@@ -972,7 +972,7 @@ public class Hotel implements Serializable{
     public Collection<Vaccination> getWrongVaccinations(){
         List<Vaccination> wrongVaccinations = new ArrayList<Vaccination>();
         for(Vaccination vaccination: _vaccinations) {
-            if (vaccination.getDamage() > 0) {
+            if (!vaccination.getStatus().equals("NORMAL")) {
                 wrongVaccinations.add(vaccination);
             }
         }

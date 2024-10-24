@@ -19,7 +19,7 @@ public class Vaccination implements Serializable, Visitable{
     private String _vaccineId;  // Identifier for the vaccine
     private String _vetId;      // Identifier for the veterinarian administering the vaccine
     private Animal _animal;     // The animal that received the vaccination
-    private int _damage;
+    private String _status;
 
     /**
      * Constructor for the Vaccination class.
@@ -29,13 +29,13 @@ public class Vaccination implements Serializable, Visitable{
      * @param animal  The animal receiving the vaccination.
      * @param damage  The damage that was applied by this vaccination.
      */
-    public Vaccination(Vaccine vaccine, String vetId, Animal animal, int damage) {
+    public Vaccination(Vaccine vaccine, String vetId, Animal animal, String status) {
         vaccine.use();                // Mark the vaccine as used
         animal.vaccinated();          // Mark the animal as vaccinated
         _vaccineId = vaccine.getId(); // Set the vaccine ID
         _vetId = vetId;               // Set the veterinarian ID
         _animal = animal;             // Set the animal
-        _damage = damage;
+        _status = status;
     }
 
     /**
@@ -66,12 +66,12 @@ public class Vaccination implements Serializable, Visitable{
     }
 
     /**
-     * Gets the damage taken by the animal.
+     * Gets the status according to the damage taken by the animal.
      *
-     * @return The damage of the vaccination.
+     * @return The status String of the vaccination.
      */
-    public int getDamage() {
-        return _damage;      
+    public String getStatus() {
+        return _status;      
     }
 
     /**

@@ -18,12 +18,17 @@ public class Evergreen extends Tree {
      * @param age            Age of the tree.
      * @param baseCleaningDiff Base cleaning difficulty associated with the tree.
      * @param currentSeason  Current season affecting the tree's behavior.
-     * @param type           Type of leaves (e.g., needle leaves).
+    
      */
-    public Evergreen(String id, String name, int age, int baseCleaningDiff, Season currentSeason, String type) {
+    public Evergreen(String id, String name, int age, int baseCleaningDiff, Season currentSeason) {
         super(id, name, age, baseCleaningDiff, currentSeason);
-        setLeafType(type); // Set the leaf type for this evergreen tree
+      
     }
+
+    public String getLeafType() {
+      return "PERENE";
+    }
+
 
     /**
      * Accepts a visitor and allows it to perform operations on this instance.
