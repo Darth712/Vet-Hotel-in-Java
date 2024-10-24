@@ -835,7 +835,9 @@ public class Hotel implements Serializable{
             damage = 0;
             wrongVaccine = false;
         }
-        _vaccinations.add(new Vaccination(vaccine, vetKey, animal, status));                            
+        Vaccination vaccination = new Vaccination(vaccine, vetKey, animal, status);
+        _vaccinations.add(vaccination);  
+        animal.addVaccination(vaccination);                          
         changed();
         return wrongVaccine;
 
