@@ -1,6 +1,5 @@
 package hva.employee;
 
-
 import java.util.TreeMap;
 import hva.habitat.Habitat;
 import hva.visitor.Visitor;

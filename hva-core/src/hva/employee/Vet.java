@@ -1,8 +1,9 @@
 package hva.employee;
+
 import hva.Species;
 import hva.visitor.Visitor;
-
 import java.util.TreeMap;
+
 /**
  * Class representing a Veterinarian (Vet), a type of employee responsible for species in the system.
  */

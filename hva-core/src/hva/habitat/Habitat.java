@@ -2,13 +2,13 @@ package hva.habitat;
 
 import java.io.Serial;
 import java.io.Serializable;
-
 import java.util.TreeMap;
 import hva.animal.Animal;
 import hva.tree.Tree;
 import hva.visitor.*;
 import java.util.Collection;
 import hva.employee.Handler;
+
 /**
  * Class representing a Habitat, which contains trees, animals, and influences (species).
  */

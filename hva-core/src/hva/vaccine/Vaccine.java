@@ -2,10 +2,8 @@ package hva.vaccine;
 
 import java.io.Serial;
 import java.io.Serializable;
-
 import hva.Species;
 import hva.visitor.*;
-
 import java.util.TreeMap;
 
 /**

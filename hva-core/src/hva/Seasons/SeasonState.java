@@ -1,6 +1,7 @@
 package hva.Seasons;
 
 import java.io.Serializable;
+
 /**
  * Abstract class representing a Season.
  * Provides abstract methods to get the effort values and biological cycles for both deciduous and evergreen trees.

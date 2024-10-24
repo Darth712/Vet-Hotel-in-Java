@@ -1,8 +1,7 @@
 package hva.vaccine;
+
 import hva.Species;
-
 import hva.animal.*;
-
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
