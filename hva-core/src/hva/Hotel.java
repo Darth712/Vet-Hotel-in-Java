@@ -820,7 +820,6 @@ public class Hotel implements Serializable{
         return satisfaction;
     }
 
-   // REFAZER ISTO TA MAL FEITO
    /**
     * Removes a certain responsability from an employee 
     *
@@ -884,7 +883,6 @@ public class Hotel implements Serializable{
       
     }
     
-    // REFAZER ESTE TAMBEM!!!
     /**
      * Checks if the responsability exists.
      * It depends whether it's a handler or a vet
@@ -909,7 +907,6 @@ public class Hotel implements Serializable{
 
     }
 
-    // REFAZER ESTE TAMBEM!!!
     /**
      * Checks if the employee contains the specified responsability.
      * 
@@ -970,6 +967,11 @@ public class Hotel implements Serializable{
         return animal.getVaccinations();
     }
 
+    /**
+     * Gets all the wrong vaccinanations.
+     * 
+     * @return Collection of wrong vaccinations
+     */
     public Collection<Vaccination> getWrongVaccinations(){
         List<Vaccination> wrongVaccinations = new ArrayList<Vaccination>();
         for(Vaccination vaccination: _vaccinations) {
