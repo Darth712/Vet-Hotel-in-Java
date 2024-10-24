@@ -830,7 +830,7 @@ public class Hotel implements Serializable{
         VaccineDamage vd = new VaccineDamage(vaccine, animal);
         int damage = vd.calculate();
         String status = vd.getNewHealthStatus(damage);
-         animal.addHealthHistory(status);
+        animal.addHealthHistory(status);
         if (damage == -1) {
             damage = 0;
             wrongVaccine = false;
