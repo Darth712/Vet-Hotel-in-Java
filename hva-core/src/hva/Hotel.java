@@ -183,7 +183,7 @@ public class Hotel implements Serializable{
         for (String treeId : _trees.keySet()) {
             Tree tree = getTree(treeId);
             if(tree.getBornSeason() == _currentSeason.getCode()) {
-                tree.newAge();
+                tree.incrementAge();
             }
         }
     }
@@ -785,6 +785,7 @@ public class Hotel implements Serializable{
      */
     public boolean isAHandler(String id) {
         return _employees.get(id).getType().equals("TRT");
+
     }
 
     /**

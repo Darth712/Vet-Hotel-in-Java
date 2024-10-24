@@ -72,7 +72,7 @@ public abstract class Tree implements Serializable, Visitable{
         return _age; // Return the age of the tree
     }
 
-    public void newAge() {
+    public void incrementAge() {
         _age++;
     }
 
